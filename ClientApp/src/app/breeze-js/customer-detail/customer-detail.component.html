@@ -1,0 +1,169 @@
+<h1>Customer Detail</h1>
+<div class="row">
+    <div class="col-12">
+        <form (ngSubmit)="onSave()" class="form" #myForm="ngForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" name="firstName" class="form-control" [(ngModel)]="_customer.firstName" />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input
+                    type="text"
+                    name="lastName"
+                    class="form-control"
+                    required
+                    minlength="4"
+                    maxlength="15"
+                    [(ngModel)]="_customer.lastName"
+                    #lastName="ngModel"
+                />
+                <span *ngIf="lastName.errors && lastName.errors.required">Last name is required</span>
+                <span *ngIf="lastName.errors && lastName.errors.minlength">Last name must be at least 4 char</span>
+            </div>
+            <!-- <div class="form-group">
+                <label for="age">Age:</label>
+                <input
+                    id='_age'
+                    type="number"
+                    name="_age"
+                    class="form-control"
+                    [(ngModel)]="_customer.age"
+                >
+            </div>
+            <div
+                class="form-group"
+                [ngClass]="{'alert alert-danger': getValidationErrors('age')}"
+            >
+                <label
+                    class="control-label"
+                    for="age"
+                >
+                    Age:
+                </label>
+                <input
+                    id='_age2'
+                    type="text"
+                    name="_age2"
+                    class="form-control"
+                    [(ngModel)]="_customer.age"
+                >
+                <span
+                    class="help-block"
+                    *ngIf="getValidationErrors('age')"
+                >
+                    {{getValidationErrors('age')}}
+                </span>
+            </div> -->
+            <ngs-data-field [propName]="'age'" [propLabel]="'Age'" [entity]="_customer"></ngs-data-field>
+            <!-- <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input
+                    type="text"
+                    name="phone"
+                    class="form-control"
+                    [(ngModel)]="_customer.phone"
+                >
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input
+                    type="text"
+                    name="email"
+                    class="form-control"
+                    [(ngModel)]="_customer.email"
+                >
+            </div>
+            <div class="form-group">
+                <label for="street">Street Address:</label>
+                <input
+                    type="text"
+                    name="street"
+                    class="form-control"
+                    [(ngModel)]="_customer.street"
+                >
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input
+                    type="text"
+                    name="city"
+                    class="form-control"
+                    [(ngModel)]="_customer.city"
+                >
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input
+                    type="text"
+                    name="state"
+                    class="form-control"
+                    [(ngModel)]="_customer.state"
+                >
+            </div>
+            <div class="form-group">
+                <label for="zip">Zip:</label>
+                <input
+                    type="text"
+                    name="zip"
+                    class="form-control"
+                    [(ngModel)]="_customer.zip"
+                >
+            </div>
+            <zza-data-field [propName]="'firstName'"
+                            [propLabel]="'First Name'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'lastName'"
+                            [propLabel]="'Last Name'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'age'"
+                            [propLabel]="'Age'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'email'"
+                            [propLabel]="'Email'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'phone'"
+                            [propLabel]="'Phone'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'street'"
+                            [propLabel]="'Street Address'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'city'"
+                            [propLabel]="'City'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'state'"
+                            [propLabel]="'State'"
+                            [entity]="customer"></zza-data-field>
+            <zza-data-field [propName]="'zip'"
+                            [propLabel]="'Zip'"
+                            [entity]="customer"></zza-data-field> -->
+            <div class="form-group" *ngIf="_errorMessage">
+                <div class="alert alert-danger">{{ _errorMessage }}</div>
+            </div>
+            <div class="form-group alert alert-danger" *ngIf="_customer?.entityAspect?.hasValidationErrors">
+                <ul>
+                    <li *ngFor="let error of _customer?.entityAspect?.getValidationErrors()">{{ error.errorMessage }}</li>
+                </ul>
+            </div>
+            <div class="form-group"><button class="btn btn-primary" type="submit">Save</button></div>
+        </form>
+    </div>
+</div>
+<!--
+<div class="row" *ngIf="_isEditMode && _orders">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Order Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of _orders">
+                <td>{{ order.orderDate | date: 'short' }}</td>
+                <td>{{ order.orderItems | orderitemsconcatproducts }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-->
