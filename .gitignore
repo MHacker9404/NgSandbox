@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+/ignore
+
 # User-specific files
 *.suo
 *.user
@@ -23,6 +25,34 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+dist/
+tmp/
+out-tsc/
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

@@ -3,7 +3,7 @@ import {
   Product,
   OrderItem,
   Order,
-  OrderStatu
+  OrderStatus
 } from '../models/entities/entity-model';
 import { ZzaDataService } from '../services/zza-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -96,7 +96,7 @@ export class OrderComponent implements OnInit, CanComponentDeactivate {
       await this._router.navigate(['']);
     } else {
       const orderStatuses = await this._svc.getOrderStatuses();
-      orderStatuses.forEach(async (os: OrderStatu) => {
+      orderStatuses.forEach(async (os: OrderStatus) => {
         if (os.name.toLowerCase() === 'ordered') {
           this._orderStatusId = os.id;
         }
