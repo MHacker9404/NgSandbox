@@ -4,10 +4,11 @@ import { Store } from '../store';
 @Component({
     selector: 'ngs-state-management-root',
     template: `
-        <p>state-management-root works!</p>
-        <ul>
-            <li *ngFor="let todo of (todo$ | async)">{{ todo.name }}</li>
-        </ul>
+        <div class="row">
+            <div class="col songs"><ngs-songs-list></ngs-songs-list></div>
+            <div class="col songs"><ngs-songs-favorites></ngs-songs-favorites></div>
+            <div class="col songs"><ngs-songs-listened></ngs-songs-listened></div>
+        </div>
     `,
     styleUrls: ['./state-management-root.component.scss']
 })

@@ -1,7 +1,8 @@
 @import "../pro.module.scss";
-songs-playlist,
-songs-favourites,
-songs-listened {
-  flex: 0 0 33%;
+ngs-songs-list,
+ngs-songs-favorites,
+ngs-songs-listened {
+  display: block;
   margin: 0 10px;
+  border: 1px solid blue;
 }

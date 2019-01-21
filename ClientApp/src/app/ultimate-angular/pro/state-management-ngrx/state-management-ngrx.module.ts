@@ -5,10 +5,11 @@ import { StateManagementNgrxRoutingModule } from './state-management-ngrx-routin
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StateManagementRootComponent } from './state-management-root/state-management-root.component';
 import { Store } from './store';
+import { SongsModule } from './songs/songs.module';
 
 @NgModule({
     declarations: [StateManagementRootComponent],
-    imports: [CommonModule, SharedModule, StateManagementNgrxRoutingModule],
+    imports: [CommonModule, SharedModule, StateManagementNgrxRoutingModule, SongsModule],
     providers: [Store]
 })
 export class StateManagementNgrxModule {}

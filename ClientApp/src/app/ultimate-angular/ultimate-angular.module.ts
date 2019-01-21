@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { ExampleDef } from '../shared/Models/example.model';
 
-import json from 'src/assets/json/ultimate-angular.json';
-
 import { UltimateAngularRoutingModule } from './ultimate-angular-routing.module';
 import { UltimateAngularBaseComponent } from './ultimate-angular-base/ultimate-angular-base.component';
 
