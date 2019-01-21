@@ -24,6 +24,7 @@
         "breeze-bridge-angular": "^4.0.2",
         "breeze-client": "^1.7.1",
         "core-js": "^2.6.2",
+        "date-fns": "^2.0.0-alpha.27",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
         "lodash": "^4.17.11",

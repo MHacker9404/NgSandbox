@@ -15,7 +15,7 @@ import { Song } from '../song';
             </div>
         </div>
     `,
-    styles: ['../songs.scss']
+    styleUrls: ['../songs.scss']
 })
 export class SongsListComponent implements OnInit, OnDestroy {
     private _destroySubscription = new Subject<boolean>();

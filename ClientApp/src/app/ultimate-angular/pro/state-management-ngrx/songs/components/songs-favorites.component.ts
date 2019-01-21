@@ -3,6 +3,7 @@ import { Store } from '../../store';
 import { SongsService } from '../songs.service';
 import { Subject, Observable } from 'rxjs';
 import { Song } from '../song';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
     selector: 'ngs-songs-favorites',
@@ -14,14 +15,17 @@ import { Song } from '../song';
             </div>
         </div>
     `,
-    styles: ['../songs.scss']
+    styleUrls: ['../songs.scss']
 })
 export class SongsFavoritesComponent implements OnInit, OnDestroy {
     private _destroySubscription = new Subject<boolean>();
     favorites$: Observable<Song[]>;
     constructor(private _store: Store, private _songsService: SongsService) {}
     ngOnInit() {
-        this.favorites$ = this._store.select('playlist');
+        this.favorites$ = this._store.select('playlist').pipe(
+            filter(Boolean),
+            map((songs: Song[]) => songs.filter((song: Song) => song.favorite))
+        );
     }
     ngOnDestroy(): void {
         this._destroySubscription.next(true);
