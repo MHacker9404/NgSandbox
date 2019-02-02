@@ -11,10 +11,10 @@ import { Song } from './song';
 })
 export class SongsService {
     private _db$ = of(json);
-    constructor(private _store: Store) {}
+    constructor(private _store: Store) { }
     getPlaylist$ = this._db$.pipe(
         map((results: any) => results.playlist as Song[]),
-        tap(results => console.log('results', results)),
+        // tap(results => console.log('results', results)),
         tap(results => this._store.set('playlist', results))
     );
 }

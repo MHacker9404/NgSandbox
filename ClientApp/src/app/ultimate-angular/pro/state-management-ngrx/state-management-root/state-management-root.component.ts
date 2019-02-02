@@ -5,7 +5,7 @@ import { Store } from '../store';
     selector: 'ngs-state-management-root',
     template: `
         <div class="row">
-            <div class="col songs"><ngs-songs-list></ngs-songs-list></div>
+            <div class="col songs"><ngs-songs-playlist></ngs-songs-playlist></div>
             <div class="col songs"><ngs-songs-favorites></ngs-songs-favorites></div>
             <div class="col songs"><ngs-songs-listened></ngs-songs-listened></div>
         </div>
@@ -14,7 +14,7 @@ import { Store } from '../store';
 })
 export class StateManagementRootComponent implements OnInit {
     todo$ = this._store.select<any[]>('todos');
-    constructor(private _store: Store) {}
+    constructor(private _store: Store) { }
 
     ngOnInit() {
         this._store.set('todos', [{ id: 1, name: 'Eat dinner' }, { id: 2, name: 'Do washing' }]);

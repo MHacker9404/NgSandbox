@@ -8,12 +8,15 @@ import { filter, map } from 'rxjs/operators';
 @Component({
     selector: 'ngs-songs-listened',
     template: `
+        <!--
         <div class="row justify-content-center"><h3>Listened</h3></div>
         <div class="row justify-content-left">
             <div class="col">
                 <div *ngFor="let song of (listened$ | async)">{{ song.artist }} {{ song.track }}</div>
             </div>
         </div>
+        -->
+        <ngs-songs-list [songs]="listened$ | async">Played</ngs-songs-list>
     `,
     styleUrls: ['../songs.scss']
 })
