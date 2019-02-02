@@ -16,7 +16,7 @@ import { Song } from '../song';
             </div>
         </div>
         -->
-        <ngs-songs-list [songs]="playlist$ | async">Playlist</ngs-songs-list>
+        <ngs-songs-list [songs]="playlist$ | async" (toggle)="onToggle($event)">Playlist</ngs-songs-list>
     `,
     styleUrls: ['../songs.scss']
 })
@@ -31,5 +31,8 @@ export class SongsPlaylistComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this._destroySubscription.next(true);
         this._destroySubscription.complete();
+    }
+    onToggle(song: Song) {
+        this._songsService.toggle(song);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Song } from '../song';
 
 @Component({
@@ -12,11 +12,11 @@ import { Song } from '../song';
                     </h3>
                     <!--<div *ngFor="let song of songs">{{ song.artist }} {{ song.track }}</div>-->
                     <ul>
-                        <li *ngFor="let song of songs">
+                        <li *ngFor="let song of songs; index as index">
                             <p>{{ song.artist }}</p>
                             <span>{{ song.track }}</span>
-                            <div class="songs-list__favorite" [class.active]="song.favorite"></div>
-                            <div class="songs-list__listened" [class.active]="song.listened"></div>
+                            <div class="songs-list__favorite" [class.active]="song.favorite" (click)="toggleItem(index, 'favorite')"></div>
+                            <div class="songs-list__listened" [class.active]="song.listened" (click)="toggleItem(index, 'listened')"></div>
                         </li>
                     </ul>
                 </div>
@@ -27,8 +27,16 @@ import { Song } from '../song';
 })
 export class SongsListComponent implements OnInit {
     @Input() songs: Song[];
+    @Output() toggle = new EventEmitter<any>();
 
     constructor() {}
 
     ngOnInit() {}
+
+    toggleItem(index: number, prop: string) {
+        const song = this.songs[index];
+        this.toggle.emit({
+            song: { ...song, [prop]: !song[prop] }
+        });
+    }
 }

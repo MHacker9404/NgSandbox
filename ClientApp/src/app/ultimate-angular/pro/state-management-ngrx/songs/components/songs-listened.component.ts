@@ -16,7 +16,7 @@ import { filter, map } from 'rxjs/operators';
             </div>
         </div>
         -->
-        <ngs-songs-list [songs]="listened$ | async">Played</ngs-songs-list>
+        <ngs-songs-list [songs]="listened$ | async" (toggle)="onToggle($event)">>Played</ngs-songs-list>
     `,
     styleUrls: ['../songs.scss']
 })
@@ -33,5 +33,8 @@ export class SongsListenedComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this._destroySubscription.next(true);
         this._destroySubscription.complete();
+    }
+    onToggle(song: Song) {
+        this._songsService.toggle(song);
     }
 }
