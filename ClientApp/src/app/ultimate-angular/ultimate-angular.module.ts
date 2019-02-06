@@ -12,6 +12,12 @@ const examples: ExampleDef[] = [
         name: 'UltimateAngularPro',
         path: 'pro',
         component: null
+    },
+    {
+        label: '02 - NgRx',
+        name: 'UltimateAngularPro-NgRx',
+        path: 'ngrx',
+        component: null
     }
 ];
 

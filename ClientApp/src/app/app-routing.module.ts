@@ -31,6 +31,11 @@ const routes: Routes = [
     path: 'ultimate-angular',
     loadChildren:
       './ultimate-angular/ultimate-angular.module#UltimateAngularModule'
+  },
+  {
+    path: 'net-basal',
+    loadChildren:
+      './net-basal/net-basal.module#NetBasalModule'
   }
 ];
 
