@@ -12,36 +12,29 @@ import { orderitemsconcatproductspipe } from './services/orderitemsconcatproduct
 import { OrderComponent } from './order/order.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { DataFieldComponent } from './data-field/data-field.component';
-import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ZzaDataService } from './services/zza-data.service';
 import { InitGuard } from './services/init.guard';
 import { CanDeactivateGuard } from './services/can-deactivate.guard';
 import { NamingConvention } from 'breeze-client';
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
-  declarations: [
-    BaseComponent,
-    CustomerListComponent,
-    CustomersListItemComponent,
-    CustomerDetailComponent,
-    orderitemsconcatproductspipe,
-    OrderComponent,
-    ProductListComponent,
-    DataFieldComponent
-  ],
-  imports: [
-    CommonModule,
-    BreezeJSRoutingModule,
-    ModalModule.forRoot(),
-    FormsModule,
-    HttpModule,
-    BreezeBridgeAngularModule
-  ],
-  providers: [ZzaDataService, InitGuard, CanDeactivateGuard]
+    declarations: [
+        BaseComponent,
+        CustomerListComponent,
+        CustomersListItemComponent,
+        CustomerDetailComponent,
+        orderitemsconcatproductspipe,
+        OrderComponent,
+        ProductListComponent,
+        DataFieldComponent,
+    ],
+    imports: [CommonModule, BreezeJSRoutingModule, ModalModule.forRoot(), FormsModule, HttpModule, BreezeBridgeAngularModule],
+    providers: [ZzaDataService, InitGuard, CanDeactivateGuard],
 })
 export class BreezeJSModule {
-  constructor() {
-    NamingConvention.camelCase.setAsDefault();
-  }
+    constructor() {
+        NamingConvention.camelCase.setAsDefault();
+    }
 }
