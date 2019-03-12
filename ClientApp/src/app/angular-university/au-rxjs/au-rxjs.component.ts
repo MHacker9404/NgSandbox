@@ -5,11 +5,11 @@ import { ExampleDef } from 'src/app/shared/Models/example.model';
     selector: 'ngs-au-rxjs',
     template: `
         <div class="row">
-            <div class="col text-center"><h2>Pro</h2></div>
+            <div class="col text-center"><h2>RxJs and Reactive Patterns</h2></div>
         </div>
         <div class="row">
             <div class="col-3"><ngs-sidebar [items]="examples"></ngs-sidebar></div>
-            <div class="col-9"><router-outlet></router-outlet></div>
+            <div class="col-9 screen-container"><router-outlet></router-outlet></div>
         </div>
     `,
     styleUrls: ['./au-rxjs.component.scss'],
