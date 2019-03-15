@@ -28,7 +28,10 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/popper.js/dist/esm/popper.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.min.js"
-                        ]
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["./src/assets/fonts/"]
+                        }
                     },
                     "configurations": {
                         "production": {
@@ -84,7 +87,10 @@
                         "karmaConfig": "src/karma.conf.js",
                         "styles": ["src/styles.scss"],
                         "scripts": [],
-                        "assets": ["src/favicon.ico", "src/assets"]
+                        "assets": ["src/favicon.ico", "src/assets"],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["./src/assets/fonts/"]
+                        }
                     }
                 },
                 "lint": {
