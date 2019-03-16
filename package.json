@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@angular-builders/custom-webpack": "^7.4.3"
+  }
+}
