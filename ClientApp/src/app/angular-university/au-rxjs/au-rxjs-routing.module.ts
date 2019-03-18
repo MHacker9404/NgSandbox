@@ -7,7 +7,13 @@ const routes: Routes = [
     {
         path: '',
         component: AuRxjsComponent,
-        children: [{ path: 'browser-events', component: BrowserEventsComponent, pathMatch: 'full' }],
+        children: [
+            { path: 'browser-events', component: BrowserEventsComponent, pathMatch: 'full' },
+            {
+                path: 'custom-events',
+                loadChildren: './components/custom-events/custom-events.component#CustomEventsModule',
+            },
+        ],
     },
 ];
 
