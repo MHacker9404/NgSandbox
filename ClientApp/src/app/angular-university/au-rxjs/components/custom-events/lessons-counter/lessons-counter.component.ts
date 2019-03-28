@@ -1,29 +1,25 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 
 @Component({
-  selector: 'ngs-lessons-counter',
-  template: `
-    <p>
-      lessons-counter works!
-    </p>
-  `,
-  styleUrls: ['./lessons-counter.component.scss']
+    selector: 'ngs-lessons-counter',
+    template: `
+        <p>
+            lessons-counter works!
+        </p>
+    `,
+    styleUrls: ['./lessons-counter.component.scss'],
 })
 export class LessonsCounterComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    ngOnInit() {}
 }
 
 @NgModule({
-  declarations: [LessonsCounterComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [LessonsCounterComponent]
+    declarations: [LessonsCounterComponent],
+    imports: [CommonModule, AgGridModule.withComponents([])],
+    exports: [LessonsCounterComponent],
 })
-export class LessonsCounterModule { }
+export class LessonsCounterModule {}

@@ -26,6 +26,8 @@
                         "styles": [
                             "node_modules/bootstrap/scss/bootstrap.scss",
                             "src/assets/fonts/material-icons/iconfont/material-icons.css",
+                            "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+                            "node_modules/ag-grid-community/dist/styles/ag-theme-bootstrap.css",
                             "src/styles.scss"
                         ],
                         "scripts": [
