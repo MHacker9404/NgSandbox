@@ -5,7 +5,7 @@ import { LessonsCounterModule } from '../lessons-counter/lessons-counter.compone
 import { LessonsListModule } from '../lessons-list/lessons-list.component';
 import json from '../../../shared/model/test-lessons.json';
 import { ILesson } from '../../../shared/model/ilesson';
-import { globalEventBus } from './event-bus';
+import { globalEventBus, LESSONS_LIST_AVAILABLE, ADD_NEW_LESSON } from './event-bus';
 
 @Component({
     selector: 'ngs-event-bus-experiments',
@@ -21,19 +21,29 @@ import { globalEventBus } from './event-bus';
     styleUrls: ['./event-bus-experiments.component.scss'],
 })
 export class EventBusExperimentsComponent implements OnInit {
-    lessons: ILesson[];
+    private lessons: ILesson[];
 
     constructor() {
-        this.lessons = json;
+        this.lessons = json.slice();
     }
 
     ngOnInit() {
         console.log('Broadcasting list to all listeners');
-        globalEventBus.notifyObservers(this.lessons);
+
+        globalEventBus.notifyObservers(LESSONS_LIST_AVAILABLE, this.lessons);
+
+        setTimeout(() => {
+            this.lessons.push({
+                id: Math.random(),
+                description: 'New lesson from server',
+            });
+            globalEventBus.notifyObservers(LESSONS_LIST_AVAILABLE, this.lessons.slice());
+        }, 10000);
     }
 
     addLesson(lesson: string) {
-        console.log(lesson);
+        globalEventBus.notifyObservers(ADD_NEW_LESSON, lesson);
+        console.log(this.lessons);
     }
 }
 

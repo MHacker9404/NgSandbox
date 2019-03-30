@@ -2,7 +2,8 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ILesson } from '../../../shared/model/ilesson';
 import { TableModule } from 'primeng/table';
-import { globalEventBus, Observer } from '../event-bus-experiments/event-bus';
+import { globalEventBus, Observer, LESSONS_LIST_AVAILABLE, ADD_NEW_LESSON } from '../event-bus-experiments/event-bus';
+import _remove from 'lodash/remove';
 
 @Component({
     selector: 'ngs-lessons-list',
@@ -10,12 +11,18 @@ import { globalEventBus, Observer } from '../event-bus-experiments/event-bus';
         <table class="table table-striped table-bordered table-sm lessons-list card card-strong">
             <tbody>
                 <tr *ngFor="let lesson of lessons">
+                    <td class="viewed">
+                        <input type="checkbox" (click)="toggleLessonViewed(lesson)" />
+                    </td>
                     <td class="lesson-title">
                         {{ lesson.description }}
                     </td>
                     <td class="duration">
+                        <!--
                         <i class="material-icons">schedule</i>
                         <span>{{ lesson.duration }}</span>
+                        -->
+                        <button class="button btn-highlight" (click)="delete(lesson)">X</button>
                     </td>
                 </tr>
             </tbody>
@@ -48,11 +55,20 @@ export class LessonsListComponent implements OnInit, Observer {
     // ];
     lessons: ILesson[] = [];
 
-    cols = [{ header: 'Description', field: 'description' }, { header: 'Duration', field: 'duration' }];
+    cols = [
+        { field: 'completed' },
+        { header: 'Description', field: 'description' },
+        { header: 'Duration', field: 'duration' },
+    ];
 
     constructor() {
         console.log('LessonsList registered');
-        globalEventBus.registerObserver(this);
+        globalEventBus.registerObserver(LESSONS_LIST_AVAILABLE, this);
+        globalEventBus.registerObserver(ADD_NEW_LESSON, {
+            notify: lesson => {
+                this.lessons.push({ id: Math.random(), description: lesson });
+            },
+        });
     }
 
     ngOnInit() {}
@@ -60,6 +76,12 @@ export class LessonsListComponent implements OnInit, Observer {
     notify(lessons: ILesson[]) {
         this.lessons = lessons;
         console.log('LessonsList received new list');
+    }
+    toggleLessonViewed(lesson: ILesson) {
+        lesson.completed = !lesson.completed;
+    }
+    delete(deleted: ILesson) {
+        _remove(this.lessons, lesson => lesson.id === deleted.id);
     }
 }
 
