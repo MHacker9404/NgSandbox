@@ -5,6 +5,7 @@ import { LessonsCounterModule } from '../lessons-counter/lessons-counter.compone
 import { LessonsListModule } from '../lessons-list/lessons-list.component';
 import json from '../../../shared/model/test-lessons.json';
 import { ILesson } from '../../../shared/model/ilesson';
+import { globalEventBus } from './event-bus';
 
 @Component({
     selector: 'ngs-event-bus-experiments',
@@ -27,7 +28,8 @@ export class EventBusExperimentsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(json, this.lessons);
+        console.log('Broadcasting list to all listeners');
+        globalEventBus.notifyObservers(this.lessons);
     }
 
     addLesson(lesson: string) {
