@@ -23,7 +23,6 @@ export class BrowserEventsComponent implements OnInit {
     }
 
     unsubscribe() {
-        console.log('Called unsubscribe()');
         this._hoverSection.removeEventListener('mousemove', onMouseMove);
     }
 }

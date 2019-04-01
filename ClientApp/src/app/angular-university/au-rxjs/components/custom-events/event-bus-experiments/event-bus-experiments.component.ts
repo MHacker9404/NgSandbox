@@ -28,8 +28,6 @@ export class EventBusExperimentsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Broadcasting list to all listeners');
-
         globalEventBus.notifyObservers(LESSONS_LIST_AVAILABLE, this.lessons);
 
         setTimeout(() => {
@@ -43,7 +41,6 @@ export class EventBusExperimentsComponent implements OnInit {
 
     addLesson(lesson: string) {
         globalEventBus.notifyObservers(ADD_NEW_LESSON, lesson);
-        console.log(this.lessons);
     }
 }
 

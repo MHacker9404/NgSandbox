@@ -13,6 +13,14 @@ const routes: Routes = [
                 path: 'custom-events',
                 loadChildren: './components/custom-events/custom-events.component#CustomEventsModule',
             },
+            {
+                path: 'observable-pattern',
+                loadChildren: './observable-pattern/observable-pattern.component#ObservablePatternModule',
+            },
+            {
+                path: 'with-rxjs',
+                loadChildren: './with-rxjs/with-rxjs.component#WithRxJsModule',
+            },
         ],
     },
 ];

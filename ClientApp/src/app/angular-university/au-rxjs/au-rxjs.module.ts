@@ -10,6 +10,8 @@ import { BrowserEventsComponent } from './components/browser-events/browser-even
 const examples: ExampleDef[] = [
     { label: '01 - Browser Events', name: 'BrowserEvents', path: 'browser-events', component: null },
     { label: '02 - Custom Events', name: 'CustomEvents', path: 'custom-events', component: null },
+    { label: '03 - Observable Pattern', name: 'ObservablePattern', path: 'observable-pattern', component: null },
+    { label: '04 - With RxJS', name: 'WithRxJS', path: 'with-rxjs', component: null },
 ];
 @NgModule({
     declarations: [AuRxjsComponent, BrowserEventsComponent],
