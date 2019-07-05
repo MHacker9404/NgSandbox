@@ -6,11 +6,6 @@ import { OrderItem } from './order-item';
 /// </code-import>
 
 export class ProductSize extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: ProductSize) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -22,5 +17,10 @@ export class ProductSize extends EntityBase {
     toppingPrice: number;
     isGlutenFree: boolean;
     orderItems: OrderItem[];
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: ProductSize) { }
 }
 

@@ -6,11 +6,6 @@ import { OrderItemOption } from './order-item-option';
 /// </code-import>
 
 export class ProductOption extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: ProductOption) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -21,5 +16,10 @@ export class ProductOption extends EntityBase {
     isPizzaOption: boolean;
     isSaladOption: boolean;
     orderItemOptions: OrderItemOption[];
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: ProductOption) { }
 }
 

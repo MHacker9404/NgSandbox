@@ -7,11 +7,6 @@ import { ProductOption } from './product-option';
 /// </code-import>
 
 export class OrderItemOption extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: OrderItemOption) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -23,5 +18,10 @@ export class OrderItemOption extends EntityBase {
     price: number;
     orderItem: OrderItem;
     productOption: ProductOption;
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: OrderItemOption) { }
 }
 

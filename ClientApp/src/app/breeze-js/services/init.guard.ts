@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanActivateChild
-} from "@angular/router";
-import { ZzaDataService } from "./zza-data.service";
+} from '@angular/router';
+import { ZzaDataService } from './zza-data.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class InitGuard implements CanActivate, CanActivateChild {
   constructor(private _svc: ZzaDataService) {}

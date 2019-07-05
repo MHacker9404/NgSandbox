@@ -8,11 +8,6 @@ import { OrderStatus } from './order-status';
 /// </code-import>
 
 export class Order extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: Order) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -32,5 +27,10 @@ export class Order extends EntityBase {
     customer: Customer;
     orderItems: OrderItem[];
     orderStatus: OrderStatus;
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: Order) { }
 }
 

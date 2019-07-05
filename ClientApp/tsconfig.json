@@ -12,8 +12,11 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
-        "target": "es5",
+        "target": "es6",
         "typeRoots": ["node_modules/@types", "src/typings.d.ts"],
-        "lib": ["es2018", "dom"]
+        "lib": ["es2019", "dom"]
+    },
+    "angularCompileOptions": {
+        "enableIvy": true
     }
 }

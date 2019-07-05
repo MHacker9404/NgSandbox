@@ -6,15 +6,15 @@ import { OrderItem } from './order-item';
 /// </code-import>
 
 export class Store extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: Store) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
     id: string;
     orderItems: OrderItem[];
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: Store) { }
 }
 

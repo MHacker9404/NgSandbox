@@ -6,11 +6,6 @@ import { OrderItem } from './order-item';
 /// </code-import>
 
 export class Product extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: Product) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -24,5 +19,10 @@ export class Product extends EntityBase {
     withTomatoSauce: boolean;
     sizeIds: string;
     orderItems: OrderItem[];
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: Product) { }
 }
 

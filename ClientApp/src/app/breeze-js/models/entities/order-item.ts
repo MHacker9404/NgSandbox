@@ -10,11 +10,6 @@ import { Store } from './store';
 /// </code-import>
 
 export class OrderItem extends EntityBase {
-
-    /// <code> Place custom code between <code> tags
-    
-    /// [Initializer]
-    static initializer(entity: OrderItem) { }
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -32,5 +27,10 @@ export class OrderItem extends EntityBase {
     product: Product;
     productSize: ProductSize;
     store: Store;
+
+    /// <code> Place custom code between <code> tags
+
+    /// [Initializer]
+    static initializer(entity: OrderItem) { }
 }
 
