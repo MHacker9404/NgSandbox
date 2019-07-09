@@ -1,46 +1,45 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
   {
     path: 'angular-university',
     loadChildren:
-      './angular-university/angular-university.module#AngularUniversityModule'
+      './angular-university/angular-university.module#AngularUniversityModule',
   },
   {
     path: 'breeze-js',
-    loadChildren: './breeze-js/breeze-js.module#BreezeJSModule'
+    loadChildren: './breeze-js/breeze-js.module#BreezeJSModule',
   },
   {
     path: 'caminte',
-    loadChildren: './caminte/caminte.module#CaminteModule'
+    loadChildren: './caminte/caminte.module#CaminteModule',
   },
   {
     path: 'loopback',
-    loadChildren: './loopback/loopback.module#LoopbackModule'
+    loadChildren: './loopback/loopback.module#LoopbackModule',
   },
   {
     path: 'ng7-book',
-    loadChildren: './ng7-book/ng7-book.module#Ng7BookModule'
+    loadChildren: './ng7-book/ng7-book.module#Ng7BookModule',
   },
   {
     path: 'type-orm',
-    loadChildren: './type-orm/type-orm.module#TypeORMModule'
+    loadChildren: './type-orm/type-orm.module#TypeORMModule',
   },
   {
     path: 'ultimate-angular',
     loadChildren:
-      './ultimate-angular/ultimate-angular.module#UltimateAngularModule'
+      './ultimate-angular/ultimate-angular.module#UltimateAngularModule',
   },
   {
     path: 'net-basal',
-    loadChildren:
-      './net-basal/net-basal.module#NetBasalModule'
-  }
+    loadChildren: './net-basal/net-basal.module#NetBasalModule',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+  exports: [RouterModule],
+  })
 export class AppRoutingModule {}

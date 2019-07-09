@@ -414,10 +414,10 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/lodash@^4.14.135":
-  version "4.14.135"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.135.tgz#d2607c35dd68f70c2b35ba020c667493dedd8447"
-  integrity sha512-Ed+tSZ9qM1oYpi5kzdsBuOzcAIn1wDW+e8TFJ50IMJMlSopGdJgKAbhHzN6h1E1OfjlGOr2JepzEWtg9NIfoNg==
+"@types/lodash@^4.14.136":
+  version "4.14.136"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.136.tgz#413e85089046b865d960c9ff1d400e04c31ab60f"
+  integrity sha512-0GJhzBdvsW2RUccNHOBkabI8HZVdOXmXbXhuKlDEd5Vv12P7oAVGfomGp3Ne21o5D/qu1WmthlNKFaoZJJeErA==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -434,10 +434,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.44.tgz#b00cf3595c6a3d75740af9768739a8125053a5a9"
   integrity sha512-HY3SK7egERHGUfY8p6ztXIEQWcIPHouYhCGcLAPQin7gE2G/fALFz+epnMwcxKUS6aKqTVoAFdi+t1llQd3xcw==
 
-"@types/node@~12.0.12":
-  version "12.0.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.12.tgz#cc791b402360db1eaf7176479072f91ee6c6c7ca"
-  integrity sha512-Uy0PN4R5vgBUXFoJrKryf5aTk3kJ8Rv3PdlHjl6UaX+Cqp1QE0yPQ68MPXGrZOfG7gZVNDIJZYyot0B9ubXUrQ==
+"@types/node@~12.6.1":
+  version "12.6.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.1.tgz#d5544f6de0aae03eefbb63d5120f6c8be0691946"
+  integrity sha512-rp7La3m845mSESCgsJePNL/JQyhkOJA6G4vcwvVgkDAwHhGdq5GCumxmPjEk1MZf+8p5ZQAUE7tqgQRQTXN7uQ==
 
 "@types/source-list-map@*":
   version "0.1.2"
@@ -6020,10 +6020,10 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-primeng@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/primeng/-/primeng-8.0.0.tgz#86c86e9c336de231f82f22bf8ad488ca1785aa58"
-  integrity sha512-nIuwzrMqAHlev3vZAjLc9/hsTcEcbDWMHdvnao/YAvEQSyfN8C7MU9b9PV6ee9/qUgf3Wj9cIXaBPNgGaKM73A==
+primeng@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-8.0.1.tgz#cc44a61bb61a2f6a43c1290cf016022c2283eb46"
+  integrity sha512-87HQEh+S4lm4r280Thlk3pHzJJ1lr4Dl82zidnfWeOBZ5lMbK2w9w9yKJH875aPKWs0MMDVZeQ5V9jMWolRjlA==
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
