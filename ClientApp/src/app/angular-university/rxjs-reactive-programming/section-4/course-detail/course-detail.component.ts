@@ -46,19 +46,27 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
         .pipe(
             takeUntil(this._unsubscribe$),
             tap((params) => (courseId = params['id'])),
-            tag('route-params')
+            tag('course-detail: route-params')
         )
         .subscribe();
-    _dataStore.courseList$
+    _dataStore
+        .findCourseByUrl(courseId)
         .pipe(
             takeUntil(this._unsubscribe$),
-            tap((courses: ICourse[]) => {
-              this.course = _cloneDeep(
-                  _find(courses, (course: ICourse) => course.url === courseId)
-              );
-              this.lessons = _cloneDeep(this.course.lessons);
+            tap((course: ICourse) => {
+              this.course = _cloneDeep(course);
             }),
-            tag('courses')
+            tag('course-detail: courses')
+        )
+        .subscribe();
+    _dataStore
+        .findLessonsForCourse(courseId)
+        .pipe(
+            takeUntil(this._unsubscribe$),
+            tap((lessons: ILesson[]) => {
+              this.lessons = _cloneDeep(lessons);
+            }),
+            tag('course-detail: lessons')
         )
         .subscribe();
   }
