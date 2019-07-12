@@ -9,6 +9,7 @@ import {Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 import _find from 'lodash/find';
 import _cloneDeep from 'lodash/cloneDeep';
+import {tag} from 'rxjs-spy/operators/tag';
 
 @Component({
   selector: 'ngs-course-detail',
@@ -44,7 +45,8 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     _route.params
         .pipe(
             takeUntil(this._unsubscribe$),
-            tap((params) => (courseId = params['id']))
+            tap((params) => (courseId = params['id'])),
+            tag('route-params')
         )
         .subscribe();
     _dataStore.courseList$
@@ -55,7 +57,8 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
                   _find(courses, (course: ICourse) => course.url === courseId)
               );
               this.lessons = _cloneDeep(this.course.lessons);
-            })
+            }),
+            tag('courses')
         )
         .subscribe();
   }

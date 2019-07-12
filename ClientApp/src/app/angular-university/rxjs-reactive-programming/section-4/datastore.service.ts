@@ -4,6 +4,9 @@ import {ILesson} from '../shared/model/ilesson';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ICourse} from '../shared/model/icourse';
 import _cloneDeep from 'lodash/cloneDeep';
+import _flatMap from 'lodash/flatMap';
+import _shuffle from 'lodash/shuffle';
+import _slice from 'lodash/slice';
 
 @Injectable({
   providedIn: null,
@@ -29,6 +32,12 @@ export class DatastoreService {
 
   constructor() {
     this._courses = _cloneDeep(json.courses);
+    this._lessons = _slice(
+        _cloneDeep(_shuffle(_flatMap(this._courses, (course) => course.lessons))),
+        0,
+        10
+    );
+
     this._broadcast();
   }
 

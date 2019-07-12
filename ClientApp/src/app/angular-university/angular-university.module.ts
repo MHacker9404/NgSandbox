@@ -13,19 +13,19 @@ const examples: ExampleDef[] = [
     path: 'rxjs',
     component: null,
   },
-  {
-    label: '02 - Angular For Beginners',
-    name: 'Beginners',
-    path: 'beginners',
-    component: null,
-  },
-  {
-    label: '03 - Angular Security Course',
-    name: 'Security',
-    path: 'security',
-    component: null,
-  },
-  {label: '04 - NgRx in Depth', name: 'NgRx', path: 'ngrx', component: null},
+//   {
+//     label: '02 - Angular For Beginners',
+//     name: 'Beginners',
+//     path: 'beginners',
+//     component: null,
+//   },
+//   {
+//     label: '03 - Angular Security Course',
+//     name: 'Security',
+//     path: 'security',
+//     component: null,
+//   },
+//   {label: '04 - NgRx in Depth', name: 'NgRx', path: 'ngrx', component: null},
 ];
 
 @NgModule({

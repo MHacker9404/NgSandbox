@@ -38,6 +38,10 @@ import {
         </tr>
       </table>
 
+      <button class="btn btn-primary" (click)="changeCourseData()">
+        Mutate Local Data
+      </button>
+
       <div *ngIf="!courses">Loading ...</div>
 
       <h2>Latest Lessons Published</h2>
@@ -85,6 +89,12 @@ export class Section4Component implements OnInit, OnDestroy {
             tap((lessons: ILesson[]) => (this.latestLessons = _cloneDeep(lessons)))
         )
         .subscribe();
+  }
+
+  changeCourseData() {
+    this.courses.forEach(
+        (course) => (course.description = `=> ${course.description}`)
+    );
   }
 
   ngOnDestroy(): void {
