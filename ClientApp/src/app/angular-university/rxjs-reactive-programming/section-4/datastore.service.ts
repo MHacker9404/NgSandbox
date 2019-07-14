@@ -14,23 +14,23 @@ import {first} from 'rxjs/operators';
   providedIn: null,
   })
 export class DatastoreService {
-  private _courses: ICourse[] = [];
+  private _courses: ICourse[];
   private _courseListSubject: BehaviorSubject<ICourse[]> = new BehaviorSubject(
-      []
+      this._courses
   );
 
   public courseList$: Observable<
     ICourse[]
-  > = this._courseListSubject.asObservable().pipe(first());
+  > = this._courseListSubject.asObservable();
 
-  private _lessons: ILesson[] = [];
+  private _lessons: ILesson[];
   private _lessonsListSubject: BehaviorSubject<ILesson[]> = new BehaviorSubject(
-      []
+      this._lessons
   );
 
   public lessonsList$: Observable<
     ILesson[]
-  > = this._lessonsListSubject.asObservable().pipe(first());
+  > = this._lessonsListSubject.asObservable();
 
   constructor() {
     this._courses = _cloneDeep(json.courses);
@@ -45,17 +45,19 @@ export class DatastoreService {
 
   findCourseByUrl(url: string): Observable<ICourse> {
     const course = _find(this._courses, (c) => c.url === url);
-    return of(course).pipe(first());
+    return of(course);
   }
 
   findLessonsForCourse(url: string): Observable<ILesson[]> {
     const course = _find(this._courses, (c) => c.url === url);
     const lessons = _cloneDeep(course.lessons);
-    return of(lessons).pipe(first());
+    return of(lessons);
   }
 
   private _broadcast(courses: ICourse[], lessons: ILesson[]) {
-    this._courseListSubject.next(_cloneDeep(courses));
-    this._lessonsListSubject.next(_cloneDeep(lessons));
+    setTimeout(() => {
+      this._courseListSubject.next(_cloneDeep(courses));
+      this._lessonsListSubject.next(_cloneDeep(lessons));
+    }, 4000);
   }
 }

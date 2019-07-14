@@ -8,6 +8,7 @@ import {DatastoreService} from './datastore.service';
 import {Observable, Subject} from 'rxjs';
 import _cloneDeep from 'lodash/cloneDeep';
 import {takeUntil} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {
   CourseDetailComponent,
   CourseDetailModule,
@@ -26,9 +27,9 @@ import {tag} from 'rxjs-spy/operators/tag';
       >-->
       <table
         class="table table-bordered table-striped table-sm"
-        *ngIf="courses$ | async"
+        *ngIf="courses$ | async as courses; else loadingCourses"
       >
-        <tr class="course-summary" *ngFor="let course of courses$ | async">
+        <tr class="course-summary" *ngFor="let course of courses">
           <td>
             <img class="lesson-logo" src="assets/img/angular.svg" />
           </td>
@@ -52,16 +53,18 @@ import {tag} from 'rxjs-spy/operators/tag';
       </button>
       -->
 
-      <div *ngIf="!(courses$ | async)">Loading ...</div>
+      <ng-template #loadingCourses>
+        <div>Loading ...</div>
+      </ng-template>
 
       <h2>Latest Lessons Published</h2>
 
       <table
         class="table table-bordered table-striped table-sm"
-        *ngIf="lessons$ | async"
+        *ngIf="lessons$ | async as lessons; else lessonsLoading"
       >
         <tbody>
-          <tr *ngFor="let lesson of lessons$ | async">
+          <tr *ngFor="let lesson of lessons">
             <td class="lesson-title">{{ lesson.description }}</td>
             <td class="duration">
               <i class="material-icons">access_time</i>
@@ -71,7 +74,9 @@ import {tag} from 'rxjs-spy/operators/tag';
         </tbody>
       </table>
 
-      <div *ngIf="!(lessons$ | async)">Loading ...</div>
+      <ng-template #lessonsLoading>
+        <div>Loading ...</div>
+      </ng-template>
     </div>
   `,
   styleUrls: ['./section4.component.scss'],
@@ -104,8 +109,8 @@ export class Section4Component implements OnInit, OnDestroy {
   //   }
 
   ngOnDestroy(): void {
-    this._unsubscribe$.next();
-    this._unsubscribe$.complete();
+    //     this._unsubscribe$.next();
+    //     this._unsubscribe$.complete();
   }
 }
 
