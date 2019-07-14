@@ -29,7 +29,10 @@ const routes: Routes = [
       },
       {
         path: 'section-4',
-        loadChildren: './section-4/section4.component#Section4Module',
+        loadChildren: () =>
+          import('./section-4/section4.component').then(
+              (mod) => mod.Section4Module
+          ),
       },
     ],
   },
