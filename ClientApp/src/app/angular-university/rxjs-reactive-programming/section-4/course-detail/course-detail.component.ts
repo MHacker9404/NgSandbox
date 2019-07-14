@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DatastoreService} from '../datastore.service';
 import {ICourse} from '../../shared/model/icourse';
 import {ILesson} from '../../shared/model/ilesson';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 import _find from 'lodash/find';
 import _cloneDeep from 'lodash/cloneDeep';
@@ -14,9 +14,12 @@ import {tag} from 'rxjs-spy/operators/tag';
 @Component({
   selector: 'ngs-course-detail',
   template: `
-    <h2>{{ course?.description }}</h2>
+    <h2>{{ (course$ | async)?.description }}</h2>
 
-    <table class="table lessons-list card card-strong" *ngIf="lessons">
+    <table
+      class="table lessons-list card card-strong"
+      *ngIf="lessons$ | async as lessons; else lessonsLoading"
+    >
       <tbody>
         <tr *ngFor="let lesson of lessons">
           <td class="lesson-title">{{ lesson.description }}</td>
@@ -28,15 +31,19 @@ import {tag} from 'rxjs-spy/operators/tag';
       </tbody>
     </table>
 
-    <div *ngIf="!lessons">Loading ...</div>
+    <ng-template #lessonsLoading>
+      <div>Loading ...</div>
+    </ng-template>
   `,
   styleUrls: ['./course-detail.component.scss'],
   })
 export class CourseDetailComponent implements OnInit, OnDestroy {
+  course$: Observable<ICourse>;
+  lessons$: Observable<ILesson[]>;
   private _unsubscribe$ = new Subject<void>();
 
-  course: ICourse;
-  lessons: ILesson[];
+  //   course: ICourse;
+  //   lessons: ILesson[];
   constructor(
     private _route: ActivatedRoute,
     private _dataStore: DatastoreService
@@ -49,26 +56,14 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
             tag('course-detail: route-params')
         )
         .subscribe();
-    _dataStore
-        .findCourseByUrl(courseId)
-        .pipe(
-            takeUntil(this._unsubscribe$),
-            tap((course: ICourse) => {
-              this.course = _cloneDeep(course);
-            }),
-            tag('course-detail: courses')
-        )
-        .subscribe();
-    _dataStore
-        .findLessonsForCourse(courseId)
-        .pipe(
-            takeUntil(this._unsubscribe$),
-            tap((lessons: ILesson[]) => {
-              this.lessons = _cloneDeep(lessons);
-            }),
-            tag('course-detail: lessons')
-        )
-        .subscribe();
+    this.course$ = this._dataStore.findCourseByUrl(courseId).pipe(
+        takeUntil(this._unsubscribe$),
+        tag('course-detail: course')
+    );
+    this.lessons$ = this._dataStore.findLessonsForCourse(courseId).pipe(
+        takeUntil(this._unsubscribe$),
+        tag('course-detail: lessons')
+    );
   }
 
   ngOnInit() {}
