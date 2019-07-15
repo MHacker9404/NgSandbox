@@ -44,6 +44,12 @@ const examples: ExampleDef[] = [
     path: 'section-5',
     component: null,
   },
+  {
+    label: '07 - Observable Data Services',
+    name: 'Section6',
+    path: 'section-6',
+    component: null,
+  },
 ];
 @NgModule({
   declarations: [AuRxjsComponent, BrowserEventsComponent],

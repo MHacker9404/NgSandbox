@@ -41,6 +41,13 @@ const routes: Routes = [
               (mod) => mod.Section5Module
           ),
       },
+      {
+        path: 'section-6',
+        loadChildren: () =>
+          import('./section-6/section-6.component').then(
+              (mod) => mod.Section6Module
+          ),
+      },
     ],
   },
 ];
