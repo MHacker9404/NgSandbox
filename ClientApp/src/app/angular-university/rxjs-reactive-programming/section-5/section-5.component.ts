@@ -13,6 +13,7 @@ import {
   CourseDetailModule,
 } from './course-detail/course-detail.component';
 import {CoursesListModule} from './courses-list/courses-list.component';
+import {LessonsListModule} from './lessons-list/lessons-list.component';
 
 @Component({
   selector: 'ngs-section5',
@@ -22,26 +23,7 @@ import {CoursesListModule} from './courses-list/courses-list.component';
 
       <ngs-courses-list [courses]="courses$ | async"></ngs-courses-list>
 
-      <h2>Latest Lessons Published</h2>
-
-      <table
-        class="table table-bordered table-striped table-sm"
-        *ngIf="lessons$ | async as lessons; else lessonsLoading"
-      >
-        <tbody>
-          <tr *ngFor="let lesson of lessons">
-            <td class="lesson-title">{{ lesson.description }}</td>
-            <td class="duration">
-              <i class="material-icons">access_time</i>
-              <span>{{ lesson.duration }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <ng-template #lessonsLoading>
-        <div>Loading ...</div>
-      </ng-template>
+      <ngs-lessons-list [lessons]="lessons$ | async"></ngs-lessons-list>
     </div>
   `,
   styleUrls: ['./section-5.component.scss'],
@@ -94,6 +76,7 @@ export class Section5RoutingModule {}
   Section5RoutingModule,
   CourseDetailModule,
   CoursesListModule,
+  LessonsListModule,
   ],
   exports: [Section5Component],
   providers: [DatastoreService],
