@@ -38,6 +38,12 @@ const examples: ExampleDef[] = [
     path: 'section-4',
     component: null,
   },
+  {
+    label: '06 - Smart vs Presentational Components',
+    name: 'Section5',
+    path: 'section-5',
+    component: null,
+  },
 ];
 @NgModule({
   declarations: [AuRxjsComponent, BrowserEventsComponent],
