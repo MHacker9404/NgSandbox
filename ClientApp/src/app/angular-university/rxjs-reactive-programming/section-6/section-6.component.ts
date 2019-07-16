@@ -36,11 +36,11 @@ export class Section6Component implements OnInit, OnDestroy {
   constructor(private _dataStore: DatastoreService) {
     this.courses$ = _dataStore.courseList$.pipe(
         takeUntil(this._unsubscribe$),
-        tag('section-5: courses')
+        tag('section-6: courses')
     );
     this.lessons$ = _dataStore.lessonsList$.pipe(
         takeUntil(this._unsubscribe$),
-        tag('section-5: lessons')
+        tag('section-6: lessons')
     );
   }
 
