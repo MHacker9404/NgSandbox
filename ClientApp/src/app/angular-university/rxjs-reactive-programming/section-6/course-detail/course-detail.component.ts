@@ -10,11 +10,18 @@ import {takeUntil, tap} from 'rxjs/operators';
 import _find from 'lodash/find';
 import _cloneDeep from 'lodash/cloneDeep';
 import {tag} from 'rxjs-spy/operators/tag';
+import {CourseDetailHeaderModule} from '../course-detail-header/course-detail-header.component';
+import {NewsletterService} from '../newsletter.service';
 
 @Component({
   selector: 'ngs-course-detail',
   template: `
-    <h2>{{ (course$ | async)?.description }}</h2>
+    <ngs-course-detail-header
+      [course]="course$ | async"
+      [lessons]="lessons$ | async"
+      firstName="John"
+      (subscribe)="onSubscribe($event)"
+    ></ngs-course-detail-header>
 
     <table
       class="table lessons-list card card-strong"
@@ -46,7 +53,8 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   //   lessons: ILesson[];
   constructor(
     private _route: ActivatedRoute,
-    private _dataStore: DatastoreService
+    private _dataStore: DatastoreService,
+    private _newsLetter: NewsletterService
   ) {
     let courseId: string;
     _route.params
@@ -68,6 +76,13 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {}
 
+  onSubscribe(email: string) {
+    this._newsLetter.subscribeToNewsletter(email).subscribe((data) => {
+      console.log(data);
+      alert(`Subscription successful ...`);
+    }, console.error);
+  }
+
   ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
@@ -76,7 +91,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
 @NgModule({
   declarations: [CourseDetailComponent],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, CourseDetailHeaderModule],
   exports: [CourseDetailComponent],
   })
 export class CourseDetailModule {}

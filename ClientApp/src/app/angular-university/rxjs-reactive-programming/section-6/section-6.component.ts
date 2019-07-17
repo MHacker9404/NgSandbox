@@ -14,6 +14,10 @@ import {
 } from './course-detail/course-detail.component';
 import {CoursesListModule} from './courses-list/courses-list.component';
 import {LessonsListModule} from './lessons-list/lessons-list.component';
+import {CourseDetailHeaderModule} from './course-detail-header/course-detail-header.component';
+import {NewsletterModule} from './newsletter/newsletter.component';
+import {NewsletterService} from './newsletter.service';
+import {LoginModule} from './login/login.component';
 
 @Component({
   selector: 'ngs-section6',
@@ -79,8 +83,11 @@ export class Section6RoutingModule {}
   CourseDetailModule,
   CoursesListModule,
   LessonsListModule,
+  CourseDetailHeaderModule,
+  NewsletterModule,
+  LoginModule,
   ],
   exports: [Section6Component],
-  providers: [DatastoreService],
+  providers: [DatastoreService, NewsletterService],
   })
 export class Section6Module {}
