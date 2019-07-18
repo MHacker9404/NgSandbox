@@ -20,7 +20,7 @@ import { UserService } from '../user.service';
         <ngs-course-detail-header
             [course]="course$ | async"
             [lessons]="lessons$ | async"
-            firstName="John"
+            [firstName]="(_userService.user$ | async).firstName"
             (subscribe)="onSubscribe($event)"
         ></ngs-course-detail-header>
 
@@ -53,7 +53,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _dataStore: DatastoreService,
         private _newsLetter: NewsletterService,
-        private _userService: UserService
+        public _userService: UserService
     ) {}
 
     ngOnInit() {

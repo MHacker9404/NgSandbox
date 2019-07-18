@@ -1,40 +1,44 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'ngs-login',
-  template: `
-    <div class="screen-container login-screen">
-      <h2>Login</h2>
+    selector: 'ngs-login',
+    template: `
+        <div class="screen-container login-screen">
+            <h2>Login</h2>
 
-      <div>
-        <input type="email" name="email" placeholder="Email" />
-      </div>
-      <div>
-        <input type="password" name="password" placeholder="Password" />
-      </div>
+            <div>
+                <input #email type="email" name="email" placeholder="Email" />
+            </div>
+            <div>
+                <input #password type="password" name="password" placeholder="Password" />
+            </div>
 
-      <input
-        type="submit"
-        value="Login"
-        class="button button-primary"
-        (click)="login()"
-      />
-    </div>
-  `,
-  styleUrls: ['./login.component.scss'],
-  })
+            <input
+                type="submit"
+                value="Login"
+                class="button button-primary"
+                (click)="login(email.value, password.value)"
+            />
+        </div>
+    `,
+    styleUrls: ['./login.component.scss'],
+})
 export class LoginComponent implements OnInit {
-  constructor() {}
+    constructor(private _userService: UserService) {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 
-  login() {}
+    login(email: string, password: string) {
+        this._userService.login(email, password);
+    }
 }
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [CommonModule],
-  exports: [LoginComponent],
-  })
+    declarations: [LoginComponent],
+    imports: [CommonModule],
+    exports: [LoginComponent],
+    providers: [UserService],
+})
 export class LoginModule {}
