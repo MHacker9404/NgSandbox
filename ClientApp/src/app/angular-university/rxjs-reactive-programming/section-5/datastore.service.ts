@@ -18,7 +18,6 @@ export class DatastoreService {
   private _courseListSubject: BehaviorSubject<ICourse[]> = new BehaviorSubject(
       this._courses
   );
-
   public courseList$: Observable<
     ICourse[]
   > = this._courseListSubject.asObservable();
@@ -27,7 +26,6 @@ export class DatastoreService {
   private _lessonsListSubject: BehaviorSubject<ILesson[]> = new BehaviorSubject(
       this._lessons
   );
-
   public lessonsList$: Observable<
     ILesson[]
   > = this._lessonsListSubject.asObservable();
