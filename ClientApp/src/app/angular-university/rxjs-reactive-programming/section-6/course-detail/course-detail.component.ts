@@ -12,6 +12,7 @@ import _cloneDeep from 'lodash/cloneDeep';
 import { tag } from 'rxjs-spy/operators/tag';
 import { CourseDetailHeaderModule } from '../course-detail-header/course-detail-header.component';
 import { NewsletterService } from '../newsletter.service';
+import { UserService } from '../user.service';
 
 @Component({
     selector: 'ngs-course-detail',
@@ -51,10 +52,13 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     constructor(
         private _route: ActivatedRoute,
         private _dataStore: DatastoreService,
-        private _newsLetter: NewsletterService
-    ) {
+        private _newsLetter: NewsletterService,
+        private _userService: UserService
+    ) {}
+
+    ngOnInit() {
         let courseId: string;
-        _route.params
+        this._route.params
             .pipe(
                 takeUntil(this._unsubscribe$),
                 tap(params => (courseId = params['id'])),
@@ -70,8 +74,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
             tag('course-detail: lessons')
         );
     }
-
-    ngOnInit() {}
 
     onSubscribe(email: string) {
         this._newsLetter.subscribeToNewsletter(email).subscribe(response => {
