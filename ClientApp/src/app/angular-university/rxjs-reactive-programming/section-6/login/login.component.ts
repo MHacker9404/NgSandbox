@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../user.service';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IUser } from '../../shared/model/IUser';
 
 @Component({
@@ -31,21 +31,27 @@ import { IUser } from '../../shared/model/IUser';
 })
 export class LoginComponent implements OnInit, OnDestroy {
     private _unsubscribe$ = new Subject<void>();
-    constructor(private _userService: UserService, private _router: Router) {}
+    constructor(private _userService: UserService, private _router: Router, private _route: ActivatedRoute) {
+        console.log(this._route);
+    }
 
     ngOnInit() {}
 
     login(email: string, password: string) {
-        this._userService.login(email, password).pipe(
-            takeUntil(this._unsubscribe$),
-            tap(
-                (user: IUser) => {
-                    alert(`login successful: ${user.firstName}`);
-                    this._router.navigateByUrl('../');
-                },
-                error => console.error(error)
+        this._userService
+            .login(email, password)
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                tap(
+                    (user: IUser) => {
+                        alert(`login successful: ${user.firstName}`);
+                        // this._router.navigate(['./'], { relativeTo: this._route.parent });
+                        this._router.navigate(['home'], { relativeTo: this._route.parent });
+                    },
+                    error => console.error(error)
+                )
             )
-        );
+            .subscribe();
     }
 
     ngOnDestroy(): void {

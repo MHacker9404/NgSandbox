@@ -61,6 +61,7 @@ const routes: Routes = [
         path: '',
         component: Section6Component,
         pathMatch: 'full',
+        children: [],
     },
     {
         path: 'course/:id',
@@ -69,6 +70,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'home',
+        component: Section6Component,
     },
 ];
 @NgModule({
