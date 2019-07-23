@@ -23,17 +23,19 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.app.json",
                         "assets": ["src/favicon.ico", "src/assets"],
+                        "sourceMap": true,
+                        "statsJson": true,
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/popper.js/dist/esm/popper.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ],
                         "styles": [
                             "node_modules/bootstrap/scss/bootstrap.scss",
                             "src/assets/fonts/material-icons/iconfont/material-icons.css",
                             "node_modules/ag-grid-community/dist/styles/ag-grid.css",
                             "node_modules/ag-grid-community/dist/styles/ag-theme-bootstrap.css",
                             "src/styles.scss"
-                        ],
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/popper.js/dist/esm/popper.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": ["./src/assets/fonts/"]
@@ -49,7 +51,6 @@
                             ],
                             "optimization": true,
                             "outputHashing": "all",
-                            "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
                             "aot": true,
