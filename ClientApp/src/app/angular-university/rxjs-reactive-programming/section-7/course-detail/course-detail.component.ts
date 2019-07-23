@@ -6,7 +6,7 @@ import { DatastoreService } from '../datastore.service';
 import { ICourse } from '../../shared/model/icourse';
 import { ILesson } from '../../shared/model/ilesson';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap, switchMap } from 'rxjs/operators';
 import _find from 'lodash/find';
 import _cloneDeep from 'lodash/cloneDeep';
 import { tag } from 'rxjs-spy/operators/tag';
@@ -49,22 +49,26 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        let courseId: string;
-        this._route.params
-            .pipe(
-                takeUntil(this._unsubscribe$),
-                tap(params => (courseId = params['id'])),
-                tag('course-detail: route-params')
-            )
-            .subscribe();
-        this.course$ = this._dataStore.findCourseByUrl(courseId).pipe(
+        this.course$ = this._route.params.pipe(
             takeUntil(this._unsubscribe$),
-            tag('course-detail: course')
+            // tap(params => (courseId = params['id'])),
+            switchMap(params =>
+                this._dataStore.findCourseByUrl(params['id']).pipe(
+                    takeUntil(this._unsubscribe$),
+                    tag('course-detail: course')
+                )
+            ),
+            tag('course-detail: route-params')
         );
-        this.lessons$ = this._dataStore.findLessonsForCourse(courseId).pipe(
-            takeUntil(this._unsubscribe$),
-            tag('course-detail: lessons')
-        );
+        this.lessons$ = this.course$.pipe(switchMap((course: ICourse) => this._dataStore.findLessonsForCourse(course.rul)))
+        // this.course$ = this._dataStore.findCourseByUrl(courseId).pipe(
+        //     takeUntil(this._unsubscribe$),
+        //     tag('course-detail: course')
+        // );
+        // this.lessons$ = this._dataStore.findLessonsForCourse(courseId).pipe(
+        //     takeUntil(this._unsubscribe$),
+        //     tag('course-detail: lessons')
+        // );
     }
 
     onSubscribe(email: string) {
