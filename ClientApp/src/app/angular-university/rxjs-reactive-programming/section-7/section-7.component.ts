@@ -28,6 +28,7 @@ import { tag } from 'rxjs-spy/operators';
 
             <ngs-courses-list [courses]="courses$ | async"></ngs-courses-list>
 
+            <h2>Latest Lessons Published</h2>
             <ngs-lessons-list [lessons]="lessons$ | async"></ngs-lessons-list>
         </div>
     `,

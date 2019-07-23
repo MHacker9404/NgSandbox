@@ -13,6 +13,7 @@ import { tag } from 'rxjs-spy/operators/tag';
 import { CourseDetailHeaderModule } from '../course-detail-header/course-detail-header.component';
 import { NewsletterService } from '../newsletter.service';
 import { UserService } from '../user.service';
+import { LessonsListModule } from '../lessons-list/lessons-list.component';
 
 @Component({
     selector: 'ngs-course-detail',
@@ -24,17 +25,8 @@ import { UserService } from '../user.service';
             (subscribe)="onSubscribe($event)"
         ></ngs-course-detail-header>
 
-        <table class="table lessons-list card card-strong" *ngIf="lessons$ | async as lessons; else lessonsLoading">
-            <tbody>
-                <tr *ngFor="let lesson of lessons">
-                    <td class="lesson-title">{{ lesson.description }}</td>
-                    <td class="duration">
-                        <i class="material-icons">access_time</i>
-                        <span>{{ lesson.duration }}</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <h2>Lessons</h2>
+        <ngs-lessons-list [lessons]="lessons$ | async"></ngs-lessons-list>
 
         <ng-template #lessonsLoading>
             <div>Loading ...</div>
@@ -90,7 +82,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
 @NgModule({
     declarations: [CourseDetailComponent],
-    imports: [CommonModule, SharedModule, CourseDetailHeaderModule],
+    imports: [CommonModule, SharedModule, CourseDetailHeaderModule, LessonsListModule],
     exports: [CourseDetailComponent],
 })
 export class CourseDetailModule {}
