@@ -1,11 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { LoggerModule } from 'ngx-logger';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     declarations: [AppComponent],
@@ -13,7 +14,7 @@ import { SharedModule } from './shared/shared.module';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG, enableSourceMaps: true }),
+        LoggerModule.forRoot({ level: environment.logLevel, enableSourceMaps: true }),
         SharedModule,
     ],
     providers: [],

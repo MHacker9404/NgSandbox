@@ -31,9 +31,7 @@ import { IUser } from '../../shared/model/IUser';
 })
 export class LoginComponent implements OnInit, OnDestroy {
     private _unsubscribe$ = new Subject<void>();
-    constructor(private _userService: UserService, private _router: Router, private _route: ActivatedRoute) {
-        console.log(this._route);
-    }
+    constructor(private _userService: UserService, private _router: Router, private _route: ActivatedRoute) {}
 
     ngOnInit() {}
 
@@ -45,7 +43,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                 tap(
                     (user: IUser) => {
                         alert(`login successful: ${user.firstName}`);
-                        // this._router.navigate(['./'], { relativeTo: this._route.parent });
                         this._router.navigate(['home'], { relativeTo: this._route.parent });
                     },
                     error => console.error(error)

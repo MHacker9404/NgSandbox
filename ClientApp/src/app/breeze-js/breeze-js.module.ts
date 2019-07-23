@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { BreezeBridgeAngularModule } from 'breeze-bridge-angular';
 
 import { BreezeJSRoutingModule } from './breeze-js-routing.module';
@@ -18,6 +17,7 @@ import { InitGuard } from './services/init.guard';
 import { CanDeactivateGuard } from './services/can-deactivate.guard';
 import { NamingConvention } from 'breeze-client';
 import { ModalModule } from 'ngx-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -30,7 +30,14 @@ import { ModalModule } from 'ngx-bootstrap';
         ProductListComponent,
         DataFieldComponent,
     ],
-    imports: [CommonModule, BreezeJSRoutingModule, ModalModule.forRoot(), FormsModule, HttpModule, BreezeBridgeAngularModule],
+    imports: [
+        CommonModule,
+        BreezeJSRoutingModule,
+        ModalModule.forRoot(),
+        FormsModule,
+        HttpClientModule,
+        BreezeBridgeAngularModule,
+    ],
     providers: [ZzaDataService, InitGuard, CanDeactivateGuard],
 })
 export class BreezeJSModule {

@@ -73,7 +73,7 @@ const routes: Routes = [
     },
     {
         path: 'home',
-        component: Section6Component,
+        redirectTo: '',
     },
 ];
 @NgModule({

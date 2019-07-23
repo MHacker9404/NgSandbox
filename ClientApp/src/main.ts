@@ -6,8 +6,6 @@ import { environment } from './environments/environment';
 
 import { create as rxjsSpy } from 'rxjs-spy';
 
-console.log(environment);
-
 if (!environment.production) {
     rxjsSpy();
 }
