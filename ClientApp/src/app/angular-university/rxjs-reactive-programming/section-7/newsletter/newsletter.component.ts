@@ -5,6 +5,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
@@ -34,6 +35,7 @@ import {SharedModule} from 'src/app/shared/shared.module';
     </fieldset>
   `,
   styleUrls: ['./newsletter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   })
 export class NewsletterComponent implements OnInit {
   @Input()

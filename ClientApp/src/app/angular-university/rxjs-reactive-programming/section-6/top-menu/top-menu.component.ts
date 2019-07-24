@@ -38,7 +38,7 @@ export class TopMenuComponent implements OnInit, OnDestroy {
         this.isLoggedIn$ = this._userService.user$.pipe(
             takeUntil(this._unsubscribe$),
             map((user: IUser) => user !== UNKNOWN_USER),
-            tag('top-menue: isLoggedIn')
+            tag('top-menu: isLoggedIn')
         );
     }
 

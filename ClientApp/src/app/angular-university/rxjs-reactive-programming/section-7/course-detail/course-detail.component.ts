@@ -51,7 +51,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.course$ = this._route.params.pipe(
             takeUntil(this._unsubscribe$),
-            // tap(params => (courseId = params['id'])),
             switchMap(params =>
                 this._dataStore.findCourseByUrl(params['id']).pipe(
                     takeUntil(this._unsubscribe$),
@@ -60,15 +59,15 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
             ),
             tag('course-detail: route-params')
         );
-        this.lessons$ = this.course$.pipe(switchMap((course: ICourse) => this._dataStore.findLessonsForCourse(course.rul)))
-        // this.course$ = this._dataStore.findCourseByUrl(courseId).pipe(
-        //     takeUntil(this._unsubscribe$),
-        //     tag('course-detail: course')
-        // );
-        // this.lessons$ = this._dataStore.findLessonsForCourse(courseId).pipe(
-        //     takeUntil(this._unsubscribe$),
-        //     tag('course-detail: lessons')
-        // );
+
+        this.lessons$ = this.course$.pipe(
+            switchMap((course: ICourse) =>
+                this._dataStore.findLessonsForCourse(course.url).pipe(
+                    takeUntil(this._unsubscribe$),
+                    tag('course-detail: lessons')
+                )
+            )
+        );
     }
 
     onSubscribe(email: string) {
