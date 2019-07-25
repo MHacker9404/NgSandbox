@@ -1,62 +1,69 @@
-import {
-  Component,
-  NgModule,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {SharedModule} from 'src/app/shared/shared.module';
+import { Component, NgModule, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NewsletterService } from '../newsletter.service';
+import { takeUntil, tap, map } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { tag } from 'rxjs-spy/operators';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'ngs-newsletter',
-  template: `
-    <fieldset class="newsletter">
-      <legend>Newsletter</legend>
+    selector: 'ngs-newsletter',
+    template: `
+        <fieldset class="newsletter">
+            <legend>Newsletter</legend>
 
-      <h5>Hello {{ firstName }}, enter your email below to subscribe:</h5>
+            <h5>Hello {{ firstName$ | async }}, enter your email below to subscribe:</h5>
 
-      <form>
-        <input
-          #email
-          type="email"
-          name="email"
-          placeholder="Enter your Email"
-        />
-        <input
-          type="button"
-          class="button button-primary"
-          value="Subscribe"
-          (click)="subscribeToNewsletter(email)"
-        />
-      </form>
-    </fieldset>
-  `,
-  styleUrls: ['./newsletter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  })
-export class NewsletterComponent implements OnInit {
-  @Input()
-  firstName: string;
+            <form>
+                <input #email type="email" name="email" placeholder="Enter your Email" />
+                <input
+                    type="button"
+                    class="button button-primary"
+                    value="Subscribe"
+                    (click)="onSubscribe(email.value)"
+                />
+            </form>
+        </fieldset>
+    `,
+    styleUrls: ['./newsletter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class NewsletterComponent implements OnInit, OnDestroy {
+    private _unsubscribe$ = new Subject<void>();
+    public firstName$: Observable<string>;
 
-  @Output()
-  subscribe = new EventEmitter();
+    constructor(private _newsLetter: NewsletterService, public _userService: UserService) {}
 
-  constructor() {}
+    ngOnInit() {
+        this.firstName$ = this._userService.user$.pipe(
+            map(user => user.firstName),
+            tag('newsletter: firstName')
+        );
+    }
 
-  subscribeToNewsletter(emailField) {
-    this.subscribe.emit(emailField.value);
-    emailField.value = '';
-  }
+    onSubscribe(emailField: any) {
+        this._newsLetter
+            .subscribeToNewsletter(emailField.value)
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                tap(console.log),
+                tap(response => alert(`Subscription successful ...${response.email}`)),
+                tap(() => (emailField.value = '')),
+                tag('newsletter: subscribeToNewsletter')
+            )
+            .subscribe();
+    }
 
-  ngOnInit() {}
+    ngOnDestroy() {
+        this._unsubscribe$.next();
+        this._unsubscribe$.complete();
+    }
 }
 
 @NgModule({
-  declarations: [NewsletterComponent],
-  imports: [CommonModule, SharedModule],
-  exports: [NewsletterComponent],
-  })
+    declarations: [NewsletterComponent],
+    imports: [CommonModule, SharedModule],
+    exports: [NewsletterComponent],
+})
 export class NewsletterModule {}

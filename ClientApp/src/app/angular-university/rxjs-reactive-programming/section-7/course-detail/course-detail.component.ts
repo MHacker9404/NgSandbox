@@ -14,16 +14,14 @@ import { CourseDetailHeaderModule } from '../course-detail-header/course-detail-
 import { NewsletterService } from '../newsletter.service';
 import { UserService } from '../user.service';
 import { LessonsListModule } from '../lessons-list/lessons-list.component';
+import { TopMenuModule } from '../top-menu/top-menu.component';
 
 @Component({
     selector: 'ngs-course-detail',
     template: `
-        <ngs-course-detail-header
-            [course]="course$ | async"
-            [lessons]="lessons$ | async"
-            [firstName]="(_userService.user$ | async).firstName"
-            (subscribe)="onSubscribe($event)"
-        ></ngs-course-detail-header>
+        <ngs-top-menu></ngs-top-menu>
+        <button class="btn btn-primary" style="margin-bottom: 15px;" (click)="loginAsJohn()">Login as John</button>
+        <ngs-course-detail-header [course]="course$ | async" [lessons]="lessons$ | async"></ngs-course-detail-header>
 
         <h2>Lessons</h2>
         <ngs-lessons-list [lessons]="lessons$ | async"></ngs-lessons-list>
@@ -44,7 +42,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     constructor(
         private _route: ActivatedRoute,
         private _dataStore: DatastoreService,
-        private _newsLetter: NewsletterService,
         public _userService: UserService
     ) {}
 
@@ -70,11 +67,14 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
         );
     }
 
-    onSubscribe(email: string) {
-        this._newsLetter.subscribeToNewsletter(email).subscribe(response => {
-            console.log(response);
-            alert(`Subscription successful ...${response.email}`);
-        }, console.error);
+    loginAsJohn() {
+        this._userService
+            .login('john@gmail.com', 'test123')
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                tag('course-detail: loginAsJohn')
+            )
+            .subscribe();
     }
 
     ngOnDestroy(): void {
@@ -85,7 +85,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
 @NgModule({
     declarations: [CourseDetailComponent],
-    imports: [CommonModule, SharedModule, CourseDetailHeaderModule, LessonsListModule],
+    imports: [CommonModule, SharedModule, TopMenuModule, CourseDetailHeaderModule, LessonsListModule],
     exports: [CourseDetailComponent],
 })
 export class CourseDetailModule {}

@@ -12,7 +12,7 @@ export const UNKNOWN_USER: IUser = { email: 'yes@no.com', firstName: 'Unknown' }
 })
 export class UserService {
     private _userSubject: BehaviorSubject<IUser> = new BehaviorSubject(UNKNOWN_USER);
-    user$: Observable<IUser> = this._userSubject.asObservable();
+    public user$: Observable<IUser> = this._userSubject.asObservable();
 
     constructor(private _http: HttpClient) {}
 
