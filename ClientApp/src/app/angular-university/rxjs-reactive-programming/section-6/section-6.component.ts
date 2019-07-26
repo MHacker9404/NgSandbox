@@ -19,7 +19,7 @@ import { UserService } from './user.service';
 import { TopMenuModule } from './top-menu/top-menu.component';
 
 @Component({
-    selector: 'ngs-section6',
+    selector: 'ngs-au-section6',
     template: `
         <div class="screen-container">
             <ngs-top-menu></ngs-top-menu>

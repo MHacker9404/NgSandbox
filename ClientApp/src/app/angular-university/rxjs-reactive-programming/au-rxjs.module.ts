@@ -56,6 +56,12 @@ const examples: ExampleDef[] = [
         path: 'section-7',
         component: null,
     },
+    {
+        label: 'Section 8 - Data Table Pagination Service',
+        name: 'Section8',
+        path: 'section-8',
+        component: null,
+    },
 ];
 @NgModule({
     declarations: [AuRxjsComponent, BrowserEventsComponent],
