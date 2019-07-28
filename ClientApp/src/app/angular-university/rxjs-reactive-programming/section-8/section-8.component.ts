@@ -15,6 +15,7 @@ import { CourseDetailHeaderModule } from './course-detail-header/course-detail-h
 import { NewsletterModule } from './newsletter/newsletter.component';
 import { LoginModule, LoginComponent } from './login/login.component';
 import { TopMenuModule } from './top-menu/top-menu.component';
+import { CourseModule } from './course/course.component';
 
 @Component({
     selector: 'ngs-au-section8',
@@ -95,6 +96,7 @@ export class Section8RoutingModule {}
         NewsletterModule,
         LoginModule,
         TopMenuModule,
+        CourseModule
     ],
     exports: [Section8Component],
 })
