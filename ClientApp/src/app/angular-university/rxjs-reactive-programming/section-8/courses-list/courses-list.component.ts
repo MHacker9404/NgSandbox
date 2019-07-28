@@ -15,7 +15,7 @@ import { ICourse } from '../../shared/model/icourse';
                     {{ course.description }}
                 </td>
                 <td>
-                    <a class="btn btn-primary" [routerLink]="['course', course.url]">
+                    <a class="btn btn-primary" [routerLink]="['../course', course.url]">
                         View
                     </a>
                 </td>

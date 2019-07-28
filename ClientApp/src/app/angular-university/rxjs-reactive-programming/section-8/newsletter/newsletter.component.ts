@@ -65,5 +65,6 @@ export class NewsletterComponent implements OnInit, OnDestroy {
     declarations: [NewsletterComponent],
     imports: [CommonModule, SharedModule],
     exports: [NewsletterComponent],
+    providers: [NewsletterService],
 })
 export class NewsletterModule {}

@@ -19,7 +19,6 @@ import { TopMenuModule } from '../top-menu/top-menu.component';
 @Component({
     selector: 'ngs-course-detail',
     template: `
-        <ngs-top-menu></ngs-top-menu>
         <button class="btn btn-primary" style="margin-bottom: 15px;" (click)="loginAsJohn()">Login as John</button>
         <ngs-course-detail-header [course]="course$ | async" [lessons]="lessons$ | async"></ngs-course-detail-header>
 
