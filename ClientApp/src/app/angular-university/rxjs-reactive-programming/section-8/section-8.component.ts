@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DatastoreService } from './datastore.service';
-import { takeUntil } from 'rxjs/operators';
-import { tag } from 'rxjs-spy/operators';
 import { CourseDetailModule, CourseDetailComponent } from './course-detail/course-detail.component';
 import { CoursesListModule } from './courses-list/courses-list.component';
 import { LessonsListModule } from './lessons-list/lessons-list.component';
@@ -14,6 +12,7 @@ import { LoginModule, LoginComponent } from './login/login.component';
 import { TopMenuModule } from './top-menu/top-menu.component';
 import { CourseModule } from './course/course.component';
 import { HomeComponent, HomeModule } from './home/home.component';
+import { AllLessonsModule, AllLessonsComponent } from './all-lessons/all-lessons.component';
 
 @Component({
     selector: 'ngs-au-section8',
@@ -48,6 +47,11 @@ const routes: Routes = [
                 component: LoginComponent,
             },
             {
+                path: 'all-lessons',
+                component: AllLessonsComponent,
+            },
+
+            {
                 path: 'home',
                 component: HomeComponent,
             },
@@ -72,6 +76,7 @@ export class Section8RoutingModule {}
         SharedModule,
         Section8RoutingModule,
         HomeModule,
+        AllLessonsModule,
         CourseDetailModule,
         CoursesListModule,
         LessonsListModule,

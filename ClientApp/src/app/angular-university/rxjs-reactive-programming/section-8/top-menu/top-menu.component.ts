@@ -16,6 +16,9 @@ import { tag } from 'rxjs-spy/operators/tag';
                 <li class="nav-item">
                     <a class="nav-link" routerLink="./" routerLinkActive="menu-active">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="all-lessons" routerLinkActive="menu-active">All Lessons</a>
+                </li>
                 <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
                     <a class="nav-link" routerLinkActive="menu-active" routerLink="login">Login</a>
                 </li>
