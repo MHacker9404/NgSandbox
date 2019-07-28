@@ -96,8 +96,9 @@ export class Section8RoutingModule {}
         NewsletterModule,
         LoginModule,
         TopMenuModule,
-        CourseModule
+        CourseModule,
     ],
     exports: [Section8Component],
+    providers: [DatastoreService],
 })
 export class Section8Module {}
