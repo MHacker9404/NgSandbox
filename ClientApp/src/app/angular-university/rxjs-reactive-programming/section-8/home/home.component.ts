@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Observable, Subject } from 'rxjs';
 import { ICourse } from '../../shared/model/icourse';
 import { ILesson } from '../../shared/model/ilesson';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { tag } from 'rxjs-spy/operators';
 import { DatastoreService } from '../datastore.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -30,12 +30,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     constructor(private _dataStore: DatastoreService) {
         this.courses$ = _dataStore.courseList$.pipe(
             takeUntil(this._unsubscribe$),
+            tap(courses => console.log(courses)),
             tag('home: courses')
         );
-        this.lessons$ = _dataStore.lessonsList$.pipe(
-            takeUntil(this._unsubscribe$),
-            tag('home: lessons')
-        );
+        // this.lessons$ = _dataStore.lessonsList$.pipe(
+        //     takeUntil(this._unsubscribe$),
+        //     tap(lessons => console.log(lessons)),
+        //     tag('home: lessons')
+        // );
     }
 
     ngOnInit() {}

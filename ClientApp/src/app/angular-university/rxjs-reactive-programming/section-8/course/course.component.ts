@@ -26,7 +26,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     constructor(private _dataStore: DatastoreService) {}
 
     ngOnInit() {
-        this.course$ = this._dataStore.findCourseByUrl(this.url).pipe(
+        this.course$ = this._dataStore.getCourseByUrl(this.url).pipe(
             takeUntil(this._unsubscribe$),
             tag('course: course')
         );

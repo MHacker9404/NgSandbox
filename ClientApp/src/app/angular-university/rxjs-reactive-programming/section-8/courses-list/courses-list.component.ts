@@ -1,7 +1,16 @@
-import { Component, NgModule, OnInit, Input } from '@angular/core';
+import {
+    Component,
+    NgModule,
+    OnInit,
+    Input,
+    AfterContentInit,
+    OnChanges,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ICourse } from '../../shared/model/icourse';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
     selector: 'ngs-courses-list',
@@ -28,17 +37,20 @@ import { ICourse } from '../../shared/model/icourse';
     `,
     styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesListComponent implements OnInit, OnChanges {
+    constructor() {}
     @Input() courses: ICourse[];
 
-    constructor() {}
+    ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
+        console.log(this.courses, changes);
+    }
 
     ngOnInit() {}
 }
 
 @NgModule({
     declarations: [CoursesListComponent],
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, SharedModule],
     exports: [CoursesListComponent],
 })
 export class CoursesListModule {}

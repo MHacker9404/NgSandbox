@@ -48,7 +48,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
         this.course$ = this._route.params.pipe(
             takeUntil(this._unsubscribe$),
             switchMap(params =>
-                this._dataStore.findCourseByUrl(params['id']).pipe(
+                this._dataStore.getCourseByUrl(params['id']).pipe(
                     takeUntil(this._unsubscribe$),
                     tag('course-detail: course')
                 )
@@ -58,7 +58,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
         this.lessons$ = this.course$.pipe(
             switchMap((course: ICourse) =>
-                this._dataStore.findLessonsForCourse(course.url).pipe(
+                this._dataStore.getLessonsForCourse(course.url).pipe(
                     takeUntil(this._unsubscribe$),
                     tag('course-detail: lessons')
                 )
