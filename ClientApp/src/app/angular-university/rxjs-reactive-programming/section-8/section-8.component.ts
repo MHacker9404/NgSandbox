@@ -13,6 +13,7 @@ import { TopMenuModule } from './top-menu/top-menu.component';
 import { CourseModule } from './course/course.component';
 import { HomeComponent, HomeModule } from './home/home.component';
 import { AllLessonsModule, AllLessonsComponent } from './all-lessons/all-lessons.component';
+import { LessonsPagerService } from './lessons-pager.service';
 
 @Component({
     selector: 'ngs-au-section8',
@@ -87,6 +88,6 @@ export class Section8RoutingModule {}
         CourseModule,
     ],
     exports: [Section8Component],
-    providers: [DatastoreService],
+    providers: [DatastoreService, LessonsPagerService],
 })
 export class Section8Module {}

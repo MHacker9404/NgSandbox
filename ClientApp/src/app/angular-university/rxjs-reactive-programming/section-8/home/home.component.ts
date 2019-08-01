@@ -15,7 +15,7 @@ import { LessonsListModule } from '../lessons-list/lessons-list.component';
     template: `
         <h2></h2>
 
-        <ngs-courses-list [courses]="courses$ | async"></ngs-courses-list>
+        <ngs-courses-list [courses]="(courses$ | async)?.courses"></ngs-courses-list>
 
         <h2>Latest Lessons Published</h2>
         <ngs-lessons-list [lessons]="lessons$ | async"></ngs-lessons-list>
@@ -28,9 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _unsubscribe$ = new Subject<void>();
 
     constructor(private _dataStore: DatastoreService) {
-        this.courses$ = _dataStore.courseList$.pipe(
+        this.courses$ = _dataStore.getCourses().pipe(
             takeUntil(this._unsubscribe$),
-            tap(courses => console.log(courses)),
             tag('home: courses')
         );
         // this.lessons$ = _dataStore.lessonsList$.pipe(

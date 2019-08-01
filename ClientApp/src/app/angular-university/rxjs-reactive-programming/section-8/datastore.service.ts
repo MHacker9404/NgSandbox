@@ -8,7 +8,7 @@ import _shuffle from 'lodash/shuffle';
 import _slice from 'lodash/slice';
 import _find from 'lodash/find';
 import { HttpClient } from '@angular/common/http';
-import { tap, publishLast, refCount } from 'rxjs/operators';
+import { tap, publishLast, refCount, map } from 'rxjs/operators';
 import { tag } from 'rxjs-spy/operators';
 
 @Injectable({
@@ -26,57 +26,41 @@ export class DatastoreService {
     public lessonsList$: Observable<ILesson[]> = this._lessonsListSubject.asObservable();
 
     constructor(private _http: HttpClient) {
-        this.loadInitialData();
+        // this.loadInitialData();
     }
 
     private loadInitialData() {
-        this._http
-            .get<ICourse[]>(`/api/courses`)
-            .pipe(
-                publishLast(),
-                refCount(),
-                tap((courses: ICourse[]) => {
-                    const cs = _cloneDeep(courses);
-                    const ls = _slice(_cloneDeep(_shuffle(_flatMap(cs, course => course.lessons))), 0, 10);
-                    this._courseListSubject.next(cs);
-                    this._lessonsListSubject.next(ls);
-                }),
-                tag('dataStoreService: loadInitialData')
-            )
-            .subscribe();
+        this._http.get<ICourse[]>(`/api/courses`).pipe(
+            tap((courses: ICourse[]) => {
+                const cs = _cloneDeep(courses);
+                const ls = _slice(_cloneDeep(_shuffle(_flatMap(cs, course => course.lessons))), 0, 10);
+                this._courseListSubject.next(cs);
+                this._lessonsListSubject.next(ls);
+            }),
+            tag('dataStoreService: loadInitialData')
+        );
     }
 
     getCourses(): Observable<ICourse[]> {
         return this._http.get<ICourse[]>(`/api/courses`).pipe(
             tap((courses: ICourse[]) => this._courseListSubject.next(courses)),
-            publishLast(),
-            refCount(),
             tag('dataStoreService: getCourses')
         );
     }
 
     getCourseByUrl(curl: string): Observable<ICourse> {
-        return this._http.get<ICourse>(`/api/courses/${curl}`).pipe(
-            publishLast(),
-            refCount(),
-            tag('dataStoreService: getCourseByUrl')
-        );
+        return this._http.get<ICourse>(`/api/courses/${curl}`).pipe(tag('dataStoreService: getCourseByUrl'));
     }
 
     getLessonsForCourse(curl: string): Observable<ILesson[]> {
         return this._http.get<ICourse>(`/api/courses/${curl}`).pipe(
             tap((course: ICourse) => this._lessonsListSubject.next(_cloneDeep(course.lessons))),
-            publishLast(),
-            refCount(),
+            map((course: ICourse) => _cloneDeep(course.lessons)),
             tag('dataStoreService: getLessonsForCourse')
         );
     }
 
     getLessonByUrl(curl: string, lurl: string): Observable<ILesson> {
-        return this._http.get<ILesson>(`/api/courses/${curl}/${lurl}`).pipe(
-            publishLast(),
-            refCount(),
-            tag('dataStoreService: getLessonByUrl')
-        );
+        return this._http.get<ILesson>(`/api/courses/${curl}/${lurl}`).pipe(tag('dataStoreService: getLessonByUrl'));
     }
 }

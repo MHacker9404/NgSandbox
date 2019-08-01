@@ -37,13 +37,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     `,
     styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit, OnChanges {
+export class CoursesListComponent implements OnInit {
     constructor() {}
     @Input() courses: ICourse[];
-
-    ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
-        console.log(this.courses, changes);
-    }
 
     ngOnInit() {}
 }
