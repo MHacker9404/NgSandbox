@@ -16,7 +16,7 @@ import {CoursesListModule} from './courses-list/courses-list.component';
 import {LessonsListModule} from './lessons-list/lessons-list.component';
 
 @Component({
-  selector: 'ngs-section5',
+  selector: 'ngs-au-section5',
   template: `
     <div class="screen-container">
       <h2>Smart vs Presentational Components</h2>

@@ -1,3 +1,5 @@
+//    https://www.udemy.com/rxjs-reactive-angular-course
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -54,6 +56,12 @@ const examples: ExampleDef[] = [
         label: 'Section 7 - Deeply Nested Smart Components',
         name: 'Section7',
         path: 'section-7',
+        component: null,
+    },
+    {
+        label: 'Section 8 - Data Table Pagination Service',
+        name: 'Section8',
+        path: 'section-8',
         component: null,
     },
 ];

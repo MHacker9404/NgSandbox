@@ -8,18 +8,6 @@ const routes: Routes = [
         loadChildren: './angular-university/angular-university.module#AngularUniversityModule',
     },
     {
-        path: 'breeze-js',
-        loadChildren: './breeze-js/breeze-js.module#BreezeJSModule',
-    },
-    {
-        path: 'caminte',
-        loadChildren: './caminte/caminte.module#CaminteModule',
-    },
-    {
-        path: 'loopback',
-        loadChildren: './loopback/loopback.module#LoopbackModule',
-    },
-    {
         path: 'ng7-book',
         loadChildren: './ng7-book/ng7-book.module#Ng7BookModule',
     },

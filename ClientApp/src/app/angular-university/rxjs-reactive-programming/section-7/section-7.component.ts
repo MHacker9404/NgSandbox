@@ -20,7 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 import { tag } from 'rxjs-spy/operators';
 
 @Component({
-    selector: 'ngs-section7',
+    selector: 'ngs-au-section7',
     template: `
         <div class="screen-container">
             <ngs-top-menu></ngs-top-menu>
