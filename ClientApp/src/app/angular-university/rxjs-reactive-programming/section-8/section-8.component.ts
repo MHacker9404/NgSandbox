@@ -88,6 +88,6 @@ export class Section8RoutingModule {}
         CourseModule,
     ],
     exports: [Section8Component],
-    providers: [DatastoreService, LessonsPagerService],
+    providers: [DatastoreService],
 })
 export class Section8Module {}

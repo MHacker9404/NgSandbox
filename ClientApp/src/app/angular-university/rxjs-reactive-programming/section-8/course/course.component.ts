@@ -25,6 +25,7 @@ import { ILesson } from '../../shared/model/ilesson';
         </div>
     `,
     styleUrls: ['./course.component.scss'],
+    providers: [LessonsPagerService],
 })
 export class CourseComponent implements OnInit, OnDestroy {
     course$: Observable<ICourse>;

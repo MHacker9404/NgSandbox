@@ -7,8 +7,21 @@ import { CourseModule } from '../course/course.component';
     selector: 'ngs-all-lessons',
     template: `
         <div class="screen-container">
-            <h2>Table Pagination</h2>
-            <ngs-course url="getting-started-with-angular2"></ngs-course>
+            <div class="row">
+                <div class="col">
+                    <h2>Table Pagination</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ngs-course url="getting-started-with-angular2"></ngs-course>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ngs-course url="angular2-http"></ngs-course>
+                </div>
+            </div>
         </div>
     `,
     styleUrls: ['./all-lessons.component.scss'],
