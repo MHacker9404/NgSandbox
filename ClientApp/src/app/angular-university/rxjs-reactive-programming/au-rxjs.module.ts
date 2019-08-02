@@ -70,6 +70,12 @@ const examples: ExampleDef[] = [
         path: 'section-9',
         component: null,
     },
+    {
+        label: 'Section 10 - Error Handling',
+        name: 'Section10',
+        path: 'section-10',
+        component: null,
+    },
 ];
 @NgModule({
     declarations: [AuRxjsComponent, BrowserEventsComponent],
