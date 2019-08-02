@@ -14,7 +14,11 @@ import { environment } from 'src/environments/environment';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        LoggerModule.forRoot({ level: environment.logLevel, enableSourceMaps: true }),
+        LoggerModule.forRoot({
+            level: environment.logLevel,
+            enableSourceMaps: true,
+            disableConsoleLogging: environment.disableConsoleLogging,
+        }),
         SharedModule,
     ],
     providers: [],

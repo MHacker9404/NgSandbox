@@ -21,7 +21,7 @@ import { ILesson } from '../../shared/model/ilesson';
                     <button (click)="nextLessonsPage()">Next</button>
                 </div>
             </div>
-            <ngs-lessons-list></ngs-lessons-list>
+            <ngs-lessons-list [lessons]="lessons$ | async"></ngs-lessons-list>
         </div>
     `,
     styleUrls: ['./course.component.scss'],
@@ -39,11 +39,19 @@ export class CourseComponent implements OnInit, OnDestroy {
             takeUntil(this._unsubscribe$),
             tag('course: course')
         );
-        this.lessons$ = this._lessonsPager.lessonsPage$;
+        this.lessons$ = this._lessonsPager.lessonsPage$.pipe(
+            takeUntil(this._unsubscribe$),
+            tag('courseComponent: lessonPager')
+        );
+        this._lessonsPager.loadFirstPage(this.url);
     }
 
-    previousLessonsPage() {}
-    nextLessonsPage() {}
+    previousLessonsPage() {
+        this._lessonsPager.previousPage();
+    }
+    nextLessonsPage() {
+        this._lessonsPager.nextPage();
+    }
 
     ngOnDestroy(): void {
         this._unsubscribe$.next();
