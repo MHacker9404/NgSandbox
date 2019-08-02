@@ -64,6 +64,12 @@ const examples: ExampleDef[] = [
         path: 'section-8',
         component: null,
     },
+    {
+        label: 'Section 9 - Master Detail Design Pattern',
+        name: 'Section9',
+        path: 'section-9',
+        component: null,
+    },
 ];
 @NgModule({
     declarations: [AuRxjsComponent, BrowserEventsComponent],
