@@ -2,13 +2,16 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TopMenuModule } from './top-menu/top-menu.component';
 
 @Component({
     selector: 'ngs-section-9',
     template: `
-        <p>
-            section-9 works!
-        </p>
+        <div class="screen-container">
+            <ngs-top-menu></ngs-top-menu>
+            <br />
+            <router-outlet></router-outlet>
+        </div>
     `,
     styleUrls: ['./section-9.component.scss'],
 })
@@ -55,7 +58,7 @@ export class Section9RoutingModule {}
 
 @NgModule({
     declarations: [Section9Component],
-    imports: [CommonModule, SharedModule, Section9RoutingModule],
+    imports: [CommonModule, SharedModule, Section9RoutingModule, TopMenuModule],
     exports: [Section9Component],
 })
 export class Section9Module {}
