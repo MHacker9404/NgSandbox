@@ -9,6 +9,7 @@ import { DatastoreService } from '../datastore.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesListModule } from '../courses-list/courses-list.component';
 import { LessonsListModule } from '../lessons-list/lessons-list.component';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
     selector: 'ngs-home',
@@ -27,16 +28,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     lessons$: Observable<ILesson[]>;
     private _unsubscribe$ = new Subject<void>();
 
-    constructor(private _dataStore: DatastoreService) {
+    constructor(private _dataStore: DatastoreService, private _log: NGXLogger) {
         this.courses$ = _dataStore.getCourses().pipe(
             takeUntil(this._unsubscribe$),
             tag('home: courses')
         );
-        // this.lessons$ = _dataStore.lessonsList$.pipe(
-        //     takeUntil(this._unsubscribe$),
-        //     tap(lessons => console.log(lessons)),
-        //     tag('home: lessons')
-        // );
+        this.lessons$ = _dataStore.getLessons().pipe(
+            takeUntil(this._unsubscribe$),
+            tag('home: lessons')
+        );
     }
 
     ngOnInit() {}

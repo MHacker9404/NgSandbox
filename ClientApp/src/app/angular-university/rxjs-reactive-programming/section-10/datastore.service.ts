@@ -16,35 +16,15 @@ import { NGXLogger } from 'ngx-logger';
     providedIn: null,
 })
 export class DatastoreService {
-    private _courses: ICourse[];
-    private _courseListSubject: BehaviorSubject<ICourse[]> = new BehaviorSubject(this._courses);
-
-    public courseList$: Observable<ICourse[]> = this._courseListSubject.asObservable();
-
-    private _lessons: ILesson[];
-    private _lessonsListSubject: BehaviorSubject<ILesson[]> = new BehaviorSubject(this._lessons);
-
-    public lessonsList$: Observable<ILesson[]> = this._lessonsListSubject.asObservable();
-
-    constructor(private _http: HttpClient, private _log: NGXLogger) {
-        // this.loadInitialData();
-    }
-
-    private loadInitialData() {
-        this._http.get<ICourse[]>(`/api/courses`).pipe(
-            tap((courses: ICourse[]) => {
-                const cs = _cloneDeep(courses);
-                const ls = _slice(_cloneDeep(_shuffle(_flatMap(cs, course => course.lessons))), 0, 10);
-                this._courseListSubject.next(cs);
-                this._lessonsListSubject.next(ls);
-            }),
-            tag('dataStoreService: loadInitialData')
-        );
-    }
+    constructor(private _http: HttpClient, private _log: NGXLogger) {}
 
     getCourses(): Observable<ICourse[]> {
-        return this._http.get<ICourse[]>(`/api/courses`).pipe(
-            tap((courses: ICourse[]) => this._courseListSubject.next(courses)),
+        return this._http.get<ICourse[]>(`/api/courses`).pipe(tag('dataStoreService: getCourses'));
+    }
+
+    getLessons(): Observable<ILesson[]> {
+        return this._http.get<ILesson[]>(`/api/lessons`).pipe(
+            map((lessons: ILesson[]) => _cloneDeep(_slice(_shuffle(lessons), 0, 10))),
             tag('dataStoreService: getCourses')
         );
     }
@@ -54,11 +34,7 @@ export class DatastoreService {
     }
 
     getLessonsForCourse(curl: string): Observable<ILesson[]> {
-        return this._http.get<ICourse>(`/api/courses/${curl}`).pipe(
-            tap((course: ICourse) => this._lessonsListSubject.next(_cloneDeep(course.lessons))),
-            map((course: ICourse) => _cloneDeep(course.lessons)),
-            tag('dataStoreService: getLessonsForCourse')
-        );
+        return this._http.get<ILesson[]>(`/api/lessons/${curl}`).pipe(tag('dataStoreService: getLessonsForCourse'));
     }
 
     getLessonByUrl(curl: string, lurl: string): Observable<ILesson> {

@@ -10,6 +10,7 @@ import { LessonsListModule } from '../lessons-list/lessons-list.component';
 import { LessonsPagerService } from '../lessons-pager.service';
 import { ILesson } from '../../shared/model/ilesson';
 import { LessonDetailModule } from '../lesson-detail/lesson-detail.component';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
     selector: 'ngs-course',
@@ -54,7 +55,11 @@ export class CourseComponent implements OnInit, OnDestroy {
 
     private _unsubscribe$ = new Subject<void>();
 
-    constructor(private _dataStore: DatastoreService, private _lessonsPager: LessonsPagerService) {}
+    constructor(
+        private _dataStore: DatastoreService,
+        private _lessonsPager: LessonsPagerService,
+        private _log: NGXLogger
+    ) {}
 
     ngOnInit() {
         this.course$ = this._dataStore.getCourseByUrl(this.url).pipe(
@@ -65,7 +70,12 @@ export class CourseComponent implements OnInit, OnDestroy {
             takeUntil(this._unsubscribe$),
             tag('courseComponent: lessonPager')
         );
-        this._lessonsPager.loadFirstPage(this.url);
+        this._lessonsPager.loadFirstPage(this.url).subscribe(
+            () => {},
+            error => {
+                this._log.error(error);
+            }
+        );
     }
 
     previousLessonsPage() {

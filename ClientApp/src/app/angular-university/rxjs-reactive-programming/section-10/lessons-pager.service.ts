@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { ILesson } from '../shared/model/ilesson';
 import { DatastoreService } from './datastore.service';
-import { map, tap, takeUntil } from 'rxjs/operators';
+import { map, tap, takeUntil, publishLast, refCount } from 'rxjs/operators';
 import _cloneDeep from 'lodash/cloneDeep';
 import _slice from 'lodash/slice';
 import _take from 'lodash/take';
@@ -34,19 +34,18 @@ export class LessonsPagerService implements OnDestroy {
         this._log.trace('lessons-pager');
     }
 
-    loadFirstPage(url: string) {
+    loadFirstPage(url: string): Observable<any> {
         this._currentUrl = url;
         this.currentPageNumber = 1;
 
-        this._dataStore
-            .getLessonsForCourse(this._currentUrl)
-            .pipe(
-                takeUntil(this._unsubscribe$),
-                map((lessons: ILesson[]) => (this._lessons = _cloneDeep(lessons))),
-                tap(lessons => this.pushData()),
-                tag('lessonsPager: loadFirstPage')
-            )
-            .subscribe();
+        return this._dataStore.getLessonsForCourse(this._currentUrl).pipe(
+            takeUntil(this._unsubscribe$),
+            map((lessons: ILesson[]) => (this._lessons = _cloneDeep(lessons))),
+            tap(lessons => this.pushData()),
+            publishLast(),
+            refCount(),
+            tag('lessonsPager: loadFirstPage')
+        );
     }
 
     nextPage() {
@@ -65,6 +64,7 @@ export class LessonsPagerService implements OnDestroy {
 
         this.pushData();
     }
+
     previousPage() {
         this.currentPageNumber = this.currentPageNumber > 1 ? this.currentPageNumber - 1 : 1;
         this.pushData();
