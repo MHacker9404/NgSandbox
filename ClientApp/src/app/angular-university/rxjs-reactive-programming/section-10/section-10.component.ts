@@ -1,36 +1,37 @@
+//    https://www.udemy.com/rxjs-reactive-angular-course/learn/lecture/6780864#overview
+
 import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { TopMenuModule } from './top-menu/top-menu.component';
 import { HomeModule, HomeComponent } from './home/home.component';
+import { CourseDetailModule, CourseDetailComponent } from './course-detail/course-detail.component';
 import { AllLessonsModule, AllLessonsComponent } from './all-lessons/all-lessons.component';
-import { CourseDetailModule } from './course-detail/course-detail.component';
 import { CoursesListModule } from './courses-list/courses-list.component';
-import { LessonsListModule } from '../with-rxjs/lessons-list/lessons-list.component';
+import { LessonsListModule } from './lessons-list/lessons-list.component';
 import { CourseDetailHeaderModule } from './course-detail-header/course-detail-header.component';
 import { NewsletterModule } from './newsletter/newsletter.component';
-import { LoginModule } from './login/login.component';
+import { LoginModule, LoginComponent } from './login/login.component';
 import { CourseModule } from './course/course.component';
-import { CourseDetailComponent } from './course-detail/course-detail.component';
-import { LoginComponent } from './login/login.component';
-import { DatastoreService } from './datastore.service';
+import { TopMenuModule } from './top-menu/top-menu.component';
 import { LessonDetailModule } from './lesson-detail/lesson-detail.component';
-import { MessagesModule } from '../section-10/messages/messages.component';
-import { MessagesService } from '../section-10/messages.service';
+import { DatastoreService } from './datastore.service';
+import { MessagesModule } from './messages/messages.component';
+import { MessagesService } from './messages.service';
 
 @Component({
-    selector: 'ngs-section-9',
+    selector: 'ngs-section-10',
     template: `
         <div class="screen-container">
             <ngs-top-menu></ngs-top-menu>
+            <ngs-messages></ngs-messages>
             <br />
             <router-outlet></router-outlet>
         </div>
     `,
-    styleUrls: ['./section-9.component.scss'],
+    styleUrls: ['./section-10.component.scss'],
 })
-export class Section9Component implements OnInit {
+export class Section10Component implements OnInit {
     constructor() {}
 
     ngOnInit() {}
@@ -39,7 +40,7 @@ export class Section9Component implements OnInit {
 const routes: Routes = [
     {
         path: '',
-        component: Section9Component,
+        component: Section10Component,
         children: [
             {
                 path: 'course/:id',
@@ -69,14 +70,14 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class Section9RoutingModule {}
+export class Section10RoutingModule {}
 
 @NgModule({
-    declarations: [Section9Component],
+    declarations: [Section10Component],
     imports: [
         CommonModule,
         SharedModule,
-        Section9RoutingModule,
+        Section10RoutingModule,
         HomeModule,
         AllLessonsModule,
         CourseDetailModule,
@@ -88,8 +89,9 @@ export class Section9RoutingModule {}
         CourseModule,
         TopMenuModule,
         LessonDetailModule,
+        MessagesModule,
     ],
-    exports: [Section9Component],
-    providers: [DatastoreService],
+    exports: [Section10Component],
+    providers: [DatastoreService, MessagesService],
 })
-export class Section9Module {}
+export class Section10Module {}
