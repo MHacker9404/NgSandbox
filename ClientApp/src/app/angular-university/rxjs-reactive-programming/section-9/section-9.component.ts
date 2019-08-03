@@ -16,6 +16,8 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { LoginComponent } from './login/login.component';
 import { DatastoreService } from './datastore.service';
 import { LessonDetailModule } from './lesson-detail/lesson-detail.component';
+import { MessagesModule } from '../section-10/messages/messages.component';
+import { MessagesService } from '../section-10/messages.service';
 
 @Component({
     selector: 'ngs-section-9',

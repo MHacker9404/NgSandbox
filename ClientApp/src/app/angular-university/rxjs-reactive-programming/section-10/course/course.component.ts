@@ -11,6 +11,7 @@ import { LessonsPagerService } from '../lessons-pager.service';
 import { ILesson } from '../../shared/model/ilesson';
 import { LessonDetailModule } from '../lesson-detail/lesson-detail.component';
 import { NGXLogger } from 'ngx-logger';
+import { MessagesService } from '../messages.service';
 
 @Component({
     selector: 'ngs-course',
@@ -58,6 +59,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     constructor(
         private _dataStore: DatastoreService,
         private _lessonsPager: LessonsPagerService,
+        private _messagesService: MessagesService,
         private _log: NGXLogger
     ) {}
 
@@ -74,6 +76,7 @@ export class CourseComponent implements OnInit, OnDestroy {
             () => {},
             error => {
                 this._log.error(error);
+                this._messagesService.error('Could not load first page');
             }
         );
     }

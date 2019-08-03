@@ -16,12 +16,15 @@ import { CourseModule } from './course/course.component';
 import { TopMenuModule } from './top-menu/top-menu.component';
 import { LessonDetailModule } from './lesson-detail/lesson-detail.component';
 import { DatastoreService } from './datastore.service';
+import { MessagesModule } from './messages/messages.component';
+import { MessagesService } from './messages.service';
 
 @Component({
     selector: 'ngs-section-10',
     template: `
         <div class="screen-container">
             <ngs-top-menu></ngs-top-menu>
+            <ngs-messages></ngs-messages>
             <br />
             <router-outlet></router-outlet>
         </div>
@@ -86,8 +89,9 @@ export class Section10RoutingModule {}
         CourseModule,
         TopMenuModule,
         LessonDetailModule,
+        MessagesModule,
     ],
     exports: [Section10Component],
-    providers: [DatastoreService],
+    providers: [DatastoreService, MessagesService],
 })
 export class Section10Module {}
