@@ -16,12 +16,15 @@ import { MessagesModule } from './messages/messages.component';
 import { LessonDetailModule } from './lesson-detail/lesson-detail.component';
 import { MessagesService } from './services/messages.service';
 import { DatastoreService } from './services/datastore.service';
+import { CourseDetailResolver } from './course-detail/course-detail.resolver';
+import { LoadingModule } from './loading/loading.component';
 
 @Component({
     selector: 'ngs-section-11',
     template: `
         <div class="screen-container">
             <ngs-top-menu></ngs-top-menu>
+            <ngs-loading></ngs-loading>
             <ngs-messages></ngs-messages>
             <br />
             <router-outlet></router-outlet>
@@ -43,6 +46,9 @@ const routes: Routes = [
             {
                 path: 'course/:id',
                 component: CourseDetailComponent,
+                resolve: {
+                    detail: CourseDetailResolver,
+                },
             },
             {
                 path: 'login',
@@ -88,8 +94,9 @@ export class Section11RoutingModule {}
         TopMenuModule,
         LessonDetailModule,
         MessagesModule,
+        LoadingModule,
     ],
     exports: [Section11Component],
-    providers: [DatastoreService, MessagesService],
+    providers: [DatastoreService, MessagesService, CourseDetailResolver],
 })
 export class Section11Module {}

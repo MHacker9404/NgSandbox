@@ -13,8 +13,6 @@ import { ILesson } from '../../shared/model/ilesson';
         <h5>
             Total lessons: <span class="length-border">{{ lessons?.length }}</span>
         </h5>
-
-        <ngs-newsletter></ngs-newsletter>
     `,
     styleUrls: ['./course-detail-header.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
