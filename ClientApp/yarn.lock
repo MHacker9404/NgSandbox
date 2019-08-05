@@ -4658,6 +4658,11 @@ loader-utils@1.2.3, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.
     emojis-list "^2.0.0"
     json5 "^1.0.1"
 
+local-storage@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/local-storage/-/local-storage-2.0.0.tgz#748b7d041b197f46f3ec7393640851c175b64db8"
+  integrity sha512-/0sRoeijw7yr/igbVVygDuq6dlYCmtsuTmmpnweVlVtl/s10pf5BCq8LWBxW/AMyFJ3MhMUuggMZiYlx6qr9tw==
+
 locate-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-3.0.0.tgz#dbec3b3ab759758071b58fe59fc41871af21400e"
@@ -7001,6 +7006,11 @@ serve-static@1.14.1:
     escape-html "~1.0.3"
     parseurl "~1.3.3"
     send "0.17.1"
+
+session-storage-json@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/session-storage-json/-/session-storage-json-0.0.1.tgz#34c1ee2ac9efd817d74da05e5c797bd496f6132c"
+  integrity sha1-NMHuKsnv2BfXTaBeXHl71Jb2Eyw=
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"

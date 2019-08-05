@@ -32,6 +32,7 @@
         "font-awesome": "^4.7.0",
         "joi-browser": "^13.4.0",
         "jquery": "^3.4.1",
+        "local-storage": "^2.0.0",
         "lodash": "^4.17.15",
         "ngx-bootstrap": "^5.1.0",
         "ngx-logger": "^4.0.3",
@@ -39,6 +40,7 @@
         "primeng": "^8.0.2",
         "rxjs": "~6.5.2",
         "rxjs-compat": "^6.5.2",
+        "session-storage-json": "^0.0.1",
         "tslib": "^1.10.0",
         "zone.js": "~0.10.1"
     },
