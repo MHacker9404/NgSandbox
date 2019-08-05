@@ -82,6 +82,12 @@ const examples: ExampleDef[] = [
         path: 'section-11',
         component: null,
     },
+    {
+        label: 'Section 12 - Reactive Forms',
+        name: 'Section12',
+        path: 'section-12',
+        component: null,
+    },
 ];
 @NgModule({
     declarations: [AuRxjsComponent, BrowserEventsComponent],
