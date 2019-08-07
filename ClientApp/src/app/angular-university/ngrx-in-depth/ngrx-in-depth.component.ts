@@ -4,20 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
-  selector: 'ngs-ngrx-in-depth',
-  template: `
-    <p>
-      ngrx-in-depth works!
-    </p>
-  `,
+    selector: 'ngs-ngrx-in-depth',
+    template: `
+        <div class="ngrx-in-depth">
+            <router-outlet></router-outlet>
+        </div>
+    `,
 })
 export class NgrxInDepthComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    ngOnInit() {}
 }
 
 const routes: Routes = [
@@ -34,7 +31,6 @@ const routes: Routes = [
     },
 ];
 
-
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
@@ -42,12 +38,8 @@ const routes: Routes = [
 export class NgrxInDepthRoutingModule {}
 
 @NgModule({
-  declarations: [NgrxInDepthComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    NgrxInDepthRoutingModule
-  ],
-  exports: [NgrxInDepthComponent]
+    declarations: [NgrxInDepthComponent],
+    imports: [CommonModule, SharedModule, NgrxInDepthRoutingModule],
+    exports: [NgrxInDepthComponent],
 })
-export class NgrxInDepthModule { }
+export class NgrxInDepthModule {}
