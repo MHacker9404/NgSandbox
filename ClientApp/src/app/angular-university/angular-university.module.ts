@@ -12,12 +12,12 @@ const examples: ExampleDef[] = [
         path: 'rxjs',
         component: null,
     },
-    {
-        label: '02 - NgRx in Depth',
-        name: 'NgrxInDepth',
-        path: 'ngrx-in-depth',
-        component: null,
-    },
+    // {
+    //     label: '02 - NgRx in Depth',
+    //     name: 'NgrxInDepth',
+    //     path: 'ngrx-in-depth',
+    //     component: null,
+    // },
 ];
 
 @Component({
@@ -46,9 +46,6 @@ export class AngularUniversityBaseComponent implements OnInit {
     ngOnInit() {}
 }
 
-export function ngrxModule() {
-    return import('./ngrx-in-depth/ngrx-in-depth.component').then(mod => mod.NgrxInDepthModule);
-}
 const routes: Routes = [
     {
         path: '',
@@ -58,12 +55,11 @@ const routes: Routes = [
                 path: 'rxjs',
                 loadChildren: './rxjs-reactive-programming/au-rxjs.module#AuRxjsModule',
             },
-            {
-                path: 'ngrx-in-depth',
-                // loadChildren: () =>
-                // import('./ngrx-in-depth/ngrx-in-depth.component').then(mod => mod.NgrxInDepthModule),
-                loadChildren: ngrxModule,
-            },
+            // {
+            //     path: 'ngrx-in-depth',
+            //     loadChildren: './ngrx-in-depth/ngrx-in-depth.component#NgrxInDepthModule ',
+            //     // loadChildren: () => import('./ngrx-in-depth/ngrx-in-depth.component').then(mod => mod.NgrxInDepthModule),
+            // },
         ],
     },
 ];
