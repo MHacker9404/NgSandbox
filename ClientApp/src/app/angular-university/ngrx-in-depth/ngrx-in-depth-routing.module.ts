@@ -6,6 +6,12 @@ const routes: Routes = [
     {
         path: '',
         component: NgrxInDepthComponent,
+        children: [
+            {
+                path: 'intro',
+                loadChildren: () => import('./section-01/section-01.component').then(mod => mod.Section01Module),
+            },
+        ],
     },
 ];
 

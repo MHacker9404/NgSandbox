@@ -4,9 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'ngs-ngrx-in-depth',
     template: `
         <div class="ngrx-in-depth">
-            <p>
-                ngrx-in-depth works!
-            </p>
+            <router-outlet></router-outlet>
         </div>
     `,
     styleUrls: ['./ngrx-in-depth.component.scss'],
