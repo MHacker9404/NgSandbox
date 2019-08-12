@@ -20,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CourseDialogComponent } from './course-dialog/course-dialog.component';
+import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 
 @Component({
     selector: 'ngs-courses',
@@ -58,7 +60,7 @@ const routes: Routes = [
 export class CoursesRoutingModule {}
 
 @NgModule({
-    declarations: [CoursesComponent],
+    declarations: [CoursesComponent, CourseComponent, CourseDialogComponent, CoursesCardListComponent, HomeComponent],
     imports: [
         CommonModule,
         SharedModule,
