@@ -11,7 +11,7 @@ export class CoursesService {
     constructor(private http: HttpClient) {}
 
     findCourseById(courseId: number): Observable<Course> {
-        return this.http.get<Course>(`/api/courses/${courseId}`);
+        return this.http.get<Course>(`/api/ngrx/courses/${courseId}`);
     }
 
     findAllCourses(): Observable<Course[]> {
@@ -31,13 +31,14 @@ export class CoursesService {
 
     findLessons(courseId: number, pageNumber = 0, pageSize = 3): Observable<Lesson[]> {
         return this.http
-            .get<Lesson[]>('/api/ngrx/lessons', {
-                params: new HttpParams()
-                    .set('courseId', courseId.toString())
-                    .set('filter', '')
-                    .set('sortOrder', 'asc')
-                    .set('pageNumber', pageNumber.toString())
-                    .set('pageSize', pageSize.toString()),
+            .get<Lesson[]>(`/api/ngrx/lessons/${courseId.toString()}/${pageNumber.toString()}/${pageSize.toString()}`, {
+                // .get<Lesson[]>('/api/ngrx/lessons', {
+                //     params: new HttpParams()
+                //         .set('courseId', courseId.toString())
+                //         .set('filter', '')
+                //         .set('sortOrder', 'asc')
+                //         .set('pageNumber', pageNumber.toString())
+                //         .set('pageSize', pageSize.toString()),
             })
             .pipe(tag('findLessons'));
     }
