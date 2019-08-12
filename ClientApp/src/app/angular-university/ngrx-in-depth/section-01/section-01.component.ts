@@ -84,6 +84,5 @@ export class Section01RoutingModule {}
         SharedModule,
         Section01RoutingModule,
     ],
-    exports: [Section01Component],
 })
 export class Section01Module {}

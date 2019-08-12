@@ -80,7 +80,7 @@ export class CoursesRoutingModule {}
         MatDatepickerModule,
         ReactiveFormsModule,
     ],
-    exports: [CoursesComponent],
+    // exports: [HomeComponent],
     providers: [CoursesService, CourseResolver],
 })
 export class CoursesModule {}
