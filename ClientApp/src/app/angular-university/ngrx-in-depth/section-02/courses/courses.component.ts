@@ -42,6 +42,7 @@ const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
+        pathMatch: 'full',
         children: [],
     },
     {
@@ -50,6 +51,10 @@ const routes: Routes = [
         resolve: {
             course: CourseResolver,
         },
+    },
+    {
+        path: '**',
+        redirectTo: '',
     },
 ];
 

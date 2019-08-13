@@ -9,6 +9,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { CoursesModule } from './courses/courses.component';
+import { HomeComponent } from './courses/home/home.component';
 
 @Component({
     selector: 'ngs-section-02',
@@ -56,7 +58,8 @@ const routes: Routes = [
         children: [
             {
                 path: 'courses',
-                loadChildren: './courses/courses.component#CoursesModule',
+                // loadChildren: './courses/courses.component#CoursesModule',
+                component: HomeComponent,
                 canActivate: [],
             },
             // {
@@ -84,6 +87,7 @@ export class Section02RoutingModule {}
         MatToolbarModule,
         SharedModule,
         Section02RoutingModule,
+        CoursesModule,
     ],
 })
 export class Section02Module {}

@@ -6,6 +6,9 @@ import { NgrxInDepthComponent } from './ngrx-in-depth/ngrx-in-depth.component';
 import { NgrxInDepthRoutingModule } from './ngrx-in-depth-routing.module';
 import { ExampleDef } from 'src/app/shared/Models/example.model';
 import { environment } from 'src/environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const examples: ExampleDef[] = [
     {
@@ -24,7 +27,20 @@ const examples: ExampleDef[] = [
 
 @NgModule({
     declarations: [NgrxInDepthComponent],
-    imports: [CommonModule, SharedModule, NgrxInDepthRoutingModule, HttpClientModule],
+    imports: [
+        CommonModule,
+        SharedModule,
+        NgrxInDepthRoutingModule,
+        HttpClientModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers,
+            runtimeChecks: {
+                strictStateImmutability: true,
+                strictActionImmutability: true,
+            },
+        }),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+    ],
     // exports: [NgrxInDepthComponent],
     providers: [{ provide: 'ngrx-in-depth', useValue: examples }],
 })
