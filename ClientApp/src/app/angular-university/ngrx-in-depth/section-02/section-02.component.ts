@@ -11,6 +11,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { CoursesModule } from './courses/courses.component';
 import { HomeComponent } from './courses/home/home.component';
+import { AuthModule } from './auth/auth.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ngs-section-02',
@@ -80,6 +82,7 @@ export class Section02RoutingModule {}
     declarations: [Section02Component],
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         MatMenuModule,
         MatIconModule,
         MatSidenavModule,
@@ -87,6 +90,7 @@ export class Section02RoutingModule {}
         MatToolbarModule,
         SharedModule,
         Section02RoutingModule,
+        AuthModule.forRoot(),
         CoursesModule,
     ],
 })

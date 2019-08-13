@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Course } from '../model/course';
+import { Course } from '../../model/course';
 import { map, tap } from 'rxjs/operators';
-import { Lesson } from '../model/lesson';
+import { Lesson } from '../../model/lesson';
 import { tag } from 'rxjs-spy/operators';
 
 @Injectable()

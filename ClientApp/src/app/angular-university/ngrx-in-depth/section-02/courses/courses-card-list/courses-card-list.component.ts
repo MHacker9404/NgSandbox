@@ -1,27 +1,22 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Course} from "../model/course";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import {CourseDialogComponent} from "../course-dialog/course-dialog.component";
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Course } from '../../model/course';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 
 @Component({
     selector: 'courses-card-list',
     templateUrl: './courses-card-list.component.html',
-    styleUrls: ['./courses-card-list.component.css']
+    styleUrls: ['./courses-card-list.component.css'],
 })
 export class CoursesCardListComponent implements OnInit {
-
     @Input()
     courses: Course[];
 
-    constructor(private dialog: MatDialog) {
-    }
+    constructor(private dialog: MatDialog) {}
 
-    ngOnInit() {
+    ngOnInit() {}
 
-    }
-
-    editCourse(course:Course) {
-
+    editCourse(course: Course) {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;
@@ -30,19 +25,6 @@ export class CoursesCardListComponent implements OnInit {
 
         dialogConfig.data = course;
 
-        const dialogRef = this.dialog.open(CourseDialogComponent,
-            dialogConfig);
-
-
+        const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
     }
-
 }
-
-
-
-
-
-
-
-
-

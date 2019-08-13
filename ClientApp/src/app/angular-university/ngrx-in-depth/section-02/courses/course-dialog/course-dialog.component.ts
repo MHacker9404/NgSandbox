@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
+import { Course } from '../../model/course';
 
 @Component({
     selector: 'course-dialog',

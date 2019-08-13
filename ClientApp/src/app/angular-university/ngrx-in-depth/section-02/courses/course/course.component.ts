@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay, takeUntil } from 'rxjs/operators';
 import { merge, fromEvent, Subject } from 'rxjs';
 import { LessonsDataSource } from '../services/lessons.datasource';
 import { NGXLogger } from 'ngx-logger';
 import { tag } from 'rxjs-spy/operators/tag';
+import { Course } from '../../model/course';
 
 @Component({
     selector: 'course',
