@@ -1,12 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../../../reducers';
 import { Login } from '../auth.actions';
+import { Subject, noop } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { User } from '../../model/user.model';
+import { NGXLogger } from 'ngx-logger';
+import { tag } from 'rxjs-spy/operators';
 
 @Component({
     selector: 'login',
@@ -30,16 +35,19 @@ import { Login } from '../auth.actions';
     `,
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+    private _unsubscribe$ = new Subject<void>();
     form: FormGroup;
 
     constructor(
-        private fb: FormBuilder,
-        private auth: AuthService,
-        private router: Router,
-        private _state$: Store<AppState>
+        private _fb: FormBuilder,
+        private _auth: AuthService,
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _state$: Store<AppState>,
+        private _log: NGXLogger
     ) {
-        this.form = fb.group({
+        this.form = _fb.group({
             email: ['test@angular-university.io', [Validators.required]],
             password: ['test', [Validators.required]],
         });
@@ -48,6 +56,25 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}
 
     login() {
-        this._state$.dispatch(new Login());
+        // this._state$.dispatch(new Login());
+        const val = this.form.value;
+
+        this._auth
+            .login(val.email, val.password)
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                tap((user: User) => {
+                    this._log.info(user);
+                    this._state$.dispatch(new Login({ user }));
+                    this._router.navigate(['courses'], { relativeTo: this._route.parent });
+                }),
+                tag('auth.login')
+            )
+            .subscribe(() => noop, () => alert('Login failed'));
+    }
+
+    ngOnDestroy() {
+        this._unsubscribe$.next();
+        this._unsubscribe$.complete();
     }
 }

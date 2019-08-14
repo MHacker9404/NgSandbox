@@ -60,14 +60,9 @@ const routes: Routes = [
         children: [
             {
                 path: 'courses',
-                // loadChildren: './courses/courses.component#CoursesModule',
                 component: HomeComponent,
                 canActivate: [],
             },
-            // {
-            //     path: '**',
-            //     redirectTo: '/',
-            // },
         ],
     },
 ];

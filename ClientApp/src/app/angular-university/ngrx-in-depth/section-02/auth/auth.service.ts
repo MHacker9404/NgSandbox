@@ -5,9 +5,9 @@ import { User } from '../model/user.model';
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient) {}
+    constructor(private _http: HttpClient) {}
 
     login(email: string, password: string): Observable<User> {
-        return this.http.post<User>('/api/ngrx/login', { email, password });
+        return this._http.post<User>('/api/ngrx/login', { email, password });
     }
 }
