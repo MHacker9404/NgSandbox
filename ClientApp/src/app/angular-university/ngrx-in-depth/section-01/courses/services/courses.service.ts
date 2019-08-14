@@ -32,16 +32,7 @@ export class CoursesService {
     findLessons(courseId: number, pageNumber = 0, pageSize = 3): Observable<Lesson[]> {
         return this.http
             .get<Lesson[]>(
-                `/api/ngrx/lessons/${courseId.toString()}/${pageNumber.toString()}/${pageSize.toString()}//asc`,
-                {
-                    // .get<Lesson[]>('/api/ngrx/lessons', {
-                    //     params: new HttpParams()
-                    //         .set('courseId', courseId.toString())
-                    //         .set('filter', '')
-                    //         .set('sortOrder', 'asc')
-                    //         .set('pageNumber', pageNumber.toString())
-                    //         .set('pageSize', pageSize.toString()),
-                }
+                `/api/ngrx/lessons/${courseId.toString()}/${pageNumber.toString()}/${pageSize.toString()}//asc`
             )
             .pipe(tag('findLessons'));
     }
