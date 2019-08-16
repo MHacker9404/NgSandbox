@@ -59,6 +59,11 @@ const routes: Routes = [
         component: Section02Component,
         children: [
             {
+                path: 'login',
+                loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
+                canActivate: [],
+            },
+            {
                 path: 'courses',
                 component: HomeComponent,
                 canActivate: [],

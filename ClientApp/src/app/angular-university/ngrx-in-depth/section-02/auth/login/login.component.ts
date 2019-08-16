@@ -11,7 +11,8 @@ import { Subject, noop } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { User } from '../../model/user.model';
 import { NGXLogger } from 'ngx-logger';
-import { tag } from 'rxjs-spy/operators';
+import { tag } from 'rxjs-spy/operators/tag';
+import _flatted from 'flatted';
 
 @Component({
     selector: 'login',
@@ -66,9 +67,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                 tap((user: User) => {
                     this._log.info(user);
                     this._state$.dispatch(new Login({ user }));
-                    this._router.navigate(['courses'], { relativeTo: this._route.parent });
+                    this._router.navigate(['../courses'], { relativeTo: this._route.parent });
                 }),
-                tag('auth.login')
+                tag('auth:login')
             )
             .subscribe(() => noop, () => alert('Login failed'));
     }
