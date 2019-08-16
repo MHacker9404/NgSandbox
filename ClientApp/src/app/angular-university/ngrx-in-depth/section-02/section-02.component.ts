@@ -15,6 +15,10 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
 import { NGXLogger } from 'ngx-logger';
 import { Logout } from './auth/auth/auth.actions';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators/map';
+import { tag } from 'rxjs-spy/operators/tag';
+import { tap } from 'rxjs/operators/tap';
 
 @Component({
     selector: 'ngs-section-02',
@@ -27,12 +31,12 @@ import { Logout } from './auth/auth/auth.actions';
                         <span>Courses</span>
                     </a>
 
-                    <a mat-list-item routerLink="login">
+                    <a *ngIf="isLoggedOut$ | async" mat-list-item routerLink="login">
                         <mat-icon>account_circle</mat-icon>
                         <span>Login</span>
                     </a>
 
-                    <a mat-list-item (click)="logout()">
+                    <a *ngIf="isLoggedIn$ | async" mat-list-item (click)="logout()">
                         <mat-icon>exit_to_app</mat-icon>
                         <span>Logout</span>
                     </a>
@@ -50,9 +54,22 @@ import { Logout } from './auth/auth/auth.actions';
     styleUrls: ['./section-02.component.scss'],
 })
 export class Section02Component implements OnInit {
+    isLoggedIn$: Observable<boolean>;
+    isLoggedOut$: Observable<boolean>;
+
     constructor(private _state$: Store<AppState>, private _log: NGXLogger) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.isLoggedIn$ = this._state$.pipe(
+            tap((state: any) => this._log.trace(state)),
+            map((state: any) => state.auth.isLoggedIn),
+            tag('section02:isLoggedIn')
+        );
+        this.isLoggedOut$ = this.isLoggedIn$.pipe(
+            map((state: boolean) => !state),
+            tag('section02:isLoggedOut')
+        );
+    }
 
     logout() {
         this._state$.dispatch(new Logout());

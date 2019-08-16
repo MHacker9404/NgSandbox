@@ -1,7 +1,5 @@
 import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
-import { User } from '../section-02/model/user.model';
-import { AuthActionTypes } from '../section-02/auth/auth/auth.actions';
 
 // interface AuthState {
 //     loggedIn: boolean;
