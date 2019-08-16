@@ -8,11 +8,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { environment } from 'src/environments/environment';
 import { CoursesModule } from './courses/courses.component';
-import { HomeComponent } from './courses/home/home.component';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '../reducers';
+import { NGXLogger } from 'ngx-logger';
+import { Logout } from './auth/auth/auth.actions';
 
 @Component({
     selector: 'ngs-section-02',
@@ -30,7 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
                         <span>Login</span>
                     </a>
 
-                    <a mat-list-item>
+                    <a mat-list-item (click)="logout()">
                         <mat-icon>exit_to_app</mat-icon>
                         <span>Logout</span>
                     </a>
@@ -48,9 +50,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     styleUrls: ['./section-02.component.scss'],
 })
 export class Section02Component implements OnInit {
-    constructor() {}
+    constructor(private _state$: Store<AppState>, private _log: NGXLogger) {}
 
     ngOnInit() {}
+
+    logout() {
+        this._state$.dispatch(new Logout());
+    }
 }
 
 const routes: Routes = [
@@ -65,7 +71,8 @@ const routes: Routes = [
             },
             {
                 path: 'courses',
-                component: HomeComponent,
+                loadChildren: () => import('./courses/courses.component').then(mod => mod.CoursesModule),
+                // component: HomeComponent,
                 canActivate: [],
             },
         ],
