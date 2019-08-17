@@ -11,7 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesModule } from './courses/courses.component';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../reducers';
 import { NGXLogger } from 'ngx-logger';
 import { Logout } from './auth/auth/auth.actions';
@@ -19,6 +19,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators/map';
 import { tag } from 'rxjs-spy/operators/tag';
 import { tap } from 'rxjs/operators/tap';
+import { AuthState } from './auth/auth/auth.reducer';
+import { isLoggedIn, isLoggedOut } from './auth/auth/auth.selectors';
 
 @Component({
     selector: 'ngs-section-02',
@@ -61,12 +63,14 @@ export class Section02Component implements OnInit {
 
     ngOnInit() {
         this.isLoggedIn$ = this._state$.pipe(
-            tap((state: any) => this._log.trace(state)),
-            map((state: any) => state.auth.isLoggedIn),
+            // map((state: any) => state.auth.isLoggedIn),
+            select(isLoggedIn),
             tag('section02:isLoggedIn')
         );
-        this.isLoggedOut$ = this.isLoggedIn$.pipe(
-            map((state: boolean) => !state),
+
+        this.isLoggedOut$ = this._state$.pipe(
+            // map((state: any) => !state.auth.isLoggedIn),
+            select(isLoggedOut),
             tag('section02:isLoggedOut')
         );
     }

@@ -5,12 +5,12 @@ import { AuthActions, AuthActionTypes } from './auth.actions';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-    loggedIn: boolean;
+    isLoggedIn: boolean;
     user: User;
 }
 
 export const initialState: AuthState = {
-    loggedIn: false,
+    isLoggedIn: false,
     user: undefined,
 };
 
@@ -18,12 +18,12 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
     switch (action.type) {
         case AuthActionTypes.LoginAction:
             return {
-                loggedIn: true,
+                isLoggedIn: true,
                 user: action.payload.user,
             };
         case AuthActionTypes.LogoutAction:
             return {
-                loggedIn: false,
+                isLoggedIn: false,
                 user: undefined,
             };
         default:
