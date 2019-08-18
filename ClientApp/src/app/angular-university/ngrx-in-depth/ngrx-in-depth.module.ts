@@ -23,6 +23,12 @@ const examples: ExampleDef[] = [
         path: 'section-02',
         component: null,
     },
+    {
+        label: '03 - NgRx Effects',
+        name: 'NgRxEffects',
+        path: 'section-03',
+        component: null,
+    },
 ];
 
 @NgModule({
