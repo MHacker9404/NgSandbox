@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@angular-builders/custom-webpack@^8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@angular-builders/custom-webpack/-/custom-webpack-8.1.0.tgz#63a3b7ada2cd01a0c02db4e7d18f52cfbaa62678"
-  integrity sha512-5JOrq+J6BhCG8VK8R4vdWfEFXBeNfH32U/3CfAzb3YxnKpPJgNmyPMy+wnK0byLJKIp3IsF5rkpq43d/ZyPRaw==
+"@angular-builders/custom-webpack@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@angular-builders/custom-webpack/-/custom-webpack-8.2.0.tgz#e0aa6237d62f709823c4930ca04f22244d1202ba"
+  integrity sha512-6654RfyqhTGhCI0edC9YU/iMn1UJnzX01bxYJbDWFgvReCqXdlgy+Fe9tp1MeqKweX6BQ1d0gRroR/WjY1aX0A==
   dependencies:
     lodash "^4.17.10"
     webpack-merge "^4.2.1"
@@ -533,10 +533,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
   integrity sha512-Il2DtDVRGDcqjDtE+rF8iqg1CArehSK84HZJCT7AMITlyXRBpuPhqGLDQMowraqqu1coEaimg4ZOqggt6L6L+A==
 
-"@types/lodash@^4.14.136":
-  version "4.14.136"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.136.tgz#413e85089046b865d960c9ff1d400e04c31ab60f"
-  integrity sha512-0GJhzBdvsW2RUccNHOBkabI8HZVdOXmXbXhuKlDEd5Vv12P7oAVGfomGp3Ne21o5D/qu1WmthlNKFaoZJJeErA==
+"@types/lodash@^4.14.137":
+  version "4.14.137"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.137.tgz#8a4804937dc6462274ffcc088df8f14fc1b368e2"
+  integrity sha512-g4rNK5SRKloO+sUGbuO7aPtwbwzMgjK+bm9BBhLD7jGUiGR7zhwYEhSln/ihgYQBeIJ5j7xjyaYzrWTcu3UotQ==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -4548,10 +4548,10 @@ jszip@^3.1.3:
     pako "~1.0.2"
     readable-stream "~2.0.6"
 
-karma-chrome-launcher@~3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/karma-chrome-launcher/-/karma-chrome-launcher-3.0.0.tgz#5c3a7f877a304e90781c28fcd9a49e334a890f42"
-  integrity sha512-u/PnVgDOP97AUe/gJeABlC6Wa6aQ83MZsm0JgsJQ5bGQ9XcXON/7b2aRhl59A62Zom+q3PFveBkczc7E1RT7TA==
+karma-chrome-launcher@~3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/karma-chrome-launcher/-/karma-chrome-launcher-3.1.0.tgz#805a586799a4d05f4e54f72a204979f3f3066738"
+  integrity sha512-3dPs/n7vgz1rxxtynpzZTvb9y/GIaW8xjAwcIGttLbycqoFtI7yo1NGnQi6oFTherRE+GIhCAHZC4vEqWGhNvg==
   dependencies:
     which "^1.2.1"
 
@@ -8546,7 +8546,7 @@ yn@^3.0.0:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.0.0.tgz#0073c6b56e92aed652fbdfd62431f2d6b9a7a091"
   integrity sha512-+Wo/p5VRfxUgBUGy2j/6KX2mj9AYJWOHuhMjMcbBFc3y54o9/4buK1ksBvuiK01C3kby8DH9lSmJdSxw+4G/2Q==
 
-zone.js@~0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.10.1.tgz#c83f7011896172cb69cbb99d2eff2302f3b2ca1a"
-  integrity sha512-PNCeR7yTNse/C1sSv01OWTV6hEnlQP98w5OX7cmNM+7wLCISLukNIzfYoRjdsWTYE3t1PQkjtjGa/GYoeP8Caw==
+zone.js@~0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.10.2.tgz#67ca084b3116fc33fc40435e0d5ea40a207e392e"
+  integrity sha512-UAYfiuvxLN4oyuqhJwd21Uxb4CNawrq6fPS/05Su5L4G+1TN+HVDJMUHNMobVQDFJRir2cLAODXwluaOKB7HFg==

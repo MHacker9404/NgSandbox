@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,6 +21,8 @@ import { tag } from 'rxjs-spy/operators/tag';
 import { tap } from 'rxjs/operators/tap';
 import { AuthState } from './auth/auth/auth.reducer';
 import { isLoggedIn, isLoggedOut } from './auth/auth/auth.selectors';
+import { AuthGuard } from './auth/auth.guard';
+import _flatted from 'flatted';
 
 @Component({
     selector: 'ngs-section-02',
@@ -59,7 +61,12 @@ export class Section02Component implements OnInit {
     isLoggedIn$: Observable<boolean>;
     isLoggedOut$: Observable<boolean>;
 
-    constructor(private _state$: Store<AppState>, private _log: NGXLogger) {}
+    constructor(
+        private _state$: Store<AppState>,
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _log: NGXLogger
+    ) {}
 
     ngOnInit() {
         this.isLoggedIn$ = this._state$.pipe(
@@ -77,6 +84,13 @@ export class Section02Component implements OnInit {
 
     logout() {
         this._state$.dispatch(new Logout());
+
+        const state = this._router.routerState.snapshot;
+        const posn = state.url.search('section-02') + 'section-02'.length;
+        const slice = state.url.slice(0, posn);
+        // this._log.trace(posn, slice);
+
+        this._router.navigateByUrl(`${slice}/login`);
     }
 }
 
@@ -94,7 +108,7 @@ const routes: Routes = [
                 path: 'courses',
                 loadChildren: () => import('./courses/courses.component').then(mod => mod.CoursesModule),
                 // component: HomeComponent,
-                canActivate: [],
+                canActivate: [AuthGuard],
             },
         ],
     },
