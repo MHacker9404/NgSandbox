@@ -8,8 +8,12 @@ const routes: Routes = [
         component: NgrxInDepthComponent,
         children: [
             {
-                path: 'intro',
+                path: 'section-01',
                 loadChildren: () => import('./section-01/section-01.component').then(mod => mod.Section01Module),
+            },
+            {
+                path: 'section-02',
+                loadChildren: () => import('./section-02/section-02.component').then(mod => mod.Section02Module),
             },
         ],
     },
