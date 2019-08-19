@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoursesService } from '../services/courses.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../reducers';
+import { AppState } from '../../../state';
 
 @Component({
     selector: 'home',

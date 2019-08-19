@@ -12,7 +12,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../../reducers';
+import { AppState } from '../../state';
 import { isLoggedIn } from './auth/auth.selectors';
 import { NGXLogger } from 'ngx-logger';
 import { tap } from 'rxjs/operators/tap';

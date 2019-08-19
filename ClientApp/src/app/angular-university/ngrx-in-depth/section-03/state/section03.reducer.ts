@@ -1,4 +1,4 @@
-import { Section03Actions, Section03ActionTypes } from '../actions/section03.actions';
+import { Section03Actions, Section03ActionTypes } from './section03.actions';
 
 export const section03FeatureKey = 'au-ngrx-section03';
 

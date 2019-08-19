@@ -12,13 +12,13 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../../reducers';
-import { isLoggedIn } from './auth/auth.selectors';
+import { isLoggedIn } from './state/auth.selectors';
 import { NGXLogger } from 'ngx-logger';
 import { tap } from 'rxjs/operators/tap';
 import { tag } from 'rxjs-spy/operators';
 import _flatted from 'flatted';
 import _first from 'lodash/first';
+import { AppState } from '../../state';
 
 @Injectable({
     providedIn: null,
