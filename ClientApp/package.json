@@ -70,7 +70,7 @@
         "ag-grid-angular": "^21.1.0",
         "ag-grid-community": "^21.1.1",
         "codelyzer": "~5.1.0",
-        "eslint": "^6.1.0",
+        "eslint": "^6.2.0",
         "eslint-config-google": "^0.13.0",
         "handlebars": "^4.1.2",
         "jasmine-core": "~3.4.0",

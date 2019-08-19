@@ -31,6 +31,12 @@ const examples: ExampleDef[] = [
         path: 'section-03',
         component: null,
     },
+    {
+        label: '04 - NgRx Store Freeze',
+        name: 'NgRxStoreFreeze',
+        path: 'section-04',
+        component: null,
+    },
 ];
 
 @NgModule({
