@@ -18,7 +18,7 @@ import { tap } from 'rxjs/operators/tap';
 import { tag } from 'rxjs-spy/operators';
 import _flatted from 'flatted';
 import _first from 'lodash/first';
-import { AppState } from '../../state';
+import { AppState } from '../../../../state';
 
 @Injectable({
     providedIn: null,

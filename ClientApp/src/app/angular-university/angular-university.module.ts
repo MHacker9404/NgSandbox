@@ -5,6 +5,10 @@ import { ExampleDef } from '../shared/Models/example.model';
 import { SharedModule } from '../shared/shared.module';
 import { AngularUniversityRoutingModule } from './angular-university-routing.module';
 import { AngularUniversityComponent } from './angular-university/angular-university.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromNgUni from './state/ng-uni.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { NgUniEffects } from './state/ng-uni.effects';
 
 const examples: ExampleDef[] = [
     {
@@ -23,7 +27,13 @@ const examples: ExampleDef[] = [
 
 @NgModule({
     declarations: [AngularUniversityComponent],
-    imports: [CommonModule, SharedModule, AngularUniversityRoutingModule],
+    imports: [
+        CommonModule,
+        SharedModule,
+        AngularUniversityRoutingModule,
+        StoreModule.forFeature(fromNgUni.ngUniFeatureKey, fromNgUni.reducer),
+        EffectsModule.forFeature([NgUniEffects]),
+    ],
     providers: [{ provide: 'a-u', useValue: examples }],
 })
 export class AngularUniversityModule {}

@@ -12,7 +12,7 @@ import { CoursesModule } from './courses/courses.component';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Store, select, StoreModule } from '@ngrx/store';
-import { AppState } from '../state';
+import { AppState } from '../../../state';
 import { NGXLogger } from 'ngx-logger';
 import { Logout } from './auth/state/auth.actions';
 import { Observable } from 'rxjs';
