@@ -1,4 +1,4 @@
-import { Injectable, OnInit, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     CanActivate,
     CanActivateChild,
@@ -12,7 +12,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../../reducers';
+import { AppState } from '../../state';
 import { isLoggedIn } from './auth/auth.selectors';
 import { NGXLogger } from 'ngx-logger';
 import { tap } from 'rxjs/operators/tap';
@@ -23,7 +23,7 @@ import _first from 'lodash/first';
 @Injectable({
     providedIn: null,
 })
-export class AuthGuard implements OnDestroy, CanActivate, CanActivateChild, CanLoad {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     constructor(
         private _state: Store<AppState>,
         private _router: Router,
@@ -50,9 +50,5 @@ export class AuthGuard implements OnDestroy, CanActivate, CanActivateChild, CanL
     }
     canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
         return of(true);
-    }
-
-    ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
     }
 }
