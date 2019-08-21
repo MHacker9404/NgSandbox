@@ -22,10 +22,12 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
                 user: action.payload.user,
             };
         case AuthActionTypes.LogoutAction:
-            return {
-                isLoggedIn: false,
-                user: undefined,
-            };
+            // return {
+            //     isLoggedIn: false,
+            //     user: undefined,
+            // };
+            state = {isLoggedIn: false, user: undefined};
+            return state;
         default:
             return state;
     }
