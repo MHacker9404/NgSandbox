@@ -26,7 +26,7 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
             //     isLoggedIn: false,
             //     user: undefined,
             // };
-            state = {isLoggedIn: false, user: undefined};
+            state = { isLoggedIn: false, user: undefined };
             return state;
         default:
             return state;

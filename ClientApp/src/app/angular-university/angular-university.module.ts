@@ -6,9 +6,9 @@ import { SharedModule } from '../shared/shared.module';
 import { AngularUniversityRoutingModule } from './angular-university-routing.module';
 import { AngularUniversityComponent } from './angular-university/angular-university.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromNgUni from './state/ng-uni.reducer';
+import * as fromNgUni from './state/index';
 import { EffectsModule } from '@ngrx/effects';
-import { NgUniEffects } from './state/ng-uni.effects';
+import { NgUniEffects } from './state/effects';
 
 const examples: ExampleDef[] = [
     {
@@ -31,7 +31,7 @@ const examples: ExampleDef[] = [
         CommonModule,
         SharedModule,
         AngularUniversityRoutingModule,
-        StoreModule.forFeature(fromNgUni.ngUniFeatureKey, fromNgUni.reducer),
+        StoreModule.forFeature(fromNgUni.ngUniFeatureKey, fromNgUni.reducers),
         EffectsModule.forFeature([NgUniEffects]),
     ],
     providers: [{ provide: 'a-u', useValue: examples }],

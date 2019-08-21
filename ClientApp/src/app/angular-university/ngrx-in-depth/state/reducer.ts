@@ -1,4 +1,4 @@
-import { NgrxInDepthActions, NgrxInDepthActionTypes } from './ngrx-in-depth.actions';
+import { NgrxInDepthActions, NgrxInDepthActionTypes } from './actions';
 
 export const NgrxInDepthFeatureKey = 'ngrxInDepth';
 
