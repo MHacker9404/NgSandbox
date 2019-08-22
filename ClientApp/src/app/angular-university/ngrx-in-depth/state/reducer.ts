@@ -1,8 +1,10 @@
 import { NgrxInDepthActions, NgrxInDepthActionTypes } from './actions';
+import * as fromApp from 'src/app/state/index';
+import * as fromParent from '../../state/reducer';
 
-export const NgrxInDepthFeatureKey = 'ngrxInDepth';
+export const NgrxInDepthFeatureKey = `${fromParent.ngUniFeatureKey}:ngrxInDepth`;
 
-export interface NgrxInDepthState {}
+export interface NgrxInDepthState extends fromApp.AppState {}
 
 export const initialState: NgrxInDepthState = {};
 

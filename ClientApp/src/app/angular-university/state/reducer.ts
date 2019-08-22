@@ -1,12 +1,13 @@
 import { NgUniActions, NgUniActionTypes } from './actions';
+import * as fromApp from 'src/app/state/index';
 
-export interface State {
-    ngUni: {};
-}
+export const ngUniFeatureKey = 'ngUni';
 
-export const initialState: State = { ngUni: {} };
+export interface NgUniState extends fromApp.AppState {}
 
-export function reducer(state = initialState, action: NgUniActions): State {
+export const initialState: NgUniState = {};
+
+export function reducer(state = initialState, action: NgUniActions): NgUniState {
     switch (action.type) {
         default:
             return state;
