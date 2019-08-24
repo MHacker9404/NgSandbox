@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Login, AuthActionTypes, Logout } from './auth.actions';
+import { Login, AuthActionTypes, Logout } from './actions';
 import { tap } from 'rxjs/operators/tap';
 import _flatted from 'flatted';
 import { defer, of } from 'rxjs';

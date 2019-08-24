@@ -14,14 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Store, select, StoreModule } from '@ngrx/store';
 import { AppState } from '../../../state';
 import { NGXLogger } from 'ngx-logger';
-import { Logout } from './auth/state/auth.actions';
+import { Logout } from './auth/state/actions';
 import { Observable } from 'rxjs';
 import { tag } from 'rxjs-spy/operators/tag';
-import { isLoggedIn, isLoggedOut } from './auth/state/auth.selectors';
+import { isLoggedIn, isLoggedOut } from './auth/state/selectors';
 import { AuthGuard } from './auth/auth.guard';
 import _flatted from 'flatted';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromSection04 from './state/section04.reducer';
+import { section04FeatureKey, reducer } from './state/reducer';
 
 @Component({
     selector: 'ngs-section-04',
@@ -130,7 +130,7 @@ export class Section04RoutingModule {}
         MatListModule,
         MatToolbarModule,
         SharedModule,
-        StoreModule.forFeature(fromSection04.section04FeatureKey, fromSection04.reducer),
+        StoreModule.forFeature(section04FeatureKey, reducer),
         Section04RoutingModule,
         AuthModule.forRoot(),
         CoursesModule,

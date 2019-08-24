@@ -1,8 +1,10 @@
 import { Action } from '@ngrx/store';
 import { User } from '../../model/user.model';
-import { AuthActions, AuthActionTypes } from './auth.actions';
+import { AuthActions, AuthActionTypes } from './actions';
+import * as fromApp from 'src/app/state/index';
+import * as fromParent from '../../state/reducer';
 
-export const authFeatureKey = 'auth';
+export const authFeatureKey = `${fromParent.section04FeatureKey}:auth`;
 
 export interface AuthState {
     isLoggedIn: boolean;
@@ -14,7 +16,7 @@ export const initialState: AuthState = {
     user: undefined,
 };
 
-export function authReducer(state: AuthState = initialState, action: AuthActions): AuthState {
+export function reducer(state: AuthState = initialState, action: AuthActions): AuthState {
     switch (action.type) {
         case AuthActionTypes.LoginAction:
             return {

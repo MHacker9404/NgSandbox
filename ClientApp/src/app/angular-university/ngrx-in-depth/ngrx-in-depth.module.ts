@@ -7,8 +7,8 @@ import { NgrxInDepthRoutingModule } from './ngrx-in-depth-routing.module';
 import { ExampleDef } from 'src/app/shared/Models/example.model';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromSelf from './state/reducer';
 import { NgrxInDepthEffects } from './state/effects';
+import { NgrxInDepthFeatureKey, reducer } from './state/reducer';
 
 const examples: ExampleDef[] = [
     {
@@ -44,7 +44,7 @@ const examples: ExampleDef[] = [
         SharedModule,
         NgrxInDepthRoutingModule,
         HttpClientModule,
-        StoreModule.forFeature(fromSelf.NgrxInDepthFeatureKey, fromSelf.reducer),
+        StoreModule.forFeature(NgrxInDepthFeatureKey, reducer),
         EffectsModule.forFeature([NgrxInDepthEffects]),
     ],
     // exports: [NgrxInDepthComponent],
