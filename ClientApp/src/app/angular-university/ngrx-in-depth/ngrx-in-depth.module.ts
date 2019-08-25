@@ -5,12 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgrxInDepthComponent } from './ngrx-in-depth/ngrx-in-depth.component';
 import { NgrxInDepthRoutingModule } from './ngrx-in-depth-routing.module';
 import { ExampleDef } from 'src/app/shared/Models/example.model';
-import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './state';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { AppStateEffects } from './state/app-state.effects';
+import { NgrxInDepthEffects } from './state/effects';
+import { NgrxInDepthFeatureKey, reducer } from './state/reducer';
 
 const examples: ExampleDef[] = [
     {
@@ -31,6 +29,12 @@ const examples: ExampleDef[] = [
         path: 'section-03',
         component: null,
     },
+    {
+        label: '04 - NgRx Store Freeze',
+        name: 'NgRxStoreFreeze',
+        path: 'section-04',
+        component: null,
+    },
 ];
 
 @NgModule({
@@ -40,15 +44,8 @@ const examples: ExampleDef[] = [
         SharedModule,
         NgrxInDepthRoutingModule,
         HttpClientModule,
-        StoreModule.forRoot(reducers, {
-            metaReducers,
-            runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true,
-            },
-        }),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        EffectsModule.forRoot([AppStateEffects]),
+        StoreModule.forFeature(NgrxInDepthFeatureKey, reducer),
+        EffectsModule.forFeature([NgrxInDepthEffects]),
     ],
     // exports: [NgrxInDepthComponent],
     providers: [{ provide: 'ngrx-in-depth', useValue: examples }],

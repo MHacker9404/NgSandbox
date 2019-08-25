@@ -11,21 +11,20 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesModule } from './courses/courses.component';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store, select, StoreModule } from '@ngrx/store';
 import { AppState } from '../../../state';
 import { NGXLogger } from 'ngx-logger';
-import { Logout } from './auth/auth/auth.actions';
+import { Logout } from './auth/state/actions';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators/map';
 import { tag } from 'rxjs-spy/operators/tag';
-import { tap } from 'rxjs/operators/tap';
-import { AuthState } from './auth/auth/auth.reducer';
-import { isLoggedIn, isLoggedOut } from './auth/auth/auth.selectors';
+import { isLoggedIn, isLoggedOut } from './auth/state/selectors';
 import { AuthGuard } from './auth/auth.guard';
 import _flatted from 'flatted';
+import { EffectsModule } from '@ngrx/effects';
+import { section04FeatureKey, reducer } from './state/reducer';
 
 @Component({
-    selector: 'ngs-section-02',
+    selector: 'ngs-section-04',
     template: `
         <mat-sidenav-container>
             <mat-sidenav #start>
@@ -55,9 +54,9 @@ import _flatted from 'flatted';
             <router-outlet></router-outlet>
         </mat-sidenav-container>
     `,
-    styleUrls: ['./section-02.component.scss'],
+    styleUrls: ['./section-04.component.scss'],
 })
-export class Section02Component implements OnInit {
+export class Section04Component implements OnInit {
     isLoggedIn$: Observable<boolean>;
     isLoggedOut$: Observable<boolean>;
 
@@ -72,13 +71,13 @@ export class Section02Component implements OnInit {
         this.isLoggedIn$ = this._state$.pipe(
             // map((state: any) => state.auth.isLoggedIn),
             select(isLoggedIn),
-            tag('section02:isLoggedIn')
+            tag('section04:isLoggedIn')
         );
 
         this.isLoggedOut$ = this._state$.pipe(
             // map((state: any) => !state.auth.isLoggedIn),
             select(isLoggedOut),
-            tag('section02:isLoggedOut')
+            tag('section04:isLoggedOut')
         );
     }
 
@@ -86,7 +85,7 @@ export class Section02Component implements OnInit {
         this._state$.dispatch(new Logout());
 
         const state = this._router.routerState.snapshot;
-        const posn = state.url.search('section-02') + 'section-02'.length;
+        const posn = state.url.search('section-04') + 'section-04'.length;
         const slice = state.url.slice(0, posn);
         // this._log.trace(posn, slice);
 
@@ -97,7 +96,7 @@ export class Section02Component implements OnInit {
 const routes: Routes = [
     {
         path: '',
-        component: Section02Component,
+        component: Section04Component,
         children: [
             {
                 path: 'login',
@@ -118,10 +117,10 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class Section02RoutingModule {}
+export class Section04RoutingModule {}
 
 @NgModule({
-    declarations: [Section02Component],
+    declarations: [Section04Component],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -131,9 +130,10 @@ export class Section02RoutingModule {}
         MatListModule,
         MatToolbarModule,
         SharedModule,
-        Section02RoutingModule,
+        StoreModule.forFeature(section04FeatureKey, reducer),
+        Section04RoutingModule,
         AuthModule.forRoot(),
         CoursesModule,
     ],
 })
-export class Section02Module {}
+export class Section04Module {}

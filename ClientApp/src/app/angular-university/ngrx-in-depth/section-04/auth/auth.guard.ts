@@ -12,7 +12,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { isLoggedIn } from './state/auth.selectors';
+import { isLoggedIn } from './state/selectors';
 import { NGXLogger } from 'ngx-logger';
 import { tap } from 'rxjs/operators/tap';
 import { tag } from 'rxjs-spy/operators';
@@ -35,7 +35,7 @@ export class AuthGuard implements OnDestroy, CanActivate, CanActivateChild, CanL
             select(isLoggedIn),
             tap((loggedIn: boolean) => {
                 if (!loggedIn) {
-                    const posn = state.url.search('section-03') + 'section-03'.length;
+                    const posn = state.url.search('section-04') + 'section-04'.length;
                     const slice = state.url.slice(0, posn);
                     // this._log.trace(posn, slice);
 

@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Login } from '../auth/auth.actions';
+import { AppState } from '../../../../../state';
+import { Login } from '../state/actions';
 import { Subject, noop } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { User } from '../../model/user.model';
 import { NGXLogger } from 'ngx-logger';
 import { tag } from 'rxjs-spy/operators/tag';
 import _flatted from 'flatted';
-import { AppState } from 'src/app/state';
 
 @Component({
     selector: 'login',
