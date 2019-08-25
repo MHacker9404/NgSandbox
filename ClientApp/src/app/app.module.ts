@@ -8,13 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { metaReducers, reducers } from './state';
-import { AppStateEffects } from './state/app-state.effects';
+import { AppStateEffects } from './state/effects';
+import { CustomSerializer } from './state/custom-serializer';
 
 @NgModule({
     declarations: [AppComponent],
@@ -40,7 +41,7 @@ import { AppStateEffects } from './state/app-state.effects';
         }),
         SharedModule,
     ],
-    providers: [],
+    providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
