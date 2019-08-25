@@ -35,6 +35,12 @@ const examples: ExampleDef[] = [
         path: 'section-04',
         component: null,
     },
+    {
+        label: '05 - NgRx Entities',
+        name: 'NgRxEntities',
+        path: 'section-05',
+        component: null,
+    },
 ];
 
 @NgModule({
