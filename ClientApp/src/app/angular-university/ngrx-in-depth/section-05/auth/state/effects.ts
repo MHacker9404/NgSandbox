@@ -25,7 +25,7 @@ export class AuthEffects {
             const state = this._router.routerState.snapshot;
             const posn = state.url.search('section-05') + 'section-05'.length;
             const slice = state.url.slice(0, posn);
-            this._log.trace(posn, slice);
+            // this._log.trace(posn, slice);
 
             this._router.navigateByUrl(`${slice}/login`);
         })
