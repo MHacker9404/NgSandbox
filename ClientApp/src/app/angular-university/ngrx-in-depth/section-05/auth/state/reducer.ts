@@ -24,12 +24,10 @@ export function reducer(state: AuthState = initialState, action: AuthActions): A
                 user: action.payload.user,
             };
         case AuthActionTypes.LogoutAction:
-            // return {
-            //     isLoggedIn: false,
-            //     user: undefined,
-            // };
-            state = { isLoggedIn: false, user: undefined };
-            return state;
+            return {
+                isLoggedIn: false,
+                user: undefined,
+            };
         default:
             return state;
     }

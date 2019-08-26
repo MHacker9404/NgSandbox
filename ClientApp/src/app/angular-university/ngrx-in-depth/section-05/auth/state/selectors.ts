@@ -1,11 +1,15 @@
-import { createSelector } from '@ngrx/store';
-import { AuthState } from './reducer';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import * as fromSelf from './reducer';
 
-export const selectAuthState = (state: any): AuthState => state.auth as AuthState;
+// export const selectAuthState = (state: any): fromSelf.AuthState => state.auth as fromSelf.AuthState;
+export const selectAuthState = createFeatureSelector(fromSelf.authFeatureKey);
 
 export const isLoggedIn = createSelector(
     selectAuthState,
-    (authState: AuthState): boolean => authState && authState.isLoggedIn
+    (authState: fromSelf.AuthState): boolean => {
+        // console.log(`authState: `, authState);
+        return authState && authState.isLoggedIn;
+    }
 );
 
 export const isLoggedOut = createSelector(

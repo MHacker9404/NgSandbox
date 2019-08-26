@@ -100,14 +100,14 @@ const routes: Routes = [
         children: [
             {
                 path: 'login',
-                // loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
-                loadChildren: './auth/auth.module#AuthModule',
+                loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
+                // loadChildren: './auth/auth.module#AuthModule',
                 canActivate: [],
             },
             {
                 path: 'courses',
-                // loadChildren: () => import('./courses/courses.component').then(mod => mod.CoursesModule),
-                loadChildren: './courses/courses.component#CoursesModule',
+                loadChildren: () => import('./courses/courses.component').then(mod => mod.CoursesModule),
+                // loadChildren: './courses/courses.component#CoursesModule',
                 // component: HomeComponent,
                 canActivate: [AuthGuard],
             },

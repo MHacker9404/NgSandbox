@@ -34,10 +34,12 @@ export class AuthGuard implements OnDestroy, CanActivate, CanActivateChild, CanL
         return this._state.pipe(
             select(isLoggedIn),
             tap((loggedIn: boolean) => {
+                this._log.trace(`canActivate: isLoggedIn: ${loggedIn}`);
+
                 if (!loggedIn) {
                     const posn = state.url.search('section-05') + 'section-05'.length;
                     const slice = state.url.slice(0, posn);
-                    // this._log.trace(posn, slice);
+                    this._log.trace(posn, slice);
 
                     this._router.navigateByUrl(`${slice}/login`);
                 }

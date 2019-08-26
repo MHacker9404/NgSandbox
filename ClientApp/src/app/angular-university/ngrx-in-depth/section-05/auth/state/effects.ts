@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators/tap';
 import _flatted from 'flatted';
 import { defer, of } from 'rxjs';
 import { User } from '../../model/user.model';
+import { NGXLogger } from 'ngx-logger';
 
 @Injectable()
 export class AuthEffects {
@@ -24,7 +25,7 @@ export class AuthEffects {
             const state = this._router.routerState.snapshot;
             const posn = state.url.search('section-05') + 'section-05'.length;
             const slice = state.url.slice(0, posn);
-            // this._log.trace(posn, slice);
+            this._log.trace(posn, slice);
 
             this._router.navigateByUrl(`${slice}/login`);
         })
@@ -41,5 +42,10 @@ export class AuthEffects {
         }
     });
 
-    constructor(private _actions$: Actions, private _router: Router, private _route: ActivatedRoute) {}
+    constructor(
+        private _actions$: Actions,
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _log: NGXLogger
+    ) {}
 }
