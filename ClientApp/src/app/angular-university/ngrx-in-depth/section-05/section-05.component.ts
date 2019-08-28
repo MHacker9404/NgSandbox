@@ -21,7 +21,7 @@ import { isLoggedIn, isLoggedOut } from './auth/state/selectors';
 import { AuthGuard } from './auth/auth.guard';
 import _flatted from 'flatted';
 import { EffectsModule } from '@ngrx/effects';
-import { section05FeatureKey, reducer } from './state/reducer';
+import * as fromSelf from './state/reducer';
 
 @Component({
     selector: 'ngs-section-05',
@@ -136,7 +136,7 @@ export class Section05RoutingModule {}
         MatListModule,
         MatToolbarModule,
         SharedModule,
-        StoreModule.forFeature(section05FeatureKey, reducer),
+        StoreModule.forFeature(fromSelf.section05FeatureKey, fromSelf.reducer),
         Section05RoutingModule,
         AuthModule.forRoot(),
         CoursesModule,

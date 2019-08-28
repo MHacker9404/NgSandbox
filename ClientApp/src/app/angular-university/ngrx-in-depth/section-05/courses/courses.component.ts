@@ -88,7 +88,7 @@ export class CoursesRoutingModule {}
         MatSelectModule,
         MatDatepickerModule,
         ReactiveFormsModule,
-        StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
+        // StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
         EffectsModule.forFeature([CourseEffects]),
     ],
     // exports: [HomeComponent],
