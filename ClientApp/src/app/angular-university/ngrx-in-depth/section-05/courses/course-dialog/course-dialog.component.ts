@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
-import { Course } from '../../model/course';
+import { ICourse } from '../../model/course';
 
 @Component({
     selector: 'course-dialog',
@@ -19,7 +19,7 @@ export class CourseDialogComponent implements OnInit {
         private coursesService: CoursesService,
         private fb: FormBuilder,
         private dialogRef: MatDialogRef<CourseDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) course: Course
+        @Inject(MAT_DIALOG_DATA) course: ICourse
     ) {
         this.courseId = course.id;
 

@@ -1,11 +1,11 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { Lesson } from '../../model/lesson';
+import { ILesson } from '../../model/lesson';
 import { CoursesService } from './courses.service';
 import { catchError, finalize } from 'rxjs/operators';
 
-export class LessonsDataSource implements DataSource<Lesson> {
-    private lessonsSubject = new BehaviorSubject<Lesson[]>([]);
+export class LessonsDataSource implements DataSource<ILesson> {
+    private lessonsSubject = new BehaviorSubject<ILesson[]>([]);
 
     private loadingSubject = new BehaviorSubject<boolean>(false);
 
@@ -25,7 +25,7 @@ export class LessonsDataSource implements DataSource<Lesson> {
             .subscribe(lessons => this.lessonsSubject.next(lessons));
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<Lesson[]> {
+    connect(collectionViewer: CollectionViewer): Observable<ILesson[]> {
         console.log('Connecting data source');
         return this.lessonsSubject.asObservable();
     }

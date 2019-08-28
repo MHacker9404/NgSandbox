@@ -22,6 +22,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from '../state/effects';
+import * as fromSelf from './state/reducer';
 
 @Component({
     selector: 'ngs-courses',
@@ -84,6 +88,8 @@ export class CoursesRoutingModule {}
         MatSelectModule,
         MatDatepickerModule,
         ReactiveFormsModule,
+        StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
+        EffectsModule.forFeature([CourseEffects]),
     ],
     // exports: [HomeComponent],
     providers: [CoursesService, CourseResolver],

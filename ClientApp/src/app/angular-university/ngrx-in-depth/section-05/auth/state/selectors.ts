@@ -7,8 +7,7 @@ export const selectAuthState = createFeatureSelector(fromSelf.authFeatureKey);
 export const isLoggedIn = createSelector(
     selectAuthState,
     (authState: fromSelf.AuthState): boolean => {
-        // console.log(`authState: `, authState);
-        return authState && authState.isLoggedIn;
+        return authState && authState.auth && authState.auth.isLoggedIn;
     }
 );
 

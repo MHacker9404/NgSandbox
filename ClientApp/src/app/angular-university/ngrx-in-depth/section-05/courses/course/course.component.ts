@@ -7,7 +7,7 @@ import { merge, fromEvent, Subject } from 'rxjs';
 import { LessonsDataSource } from '../services/lessons.datasource';
 import { NGXLogger } from 'ngx-logger';
 import { tag } from 'rxjs-spy/operators/tag';
-import { Course } from '../../model/course';
+import { ICourse } from '../../model/course';
 
 @Component({
     selector: 'course',
@@ -54,7 +54,7 @@ import { Course } from '../../model/course';
 })
 export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     private _unsubscribe$: Subject<void> = new Subject<void>();
-    course: Course;
+    course: ICourse;
 
     dataSource: LessonsDataSource;
 

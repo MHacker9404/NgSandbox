@@ -5,7 +5,7 @@ import { Login, AuthActionTypes, Logout } from './actions';
 import { tap } from 'rxjs/operators/tap';
 import _flatted from 'flatted';
 import { defer, of } from 'rxjs';
-import { User } from '../../model/user.model';
+import { IUser } from '../../model/user.model';
 import { NGXLogger } from 'ngx-logger';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class AuthEffects {
     init$ = defer(() => {
         const userData = localStorage.getItem('user');
         if (userData) {
-            const user: User = _flatted.parse(userData);
+            const user: IUser = _flatted.parse(userData);
             return of(new Login({ user }));
         } else {
             return of(new Logout());

@@ -15,10 +15,10 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.router.events.subscribe(event => {
             if (event instanceof RouteConfigLoadStart) {
-                this._log.trace('Loading Route Config');
+                // this._log.trace('Loading Route Config');
                 this.loadingRouteConfig = true;
             } else if (event instanceof RouteConfigLoadEnd) {
-                this._log.trace('Loading Route Config Dun');
+                // this._log.trace('Loading Route Config Dun');
                 this.loadingRouteConfig = false;
             }
         });

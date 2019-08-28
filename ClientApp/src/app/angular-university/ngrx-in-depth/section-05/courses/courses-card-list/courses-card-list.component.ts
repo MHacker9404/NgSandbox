@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Course } from '../../model/course';
+import { ICourse } from '../../model/course';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 
@@ -10,13 +10,13 @@ import { CourseDialogComponent } from '../course-dialog/course-dialog.component'
 })
 export class CoursesCardListComponent implements OnInit {
     @Input()
-    courses: Course[];
+    courses: ICourse[];
 
     constructor(private dialog: MatDialog) {}
 
     ngOnInit() {}
 
-    editCourse(course: Course) {
+    editCourse(course: ICourse) {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;

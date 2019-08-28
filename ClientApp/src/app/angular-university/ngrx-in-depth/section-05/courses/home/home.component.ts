@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../../model/course';
+import { ICourse } from '../../model/course';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoursesService } from '../services/courses.service';
@@ -32,9 +32,9 @@ import { AppState } from '../../../../../state';
 export class HomeComponent implements OnInit {
     promoTotal$: Observable<number>;
 
-    beginnerCourses$: Observable<Course[]>;
+    beginnerCourses$: Observable<ICourse[]>;
 
-    advancedCourses$: Observable<Course[]>;
+    advancedCourses$: Observable<ICourse[]>;
 
     constructor(private coursesService: CoursesService, private _state$: Store<AppState>) {}
 
