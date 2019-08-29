@@ -1,23 +1,21 @@
-import * as fromApp from 'src/app/state/index';
-
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Action } from '@ngrx/store';
+import _deepClone from 'lodash/clone';
 
 import { ICourse } from '../../model/course';
 import * as fromParent from '../../state/reducer';
-import { CourseActions } from './actions';
-
+import { CourseActions, CoursesActionTypes } from './actions';
 export const coursesFeatureKey = `${fromParent.section05FeatureKey}:courses`;
 
-// export interface CoursesState extends fromApp.AppState {
-export interface CoursesState extends EntityState<ICourse> {
-    // courses: {
-    //     entities: { [key: number]: ICourse };
-    //     order: number[];
-    // };
-}
+export interface CoursesState extends EntityState<ICourse> {}
 
 export const adapter: EntityAdapter<ICourse> = createEntityAdapter<ICourse>();
+
+// export interface CoursesState extends fromApp.AppState {
+// courses: {
+//     entities: { [key: number]: ICourse };
+//     order: number[];
+// };
+// }
 
 // export const initialState: CoursesState = {
 //     courses: {
@@ -26,9 +24,19 @@ export const adapter: EntityAdapter<ICourse> = createEntityAdapter<ICourse>();
 //     },
 // };
 
-// export function reducer(state: CoursesState = initialState, action: CourseActions): CoursesState {
-//     switch (action.type) {
-//         default:
-//             return state;
-//     }
-// }
+export function reducer(state: CoursesState, action: CourseActions): CoursesState {
+    switch (action.type) {
+        case CoursesActionTypes.LoadCourse: {
+            const course = _deepClone(action.payload.course);
+            return adapter.addOne(course, state);
+        }
+
+        case CoursesActionTypes.RequestCourse: {
+            return state;
+        }
+
+        default: {
+            return state;
+        }
+    }
+}

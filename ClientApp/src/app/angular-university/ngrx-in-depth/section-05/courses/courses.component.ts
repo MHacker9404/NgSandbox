@@ -1,13 +1,13 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HomeComponent } from './home/home.component';
-import { CourseComponent } from './course/course.component';
-import { CourseResolver } from './services/course.resolver';
-import { CoursesService } from './services/courses.service';
+
+import { CommonModule } from '@angular/common';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -16,15 +16,17 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { CourseDialogComponent } from './course-dialog/course-dialog.component';
-import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
-import { StoreModule } from '@ngrx/store';
+import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { CourseEffects } from '../state/effects';
+import { StoreModule } from '@ngrx/store';
+
+import { CoursesEffects } from './state/effects';
+import { CourseDialogComponent } from './course-dialog/course-dialog.component';
+import { CourseComponent } from './course/course.component';
+import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { HomeComponent } from './home/home.component';
+import { CourseResolver } from './services/course.resolver';
+import { CoursesService } from './services/courses.service';
 import * as fromSelf from './state/reducer';
 
 @Component({
@@ -88,10 +90,9 @@ export class CoursesRoutingModule {}
         MatSelectModule,
         MatDatepickerModule,
         ReactiveFormsModule,
-        // StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
-        EffectsModule.forFeature([CourseEffects]),
+        StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
+        EffectsModule.forFeature([CoursesEffects]),
     ],
-    // exports: [HomeComponent],
     providers: [CoursesService, CourseResolver],
 })
 export class CoursesModule {}

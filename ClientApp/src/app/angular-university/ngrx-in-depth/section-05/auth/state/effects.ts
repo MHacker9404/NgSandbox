@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Login, AuthActionTypes, Logout } from './actions';
-import { tap } from 'rxjs/operators/tap';
 import _flatted from 'flatted';
-import { defer, of } from 'rxjs';
-import { IUser } from '../../model/user.model';
 import { NGXLogger } from 'ngx-logger';
+import { defer, of } from 'rxjs';
+import { tap } from 'rxjs/operators/tap';
+
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+
+import { IUser } from '../../model/user.model';
+import { AuthActionTypes, Login, Logout } from './actions';
 
 @Injectable()
 export class AuthEffects {
