@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         private _auth: AuthService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _state$: Store<AppState>,
+        private _store$: Store<AppState>,
         private _log: NGXLogger
     ) {
         this.form = _fb.group({
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     ngOnInit() {}
 
     login() {
-        // this._state$.dispatch(new Login());
+        // this._store$.dispatch(new Login());
         const val = this.form.value;
 
         this._auth
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 takeUntil(this._unsubscribe$),
                 tap((user: IUser) => {
                     this._log.info(user);
-                    this._state$.dispatch(new Login({ user }));
+                    this._store$.dispatch(new Login({ user }));
                     this._router.navigate(['../courses'], { relativeTo: this._route.parent });
                 }),
                 tag('auth:login')

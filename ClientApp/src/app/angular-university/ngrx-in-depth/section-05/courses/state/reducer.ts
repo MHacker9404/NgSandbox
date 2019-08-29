@@ -1,9 +1,11 @@
-import { Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as fromApp from 'src/app/state/index';
+
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action } from '@ngrx/store';
+
+import { ICourse } from '../../model/course';
 import * as fromParent from '../../state/reducer';
 import { CourseActions } from './actions';
-import { ICourse } from '../../model/course';
 
 export const coursesFeatureKey = `${fromParent.section05FeatureKey}:courses`;
 

@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
     advancedCourses$: Observable<ICourse[]>;
 
-    constructor(private coursesService: CoursesService, private _state$: Store<AppState>) {}
+    constructor(private coursesService: CoursesService, private _store$: Store<AppState>) {}
 
     ngOnInit() {
         const courses$ = this.coursesService.findAllCourses();

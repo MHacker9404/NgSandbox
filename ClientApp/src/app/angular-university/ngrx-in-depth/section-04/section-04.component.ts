@@ -61,20 +61,20 @@ export class Section04Component implements OnInit {
     isLoggedOut$: Observable<boolean>;
 
     constructor(
-        private _state$: Store<AppState>,
+        private _store$: Store<AppState>,
         private _router: Router,
         private _route: ActivatedRoute,
         private _log: NGXLogger
     ) {}
 
     ngOnInit() {
-        this.isLoggedIn$ = this._state$.pipe(
+        this.isLoggedIn$ = this._store$.pipe(
             // map((state: any) => state.auth.isLoggedIn),
             select(isLoggedIn),
             tag('section04:isLoggedIn')
         );
 
-        this.isLoggedOut$ = this._state$.pipe(
+        this.isLoggedOut$ = this._store$.pipe(
             // map((state: any) => !state.auth.isLoggedIn),
             select(isLoggedOut),
             tag('section04:isLoggedOut')
@@ -82,7 +82,7 @@ export class Section04Component implements OnInit {
     }
 
     logout() {
-        this._state$.dispatch(new Logout());
+        this._store$.dispatch(new Logout());
 
         const state = this._router.routerState.snapshot;
         const posn = state.url.search('section-04') + 'section-04'.length;
