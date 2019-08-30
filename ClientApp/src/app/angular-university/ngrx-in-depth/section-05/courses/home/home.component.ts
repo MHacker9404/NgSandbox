@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ICourse } from '../../model/course';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoursesService } from '../services/courses.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../../../state';
+import { AppState } from 'src/app/state';
+
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+
+import { ICourse } from '../../model/course';
+import { RequestAllCourses } from '../state/actions';
+import { selectAllCourses } from '../state/selectors';
+
+import _filter from 'lodash/filter';
 
 @Component({
     selector: 'home',
@@ -36,15 +41,21 @@ export class HomeComponent implements OnInit {
 
     advancedCourses$: Observable<ICourse[]>;
 
-    constructor(private coursesService: CoursesService, private _store$: Store<AppState>) {}
+    constructor(private _store$: Store<AppState>) {}
 
     ngOnInit() {
-        const courses$ = this.coursesService.findAllCourses();
+        this._store$.dispatch(new RequestAllCourses());
 
-        this.beginnerCourses$ = courses$.pipe(map(courses => courses.filter(course => course.category === 'BEGINNER')));
+        const courses$ = this._store$.pipe(select(selectAllCourses()));
 
-        this.advancedCourses$ = courses$.pipe(map(courses => courses.filter(course => course.category === 'ADVANCED')));
-
-        this.promoTotal$ = courses$.pipe(map(courses => courses.filter(course => course.promo === true).length));
+        this.beginnerCourses$ = courses$.pipe(
+            map((courses: ICourse[]) => _filter(courses, course => course.category === 'BEGINNER'))
+        );
+        this.advancedCourses$ = courses$.pipe(
+            map((courses: ICourse[]) => _filter(courses, course => course.category === 'ADVANCED'))
+        );
+        this.promoTotal$ = courses$.pipe(
+            map((courses: ICourse[]) => _filter(courses, course => course.promo === true).length)
+        );
     }
 }

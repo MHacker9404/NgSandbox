@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { CourseResolver } from './services/course.resolver';
 import { CoursesService } from './services/courses.service';
 import * as fromSelf from './state/reducer';
+import { LessonsDataSource } from './services/lessons.datasource';
 
 @Component({
     selector: 'ngs-courses',
@@ -93,6 +94,6 @@ export class CoursesRoutingModule {}
         StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
         EffectsModule.forFeature([CoursesEffects]),
     ],
-    providers: [CoursesService, CourseResolver],
+    providers: [CoursesService, CourseResolver, LessonsDataSource],
 })
 export class CoursesModule {}

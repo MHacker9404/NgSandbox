@@ -29,16 +29,11 @@ export function reducer(state: CoursesState = initialState, action: CourseAction
     }
 }
 
+export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
+
 // export interface CoursesState extends fromApp.AppState {
 // courses: {
 //     entities: { [key: number]: ICourse };
 //     order: number[];
 // };
 // }
-
-// export const initialState: CoursesState = {
-//     courses: {
-//         entities: {},
-//         order: [],
-//     },
-// };

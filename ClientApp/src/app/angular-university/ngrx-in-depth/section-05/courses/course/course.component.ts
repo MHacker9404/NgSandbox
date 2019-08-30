@@ -17,12 +17,12 @@ import { ICourse } from '../../model/course';
 
             <img class="course-thumbnail" [src]="course?.iconUrl" />
 
-            <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+            <div class="spinner-container" *ngIf="_dataSource.loading$ | async">
                 <mat-spinner></mat-spinner>
             </div>
 
             <div class="mat-elevation-z8">
-                <mat-table class="lessons-table" [dataSource]="dataSource">
+                <mat-table class="lessons-table" [dataSource]="_dataSource">
                     <ng-container matColumnDef="seqNo">
                         <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
 
@@ -56,20 +56,23 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     private _unsubscribe$: Subject<void> = new Subject<void>();
     course: ICourse;
 
-    dataSource: LessonsDataSource;
-
     displayedColumns = ['seqNo', 'description', 'duration'];
 
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-    constructor(private route: ActivatedRoute, private coursesService: CoursesService, private _log: NGXLogger) {}
+    constructor(
+        private route: ActivatedRoute,
+        private coursesService: CoursesService,
+        private _log: NGXLogger,
+        public _dataSource: LessonsDataSource
+    ) {}
 
     ngOnInit() {
         this.course = this.route.snapshot.data['course'];
 
-        this.dataSource = new LessonsDataSource(this.coursesService);
+        // this.dataSource = new LessonsDataSource(this.coursesService);
 
-        this.dataSource.loadLessons(this.course.id, 0, 3);
+        this._dataSource.loadLessons(this.course.id, 0, 3);
     }
 
     ngAfterViewInit() {
@@ -82,7 +85,7 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     loadLessonsPage() {
-        this.dataSource.loadLessons(this.course.id, this.paginator.pageIndex, this.paginator.pageSize);
+        this._dataSource.loadLessons(this.course.id, this.paginator.pageIndex, this.paginator.pageSize);
     }
 
     ngOnDestroy(): void {

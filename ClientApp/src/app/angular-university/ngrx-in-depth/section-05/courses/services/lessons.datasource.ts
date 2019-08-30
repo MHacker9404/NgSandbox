@@ -3,7 +3,10 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { ILesson } from '../../model/lesson';
 import { CoursesService } from './courses.service';
 import { catchError, finalize } from 'rxjs/operators';
+import { NGXLogger } from 'ngx-logger';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class LessonsDataSource implements DataSource<ILesson> {
     private lessonsSubject = new BehaviorSubject<ILesson[]>([]);
 
@@ -11,7 +14,7 @@ export class LessonsDataSource implements DataSource<ILesson> {
 
     public loading$ = this.loadingSubject.asObservable();
 
-    constructor(private coursesService: CoursesService) {}
+    constructor(private coursesService: CoursesService, private _log: NGXLogger) {}
 
     loadLessons(courseId: number, pageIndex: number, pageSize: number) {
         this.loadingSubject.next(true);
@@ -26,7 +29,6 @@ export class LessonsDataSource implements DataSource<ILesson> {
     }
 
     connect(collectionViewer: CollectionViewer): Observable<ILesson[]> {
-        console.log('Connecting data source');
         return this.lessonsSubject.asObservable();
     }
 
