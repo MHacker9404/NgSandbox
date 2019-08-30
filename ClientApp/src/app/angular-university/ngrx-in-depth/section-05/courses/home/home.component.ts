@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store';
 
 import { ICourse } from '../../model/course';
 import { RequestAllCourses } from '../state/actions';
-import { selectAllCourses } from '../state/selectors';
+import { selectAllCourses, selectBeginnersCourses, selectAdvancedCourses, selectPromoCount } from '../state/selectors';
 
 import _filter from 'lodash/filter';
 
@@ -36,9 +36,7 @@ import _filter from 'lodash/filter';
 })
 export class HomeComponent implements OnInit {
     promoTotal$: Observable<number>;
-
     beginnerCourses$: Observable<ICourse[]>;
-
     advancedCourses$: Observable<ICourse[]>;
 
     constructor(private _store$: Store<AppState>) {}
@@ -46,8 +44,12 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this._store$.dispatch(new RequestAllCourses());
 
-        const courses$ = this._store$.pipe(select(selectAllCourses()));
+        this.beginnerCourses$ = this._store$.pipe(select(selectBeginnersCourses));
+        this.advancedCourses$ = this._store$.pipe(select(selectAdvancedCourses));
+        this.promoTotal$ = this._store$.pipe(select(selectPromoCount));
 
+        /*
+        const courses$ = this._store$.pipe(select(selectAllCourses));
         this.beginnerCourses$ = courses$.pipe(
             map((courses: ICourse[]) => _filter(courses, course => course.category === 'BEGINNER'))
         );
@@ -57,5 +59,6 @@ export class HomeComponent implements OnInit {
         this.promoTotal$ = courses$.pipe(
             map((courses: ICourse[]) => _filter(courses, course => course.promo === true).length)
         );
+        */
     }
 }
