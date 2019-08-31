@@ -32,3 +32,8 @@ export const selectPromoCount = createSelector(
     selectAllCourses,
     (courses: ICourse[]) => _filter(courses, course => course.promo === true).length
 );
+
+export const allCoursesLoaded = createSelector(
+    selectCoursesState,
+    (coursesState: fromSelf.CoursesState) => coursesState.allCoursesLoaded
+);

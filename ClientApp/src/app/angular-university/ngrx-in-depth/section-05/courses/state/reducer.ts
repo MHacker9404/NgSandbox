@@ -6,11 +6,13 @@ import * as fromParent from '../../state/reducer';
 import { CourseActions, CoursesActionTypes } from './actions';
 export const coursesFeatureKey = `${fromParent.section05FeatureKey}:courses`;
 
-export interface CoursesState extends EntityState<ICourse> {}
+export interface CoursesState extends EntityState<ICourse> {
+    allCoursesLoaded: boolean;
+}
 
 const adapter: EntityAdapter<ICourse> = createEntityAdapter<ICourse>();
 
-const initialState: CoursesState = adapter.getInitialState();
+const initialState: CoursesState = adapter.getInitialState({ allCoursesLoaded: false });
 
 export function reducer(state: CoursesState = initialState, action: CourseActions): CoursesState {
     switch (action.type) {
@@ -21,6 +23,11 @@ export function reducer(state: CoursesState = initialState, action: CourseAction
 
         case CoursesActionTypes.RequestCourse: {
             return state;
+        }
+
+        case CoursesActionTypes.LoadAllCourses: {
+            const courses = _deepClone(action.payload.courses);
+            return adapter.addAll(courses, { ...state, allCoursesLoaded: true });
         }
 
         default: {
