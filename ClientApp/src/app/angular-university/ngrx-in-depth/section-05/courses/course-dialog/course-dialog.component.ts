@@ -1,15 +1,24 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
 import { ICourse } from '../../model/course';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state';
+import { SaveCourse } from '../state/actions';
+import { Update } from '@ngrx/entity';
+import { EventEmitter } from 'events';
+import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators/tap';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'course-dialog',
     templateUrl: './course-dialog.component.html',
     styleUrls: ['./course-dialog.component.css'],
 })
-export class CourseDialogComponent implements OnInit {
+export class CourseDialogComponent implements OnInit, OnDestroy {
+    private _unsubscribe$ = new Subject<void>();
     courseId: number;
 
     form: FormGroup;
@@ -19,7 +28,8 @@ export class CourseDialogComponent implements OnInit {
         private coursesService: CoursesService,
         private fb: FormBuilder,
         private dialogRef: MatDialogRef<CourseDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) course: ICourse
+        @Inject(MAT_DIALOG_DATA) course: ICourse,
+        private _state$: Store<AppState>
     ) {
         this.courseId = course.id;
 
@@ -38,10 +48,28 @@ export class CourseDialogComponent implements OnInit {
     save() {
         const changes = this.form.value;
 
-        this.coursesService.saveCourse(this.courseId, changes).subscribe(() => this.dialogRef.close());
+        this.coursesService
+            .saveCourse(this.courseId, changes)
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                tap(() => {
+                    const course: Update<ICourse> = {
+                        id: this.courseId,
+                        changes: changes,
+                    };
+                    this._state$.dispatch(new SaveCourse({ course }));
+                }),
+                tap(() => this.dialogRef.close())
+            )
+            .subscribe();
     }
 
     close() {
         this.dialogRef.close();
+    }
+
+    ngOnDestroy() {
+        this._unsubscribe$.next();
+        this._unsubscribe$.complete();
     }
 }

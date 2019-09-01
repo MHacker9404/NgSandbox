@@ -30,6 +30,10 @@ export function reducer(state: CoursesState = initialState, action: CourseAction
             return adapter.addAll(courses, { ...state, allCoursesLoaded: true });
         }
 
+        case CoursesActionTypes.SaveCourse: {
+            return adapter.updateOne(action.payload.course, state);
+        }
+
         default: {
             return state;
         }

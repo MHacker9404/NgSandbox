@@ -95,5 +95,6 @@ export class CoursesRoutingModule {}
         EffectsModule.forFeature([CoursesEffects]),
     ],
     providers: [CoursesService, CourseResolver, LessonsDataSource],
+    entryComponents: [CourseDialogComponent],
 })
 export class CoursesModule {}

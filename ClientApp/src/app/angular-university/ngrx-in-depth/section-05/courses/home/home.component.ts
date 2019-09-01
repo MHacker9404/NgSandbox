@@ -7,7 +7,13 @@ import { select, Store } from '@ngrx/store';
 
 import { ICourse } from '../../model/course';
 import { RequestAllCourses } from '../state/actions';
-import { selectAllCourses, selectBeginnersCourses, selectAdvancedCourses, selectPromoCount } from '../state/selectors';
+import {
+    selectAllCourses,
+    selectBeginnersCourses,
+    selectAdvancedCourses,
+    selectPromoCount,
+    selectIntermediateCourses,
+} from '../state/selectors';
 
 import _filter from 'lodash/filter';
 
@@ -26,6 +32,10 @@ import _filter from 'lodash/filter';
                     <courses-card-list [courses]="beginnerCourses$ | async"> </courses-card-list>
                 </mat-tab>
 
+                <mat-tab label="Intermediate">
+                    <courses-card-list [courses]="intermediateCourses$ | async"> </courses-card-list>
+                </mat-tab>
+
                 <mat-tab label="Advanced">
                     <courses-card-list [courses]="advancedCourses$ | async"></courses-card-list>
                 </mat-tab>
@@ -37,6 +47,7 @@ import _filter from 'lodash/filter';
 export class HomeComponent implements OnInit {
     promoTotal$: Observable<number>;
     beginnerCourses$: Observable<ICourse[]>;
+    intermediateCourses$: Observable<ICourse[]>;
     advancedCourses$: Observable<ICourse[]>;
 
     constructor(private _store$: Store<AppState>) {}
@@ -45,6 +56,7 @@ export class HomeComponent implements OnInit {
         this._store$.dispatch(new RequestAllCourses());
 
         this.beginnerCourses$ = this._store$.pipe(select(selectBeginnersCourses));
+        this.intermediateCourses$ = this._store$.pipe(select(selectIntermediateCourses));
         this.advancedCourses$ = this._store$.pipe(select(selectAdvancedCourses));
         this.promoTotal$ = this._store$.pipe(select(selectPromoCount));
 
