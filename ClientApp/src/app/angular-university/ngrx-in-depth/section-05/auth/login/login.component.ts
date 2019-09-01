@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Login } from '../auth/auth.actions';
+import { AppState } from '../../../../../state';
+import { Login } from '../state/actions';
 import { Subject, noop } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { User } from '../../model/user.model';
+import { IUser } from '../../model/user.model';
 import { NGXLogger } from 'ngx-logger';
 import { tag } from 'rxjs-spy/operators/tag';
 import _flatted from 'flatted';
-import { AppState } from 'src/app/state';
 
 @Component({
     selector: 'login',
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             .login(val.email, val.password)
             .pipe(
                 takeUntil(this._unsubscribe$),
-                tap((user: User) => {
+                tap((user: IUser) => {
                     this._log.info(user);
                     this._store$.dispatch(new Login({ user }));
                     this._router.navigate(['../courses'], { relativeTo: this._route.parent });

@@ -5,7 +5,7 @@ export const selectAuthState = (state: any): AuthState => state.auth as AuthStat
 
 export const isLoggedIn = createSelector(
     selectAuthState,
-    (authState: AuthState): boolean => authState.isLoggedIn
+    (authState: AuthState): boolean => authState && authState.isLoggedIn
 );
 
 export const isLoggedOut = createSelector(
