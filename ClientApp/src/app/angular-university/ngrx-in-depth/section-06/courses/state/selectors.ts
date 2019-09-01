@@ -2,7 +2,7 @@ import _filter from 'lodash/filter';
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as fromSelf from './reducer';
+import * as fromSelf from './course.reducer';
 import { ICourse } from '../../model/course';
 
 export const selectCoursesState = createFeatureSelector<fromSelf.CoursesState>(fromSelf.coursesFeatureKey);

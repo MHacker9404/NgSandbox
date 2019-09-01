@@ -20,15 +20,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { CoursesEffects } from './state/effects';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import { CourseComponent } from './course/course.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { HomeComponent } from './home/home.component';
 import { CourseResolver } from './services/course.resolver';
 import { CoursesService } from './services/courses.service';
-import * as fromSelf from './state/reducer';
 import { LessonsDataSource } from './services/lessons.datasource';
+import { CoursesEffects } from './state/effects';
+import * as fromSelfCourse from './state/course.reducer';
+import * as fromSelfLesson from './state/lessons.reducer';
 
 @Component({
     selector: 'ngs-courses',
@@ -91,7 +92,8 @@ export class CoursesRoutingModule {}
         MatSelectModule,
         MatDatepickerModule,
         ReactiveFormsModule,
-        StoreModule.forFeature(fromSelf.coursesFeatureKey, fromSelf.reducer),
+        StoreModule.forFeature(fromSelfCourse.coursesFeatureKey, fromSelfCourse.reducer),
+        StoreModule.forFeature(fromSelfLesson.lessonsFeatureKey, fromSelfLesson.reducer),
         EffectsModule.forFeature([CoursesEffects]),
     ],
     providers: [CoursesService, CourseResolver, LessonsDataSource],

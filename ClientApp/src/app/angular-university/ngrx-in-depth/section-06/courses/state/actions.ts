@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { ICourse } from '../../model/course';
 import { Update } from '@ngrx/entity';
+import { ILesson } from '../../model/lesson';
 
 export enum CoursesActionTypes {
     RequestCourse = '[View Course Page] Request Course',
@@ -8,6 +9,9 @@ export enum CoursesActionTypes {
     RequestAllCourses = '[Courses Home Page] Request All Courses',
     LoadAllCourses = '[Course API] Load All Courses',
     SaveCourse = '[Edit Course Dialog] Save Course',
+    RequestLessonsPage = '[Course Landing Page] Request Lessons Page',
+    LoadLessonsPage = '[Course API] Load Lessons Page',
+    CancelLessonsPage = '[Course API] Cancel Lessons Page',
 }
 
 export class RequestCourse implements Action {
@@ -35,4 +39,30 @@ export class SaveCourse implements Action {
     constructor(public payload: { course: Update<ICourse> }) {}
 }
 
-export type CourseActions = RequestCourse | LoadCourse | RequestAllCourses | LoadAllCourses | SaveCourse;
+export interface PageQuery {
+    pageIndex: number;
+    pageSize: number;
+}
+export class RequestLessonsPage implements Action {
+    readonly type = CoursesActionTypes.RequestLessonsPage;
+    constructor(public payload: { courseId: number; page: PageQuery }) {}
+}
+
+export class LoadLessonsPage implements Action {
+    readonly type = CoursesActionTypes.LoadLessonsPage;
+    constructor(public payload: { lessons: ILesson[] }) {}
+}
+
+export class CancelLessonsPage implements Action {
+    readonly type = CoursesActionTypes.CancelLessonsPage;
+}
+
+export type CourseActions =
+    | RequestCourse
+    | LoadCourse
+    | RequestAllCourses
+    | LoadAllCourses
+    | SaveCourse
+    | RequestLessonsPage
+    | LoadLessonsPage
+    | CancelLessonsPage;
