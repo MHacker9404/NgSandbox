@@ -59,6 +59,8 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     course: ICourse;
     displayedColumns = ['seqNo', 'description', 'duration'];
 
+    private _unsubscribe$ = new Subject<void>();
+
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
     constructor(
@@ -79,11 +81,27 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dataSource.loadLessons(this.course.id, initialPage);
     }
 
-    ngAfterViewInit() {}
+    ngAfterViewInit() {
+        this.paginator.page
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                tap(() => this.loadLessonsPage())
+            )
+            .subscribe();
+    }
 
-    loadLessonsPage() {}
+    loadLessonsPage() {
+        const newPageQuery: PageQuery = {
+            pageIndex: this.paginator.pageIndex,
+            pageSize: this.paginator.pageSize,
+        };
+        this.dataSource.loadLessons(this.course.id, newPageQuery);
+    }
 
     ngOnDestroy(): void {
         this._log.trace('LessonsPager: OnDestroy');
+
+        this._unsubscribe$.next();
+        this._unsubscribe$.complete();
     }
 }
