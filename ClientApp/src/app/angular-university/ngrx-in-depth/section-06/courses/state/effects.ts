@@ -17,11 +17,13 @@ import {
     LoadAllCourses,
     RequestLessonsPage,
     LoadLessonsPage,
+    CancelLessonsPage,
 } from './actions';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state';
-import { withLatestFrom, filter } from 'rxjs/operators';
+import { withLatestFrom, filter, catchError } from 'rxjs/operators';
 import { allCoursesLoaded } from './selectors';
+import { of } from 'rxjs';
 
 @Injectable()
 export class CoursesEffects {
@@ -51,7 +53,15 @@ export class CoursesEffects {
     @Effect() loadLessonsPage$ = this._actions$.pipe(
         ofType<RequestLessonsPage>(CoursesActionTypes.RequestLessonsPage),
         mergeMap(({ payload }) => {
-            return this._service.findLessons(payload.courseId, payload.pageQuery.pageIndex, payload.pageQuery.pageSize);
+            return this._service
+                .findLessons(payload.courseId, payload.pageQuery.pageIndex, payload.pageQuery.pageSize)
+                .pipe(
+                    catchError(error => {
+                        this._log.error(error);
+                        this._state$.dispatch(new CancelLessonsPage());
+                        return of([]);
+                    })
+                );
         }),
         map(lessons => new LoadLessonsPage({ lessons }))
     );

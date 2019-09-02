@@ -18,7 +18,6 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./course-dialog.component.css'],
 })
 export class CourseDialogComponent implements OnInit, OnDestroy {
-    private _unsubscribe$ = new Subject<void>();
     courseId: number;
 
     form: FormGroup;
@@ -51,7 +50,6 @@ export class CourseDialogComponent implements OnInit, OnDestroy {
         this.coursesService
             .saveCourse(this.courseId, changes)
             .pipe(
-                takeUntil(this._unsubscribe$),
                 tap(() => {
                     const course: Update<ICourse> = {
                         id: this.courseId,
@@ -68,8 +66,5 @@ export class CourseDialogComponent implements OnInit, OnDestroy {
         this.dialogRef.close();
     }
 
-    ngOnDestroy() {
-        this._unsubscribe$.next();
-        this._unsubscribe$.complete();
-    }
+    ngOnDestroy() {}
 }

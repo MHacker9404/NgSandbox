@@ -6,7 +6,7 @@ import * as fromParent from '../../state/reducer';
 export const lessonsFeatureKey = `${fromParent.section06FeatureKey}:lessons`;
 
 export interface LessonsState extends EntityState<ILesson> {
-    allLessonsLoaded: boolean;
+    loading: boolean;
 }
 
 function sortByCourseAndSeqNo(l1: ILesson, l2: ILesson): number {
@@ -22,12 +22,18 @@ const adapter: EntityAdapter<ILesson> = createEntityAdapter<ILesson>({
     sortComparer: sortByCourseAndSeqNo,
 });
 
-const initialState: LessonsState = adapter.getInitialState({ allLessonsLoaded: false });
+const initialState: LessonsState = adapter.getInitialState({ loading: false });
 
 export function reducer(state: LessonsState = initialState, action: CourseActions): LessonsState {
     switch (action.type) {
         case CoursesActionTypes.LoadLessonsPage:
-            return adapter.addMany(action.payload.lessons, state);
+            return adapter.addMany(action.payload.lessons, { ...state, loading: false });
+
+        case CoursesActionTypes.RequestLessonsPage:
+            return { ...state, loading: true };
+
+        case CoursesActionTypes.CancelLessonsPage:
+            return { ...state, loading: false };
 
         default: {
             return state;

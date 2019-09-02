@@ -3,14 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { CoursesService } from '../services/courses.service';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay, takeUntil } from 'rxjs/operators';
-import { merge, fromEvent, Subject } from 'rxjs';
+import { merge, fromEvent, Subject, Observable } from 'rxjs';
 import { LessonsDataSource } from '../services/lessons.datasource';
 import { NGXLogger } from 'ngx-logger';
 import { tag } from 'rxjs-spy/operators/tag';
 import { ICourse } from '../../model/course';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state';
 import { PageQuery } from '../state/actions';
+import { selectLessonsState, selectLessonsLoading } from '../state/selectors';
 
 @Component({
     selector: 'course',
@@ -20,7 +21,7 @@ import { PageQuery } from '../state/actions';
 
             <img class="course-thumbnail" [src]="course?.iconUrl" />
 
-            <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+            <div class="spinner-container" *ngIf="loading$ | async">
                 <mat-spinner></mat-spinner>
             </div>
 
@@ -59,7 +60,7 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     course: ICourse;
     displayedColumns = ['seqNo', 'description', 'duration'];
 
-    private _unsubscribe$ = new Subject<void>();
+    loading$: Observable<boolean>;
 
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -71,6 +72,8 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.loading$ = this._state$.pipe(select(selectLessonsLoading));
+
         this.course = this.route.snapshot.data['course'];
 
         const initialPage: PageQuery = {
@@ -82,12 +85,7 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        this.paginator.page
-            .pipe(
-                takeUntil(this._unsubscribe$),
-                tap(() => this.loadLessonsPage())
-            )
-            .subscribe();
+        this.paginator.page.pipe(tap(() => this.loadLessonsPage())).subscribe();
     }
 
     loadLessonsPage() {
@@ -100,8 +98,5 @@ export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnDestroy(): void {
         this._log.trace('LessonsPager: OnDestroy');
-
-        this._unsubscribe$.next();
-        this._unsubscribe$.complete();
     }
 }

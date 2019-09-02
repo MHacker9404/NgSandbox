@@ -37,7 +37,6 @@ import _flatted from 'flatted';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-    private _unsubscribe$ = new Subject<void>();
     form: FormGroup;
 
     constructor(
@@ -63,7 +62,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this._auth
             .login(val.email, val.password)
             .pipe(
-                takeUntil(this._unsubscribe$),
                 tap((user: IUser) => {
                     this._log.info(user);
                     this._store$.dispatch(new Login({ user }));
@@ -74,8 +72,5 @@ export class LoginComponent implements OnInit, OnDestroy {
             .subscribe(() => noop, () => alert('Login failed'));
     }
 
-    ngOnDestroy() {
-        this._unsubscribe$.next();
-        this._unsubscribe$.complete();
-    }
+    ngOnDestroy() {}
 }

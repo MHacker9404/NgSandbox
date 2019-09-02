@@ -11,7 +11,6 @@ import { selectLessonPage } from '../state/selectors';
 
 @Injectable()
 export class LessonsDataSource implements DataSource<ILesson> {
-    private _unsubscribe$ = new Subject<void>();
     private lessonsSubject = new BehaviorSubject<ILesson[]>([]);
 
     constructor(private _state$: Store<AppState>, private _log: NGXLogger) {}
@@ -19,7 +18,6 @@ export class LessonsDataSource implements DataSource<ILesson> {
     loadLessons(courseId: number, pageQuery: PageQuery) {
         this._state$
             .pipe(
-                takeUntil(this._unsubscribe$),
                 select(selectLessonPage(courseId, pageQuery)),
                 tap((lessons: ILesson[]) => {
                     if (lessons && lessons.length > 0) {
@@ -39,10 +37,5 @@ export class LessonsDataSource implements DataSource<ILesson> {
         return this.lessonsSubject.asObservable();
     }
 
-    disconnect(collectionViewer: CollectionViewer): void {
-        this._unsubscribe$.next();
-        this._unsubscribe$.complete();
-
-        this.lessonsSubject.complete();
-    }
+    disconnect(collectionViewer: CollectionViewer): void {}
 }
