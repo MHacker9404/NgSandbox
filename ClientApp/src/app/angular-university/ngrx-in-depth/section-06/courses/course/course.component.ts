@@ -8,6 +8,9 @@ import { LessonsDataSource } from '../services/lessons.datasource';
 import { NGXLogger } from 'ngx-logger';
 import { tag } from 'rxjs-spy/operators/tag';
 import { ICourse } from '../../model/course';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state';
+import { PageQuery } from '../state/actions';
 
 @Component({
     selector: 'course',
@@ -53,45 +56,34 @@ import { ICourse } from '../../model/course';
     styleUrls: ['./course.component.scss'],
 })
 export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
-    private _unsubscribe$: Subject<void> = new Subject<void>();
     course: ICourse;
-
     displayedColumns = ['seqNo', 'description', 'duration'];
 
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
     constructor(
+        public dataSource: LessonsDataSource,
         private route: ActivatedRoute,
-        private coursesService: CoursesService,
-        private _log: NGXLogger,
-        public _dataSource: LessonsDataSource
+        private _state$: Store<AppState>,
+        private _log: NGXLogger
     ) {}
 
     ngOnInit() {
         this.course = this.route.snapshot.data['course'];
 
-        // this.dataSource = new LessonsDataSource(this.coursesService);
+        const initialPage: PageQuery = {
+            pageIndex: 0,
+            pageSize: 3,
+        };
 
-        this._dataSource.loadLessons(this.course.id, 0, 3);
+        this.dataSource.loadLessons(this.course.id, initialPage);
     }
 
-    ngAfterViewInit() {
-        this.paginator.page
-            .pipe(
-                takeUntil(this._unsubscribe$),
-                tap(() => this.loadLessonsPage(), tag('CourseComponent: paginator.page'))
-            )
-            .subscribe();
-    }
+    ngAfterViewInit() {}
 
-    loadLessonsPage() {
-        this._dataSource.loadLessons(this.course.id, this.paginator.pageIndex, this.paginator.pageSize);
-    }
+    loadLessonsPage() {}
 
     ngOnDestroy(): void {
         this._log.trace('LessonsPager: OnDestroy');
-
-        this._unsubscribe$.next();
-        this._unsubscribe$.complete();
     }
 }

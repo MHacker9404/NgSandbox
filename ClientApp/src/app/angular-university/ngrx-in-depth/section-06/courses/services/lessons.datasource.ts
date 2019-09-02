@@ -1,39 +1,31 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, Subject } from 'rxjs';
 import { ILesson } from '../../model/lesson';
 import { CoursesService } from './courses.service';
-import { catchError, finalize } from 'rxjs/operators';
+import { catchError, finalize, tap, takeUntil } from 'rxjs/operators';
 import { NGXLogger } from 'ngx-logger';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state';
+import { PageQuery } from '../state/actions';
 
 @Injectable()
 export class LessonsDataSource implements DataSource<ILesson> {
+    private _unsubscribe$ = new Subject<void>();
     private lessonsSubject = new BehaviorSubject<ILesson[]>([]);
 
-    private loadingSubject = new BehaviorSubject<boolean>(false);
+    constructor(private _state$: Store<AppState>, private _log: NGXLogger) {}
 
-    public loading$ = this.loadingSubject.asObservable();
-
-    constructor(private coursesService: CoursesService, private _log: NGXLogger) {}
-
-    loadLessons(courseId: number, pageIndex: number, pageSize: number) {
-        this.loadingSubject.next(true);
-
-        this.coursesService
-            .findLessons(courseId, pageIndex, pageSize)
-            .pipe(
-                catchError(() => of([])),
-                finalize(() => this.loadingSubject.next(false))
-            )
-            .subscribe(lessons => this.lessonsSubject.next(lessons));
-    }
+    loadLessons(courseId: number, pageQuery: PageQuery) {}
 
     connect(collectionViewer: CollectionViewer): Observable<ILesson[]> {
+        this._log.trace('Connecting data source');
+
         return this.lessonsSubject.asObservable();
     }
 
     disconnect(collectionViewer: CollectionViewer): void {
-        this.lessonsSubject.complete();
-        this.loadingSubject.complete();
+        this._unsubscribe$.next();
+        this._unsubscribe$.complete();
     }
 }
