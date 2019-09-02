@@ -1,13 +1,13 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of, Subject } from 'rxjs';
 import { ILesson } from '../../model/lesson';
-import { CoursesService } from './courses.service';
-import { catchError, finalize, tap, takeUntil } from 'rxjs/operators';
+import { tap, takeUntil, catchError } from 'rxjs/operators';
 import { NGXLogger } from 'ngx-logger';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state';
-import { PageQuery } from '../state/actions';
+import { PageQuery, RequestLessonsPage } from '../state/actions';
+import { selectLessonPage } from '../state/selectors';
 
 @Injectable()
 export class LessonsDataSource implements DataSource<ILesson> {
@@ -16,7 +16,22 @@ export class LessonsDataSource implements DataSource<ILesson> {
 
     constructor(private _state$: Store<AppState>, private _log: NGXLogger) {}
 
-    loadLessons(courseId: number, pageQuery: PageQuery) {}
+    loadLessons(courseId: number, pageQuery: PageQuery) {
+        this._state$
+            .pipe(
+                takeUntil(this._unsubscribe$),
+                select(selectLessonPage(courseId, pageQuery)),
+                tap((lessons: ILesson[]) => {
+                    if (lessons && lessons.length > 0) {
+                        this.lessonsSubject.next(lessons);
+                    } else {
+                        this._state$.dispatch(new RequestLessonsPage({ courseId, pageQuery }));
+                    }
+                }),
+                catchError(error => of([]))
+            )
+            .subscribe();
+    }
 
     connect(collectionViewer: CollectionViewer): Observable<ILesson[]> {
         this._log.trace('Connecting data source');
@@ -27,5 +42,7 @@ export class LessonsDataSource implements DataSource<ILesson> {
     disconnect(collectionViewer: CollectionViewer): void {
         this._unsubscribe$.next();
         this._unsubscribe$.complete();
+
+        this.lessonsSubject.complete();
     }
 }

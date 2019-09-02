@@ -20,12 +20,12 @@ import { PageQuery } from '../state/actions';
 
             <img class="course-thumbnail" [src]="course?.iconUrl" />
 
-            <div class="spinner-container" *ngIf="_dataSource.loading$ | async">
+            <div class="spinner-container" *ngIf="dataSource.loading$ | async">
                 <mat-spinner></mat-spinner>
             </div>
 
             <div class="mat-elevation-z8">
-                <mat-table class="lessons-table" [dataSource]="_dataSource">
+                <mat-table class="lessons-table" [dataSource]="dataSource">
                     <ng-container matColumnDef="seqNo">
                         <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
 

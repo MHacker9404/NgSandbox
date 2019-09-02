@@ -9,7 +9,15 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { ICourse } from '../../model/course';
 import { CoursesService } from '../services/courses.service';
-import { CoursesActionTypes, LoadCourse, RequestCourse, RequestAllCourses, LoadAllCourses } from './actions';
+import {
+    CoursesActionTypes,
+    LoadCourse,
+    RequestCourse,
+    RequestAllCourses,
+    LoadAllCourses,
+    RequestLessonsPage,
+    LoadLessonsPage,
+} from './actions';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state';
 import { withLatestFrom, filter } from 'rxjs/operators';
@@ -38,5 +46,13 @@ export class CoursesEffects {
         filter(([action, coursesLoaded]) => !coursesLoaded),
         mergeMap(() => this._service.findAllCourses()),
         map((courses: ICourse[]) => new LoadAllCourses({ courses }))
+    );
+
+    @Effect() loadLessonsPage$ = this._actions$.pipe(
+        ofType<RequestLessonsPage>(CoursesActionTypes.RequestLessonsPage),
+        mergeMap(({ payload }) => {
+            return this._service.findLessons(payload.courseId, payload.pageQuery.pageIndex, payload.pageQuery.pageSize);
+        }),
+        map(lessons => new LoadLessonsPage({ lessons }))
     );
 }

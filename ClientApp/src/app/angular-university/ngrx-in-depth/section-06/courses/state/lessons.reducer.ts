@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { ILesson } from '../../model/lesson';
-import { CourseActions } from './actions';
+import { CourseActions, CoursesActionTypes } from './actions';
 import * as fromParent from '../../state/reducer';
 
 export const lessonsFeatureKey = `${fromParent.section06FeatureKey}:lessons`;
@@ -26,6 +26,9 @@ const initialState: LessonsState = adapter.getInitialState({ allLessonsLoaded: f
 
 export function reducer(state: LessonsState = initialState, action: CourseActions): LessonsState {
     switch (action.type) {
+        case CoursesActionTypes.LoadLessonsPage:
+            return adapter.addMany(action.payload.lessons, state);
+
         default: {
             return state;
         }

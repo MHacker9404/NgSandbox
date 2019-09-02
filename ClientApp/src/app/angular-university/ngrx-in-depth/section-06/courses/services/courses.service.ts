@@ -37,25 +37,17 @@ export class CoursesService {
     findLessons(courseId: number, pageNumber = 0, pageSize = 3): Observable<ILesson[]> {
         this._log.debug(courseId, pageNumber, pageSize);
 
+        const filter = '';
+        const sort = 'asc';
+
         return this.http
-            .get<ILesson[]>(
-                `/api/ngrx/lessons/${courseId.toString()}/${pageNumber.toString()}/${pageSize.toString()}//asc`,
-                {
-                    // .get<Lesson[]>('/api/ngrx/lessons', {
-                    //     params: new HttpParams()
-                    //         .set('courseId', courseId.toString())
-                    //         .set('filter', '')
-                    //         .set('sortOrder', 'asc')
-                    //         .set('pageNumber', pageNumber.toString())
-                    //         .set('pageSize', pageSize.toString()),
-                }
-            )
+            .get<ILesson[]>(`/api/ngrx/lessons/${courseId}/${pageNumber}/${pageSize}/${filter}/${sort}`)
             .pipe(tag('findLessons'));
     }
 
     saveCourse(courseId: number, changes: Partial<ICourse>) {
         this._log.debug(courseId, changes);
 
-        return this.http.put('/api/ngrx/courses/' + courseId, changes).pipe(tag('saveCourse'));
+        return this.http.put(`/api/ngrx/courses/${courseId}`, changes).pipe(tag('saveCourse'));
     }
 }

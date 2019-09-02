@@ -45,7 +45,7 @@ export interface PageQuery {
 }
 export class RequestLessonsPage implements Action {
     readonly type = CoursesActionTypes.RequestLessonsPage;
-    constructor(public payload: { courseId: number; page: PageQuery }) {}
+    constructor(public payload: { courseId: number; pageQuery: PageQuery }) {}
 }
 
 export class LoadLessonsPage implements Action {
