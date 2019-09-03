@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppState } from 'src/app/state';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { ICourse } from '../../model/course';
@@ -43,6 +43,7 @@ import _filter from 'lodash/filter';
         </div>
     `,
     styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
     promoTotal$: Observable<number>;
@@ -59,18 +60,5 @@ export class HomeComponent implements OnInit {
         this.intermediateCourses$ = this._store$.pipe(select(selectIntermediateCourses));
         this.advancedCourses$ = this._store$.pipe(select(selectAdvancedCourses));
         this.promoTotal$ = this._store$.pipe(select(selectPromoCount));
-
-        /*
-        const courses$ = this._store$.pipe(select(selectAllCourses));
-        this.beginnerCourses$ = courses$.pipe(
-            map((courses: ICourse[]) => _filter(courses, course => course.category === 'BEGINNER'))
-        );
-        this.advancedCourses$ = courses$.pipe(
-            map((courses: ICourse[]) => _filter(courses, course => course.category === 'ADVANCED'))
-        );
-        this.promoTotal$ = courses$.pipe(
-            map((courses: ICourse[]) => _filter(courses, course => course.promo === true).length)
-        );
-        */
     }
 }
