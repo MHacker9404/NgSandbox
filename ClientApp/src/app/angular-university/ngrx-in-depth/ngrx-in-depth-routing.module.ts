@@ -26,7 +26,10 @@ const routes: Routes = [
             {
                 path: 'section-05',
                 loadChildren: () => import('./section-05/section-05.component').then(mod => mod.Section05Module),
-                // loadChildren: './section-05/section-05.component#Section05Module',
+            },
+            {
+                path: 'section-06',
+                loadChildren: () => import('./section-06/section-06.component').then(mod => mod.Section06Module),
             },
         ],
     },

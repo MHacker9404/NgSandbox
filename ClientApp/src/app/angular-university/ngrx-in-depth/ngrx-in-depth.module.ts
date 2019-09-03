@@ -41,6 +41,12 @@ const examples: ExampleDef[] = [
         path: 'section-05',
         component: null,
     },
+    {
+        label: '06 - Entities Pagination',
+        name: 'NgRxPagination',
+        path: 'section-06',
+        component: null,
+    },
 ];
 
 @NgModule({
