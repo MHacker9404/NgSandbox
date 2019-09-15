@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    OnInit,
+    ViewChild,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { CoursesService } from '../services/courses.service';
@@ -55,6 +63,7 @@ import { selectLessonsState, selectLessonsLoading } from '../state/selectors';
         </div>
     `,
     styleUrls: ['./course.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseComponent implements OnInit, AfterViewInit, OnDestroy {
     course: ICourse;
