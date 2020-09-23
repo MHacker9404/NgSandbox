@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Section 02</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"></script>
+    </head>
+    <body data-ng-init='data={name:"james", isVisible:true, loggedIn:false, status:"red"}' data-ng-cloak>
+        <div data-ng-switch on="data.loggedIn">
+            <div data-ng-switch when="true">Welcome: {{data.name}}</div>
+            <div data-ng-switch default>Login:</div>
+        </div>
+        <br />
+        <div data-ng-hide="!data.isVisible">
+            Name: <input type="text" data-ng-model="data.name" /> {{ data.name }}
+            <strong><span data-ng-bind="data.name" data-ng-class="data.status"></span></strong>
+        </div>
+        <br />
+        Login: <input type="checkbox" data-ng-model="data.loggedIn" />
+        <br />
+        Hide: <input type="checkbox" data-ng-model="data.isVisible" />
+        <br />
+        <button data-ng-click='data.name = "michelle"'>Change Name</button>
+        <div data-ng-init='names=["Dave", "Jeff", "Heedy", "Danny"]'>
+            <h3>Iterating thru data with ng-repeat</h3>
+            <ul>
+                <li data-ng-repeat="name in names">{{name}}</li>
+            </ul>
+        </div>
+    </body>
+</html>
