@@ -37,7 +37,7 @@
         "flatted": "^2.0.1",
         "font-awesome": "^4.7.0",
         "joi-browser": "^13.4.0",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "local-storage": "^2.0.0",
         "lodash": "^4.17.19",
         "ngx-bootstrap": "^5.1.1",
