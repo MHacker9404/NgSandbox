@@ -39,7 +39,7 @@
         "joi-browser": "^13.4.0",
         "jquery": "^3.4.1",
         "local-storage": "^2.0.0",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "ngx-bootstrap": "^5.1.1",
         "ngx-logger": "^4.0.4",
         "popper.js": "^1.15.0",
