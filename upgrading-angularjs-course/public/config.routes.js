@@ -13,7 +13,7 @@
         function ($routeProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: './templates/home.html',
+                    templateUrl: './home/home.html',
                     controller: 'homeController',
                 })
                 .when('/customers', {
