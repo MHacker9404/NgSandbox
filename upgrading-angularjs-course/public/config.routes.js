@@ -28,8 +28,7 @@
                     controller: 'productsController',
                 })
                 .when('/customers/:id', {
-                    templateUrl: './customerDetail/customerDetail.html',
-                    controller: 'customerDetailController',
+                    template: '<customer-detail customer="$resolve.customer"></customer-detail>',
                     resolve: {
                         customer: [
                             '$route',
