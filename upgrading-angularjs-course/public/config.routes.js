@@ -29,7 +29,7 @@
                     controller: 'productsController',
                 })
                 .when('/customers/:id', {
-                    templateUrl: './templates/customerDetail.html',
+                    templateUrl: './customerDetail/customerDetail.html',
                     controller: 'customerDetailController',
                     resolve: {
                         customer: [
@@ -43,7 +43,7 @@
                     },
                 })
                 .when('/orders/:id', {
-                    templateUrl: './templates/orderDetail.html',
+                    templateUrl: './orderDetail/orderDetail.html',
                     controller: 'orderDetailController',
                     resolve: {
                         order: [
@@ -57,7 +57,7 @@
                     },
                 })
                 .when('/products/:id', {
-                    templateUrl: './templates/productDetail.html',
+                    templateUrl: './productDetail/productDetail.html',
                     controller: 'productDetailController',
                     resolve: {
                         product: [

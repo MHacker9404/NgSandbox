@@ -1,11 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('app').directive('navigation', function () {
+    function directive() {
         return {
             restrict: 'E',
-            templateUrl: '../templates/navigation.html',
+            templateUrl: '../navigation/navigation.html',
             link: function (scope, element, attrs, ctrl) {},
         };
-    });
+    }
+
+    angular.module('app').directive('navigation', directive);
 })();
