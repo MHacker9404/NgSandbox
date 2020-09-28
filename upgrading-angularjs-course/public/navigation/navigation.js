@@ -1,13 +1,19 @@
 (function () {
     'use strict';
 
-    function directive() {
-        return {
-            restrict: 'E',
-            templateUrl: '../navigation/navigation.html',
-            link: function (scope, element, attrs, ctrl) {},
+    function controller() {
+        const vm = this;
+
+        vm.$onInit = function () {
+            vm.companyName = 'Awesome, Inc';
         };
     }
 
-    angular.module('app').directive('navigation', directive);
+    const component = {
+        templateUrl: './navigation/navigation.html',
+        bindings: {},
+        controller: controller,
+    };
+
+    angular.module('app').component('navigation', component);
 })();
