@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    productService.$inject = ['$http'];
+    service.$inject = ['$http'];
 
-    function productService($http) {
+    function service($http) {
         function getProducts() {
             return products();
         }
@@ -27,7 +27,7 @@
         };
     }
 
-    angular.module('app').service('productService', productService);
+    angular.module('app').service('productService', service);
 })();
 
 //Sample data

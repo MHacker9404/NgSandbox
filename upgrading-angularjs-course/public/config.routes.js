@@ -21,11 +21,11 @@
                     controller: 'customersController',
                 })
                 .when('/orders', {
-                    templateUrl: './templates/orders.html',
+                    templateUrl: './orders/orders.html',
                     controller: 'ordersController',
                 })
                 .when('/products', {
-                    templateUrl: './templates/products.html',
+                    templateUrl: './products/products.html',
                     controller: 'productsController',
                 })
                 .when('/customers/:id', {
