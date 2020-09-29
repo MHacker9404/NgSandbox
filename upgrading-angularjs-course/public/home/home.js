@@ -1,16 +1,18 @@
-(function(){
-    'use strict';
+// (function(){
+'use strict';
 
-    var homeComponent = {
-        templateUrl: './home/home.html',
-        bindings: {},
-        controller: homeComponentController
-    };
+function controller() {
+    const vm = this;
+    vm.title = 'Awesome, Inc. Internal Ordering System';
+}
 
-    function homeComponentController(){
-        var vm = this;
-        vm.title = 'Awesome, Inc. Internal Ordering System';
-    }
+const component = {
+    templateUrl: './home/home.html',
+    bindings: {},
+    controller: controller,
+};
 
-    angular.module('app').component('home', homeComponent);
-})();
+// angular.module('app').component('home', component);
+// })();
+
+export { component as HomeComponent };

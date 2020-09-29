@@ -1,35 +1,36 @@
 <html data-ng-app="app">
-  <head>
-    <title>Amazing, Inc. Order System</title>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles/app.css">
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/lodash/lodash.min.js"></script>
-    <script src="./node_modules/moment/min/moment.min.js"></script>
-    <script src="./node_modules/angular/angular.min.js"></script>
-    <script src="./node_modules/angular-route/angular-route.min.js"></script>
-  </head>
-  <body>
-      <navigation></navigation>
-      <div class="container" ng-view></div>
+    <head>
+        <title>Amazing, Inc. Order System</title>
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./styles/app.css" />
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./node_modules/lodash/lodash.min.js"></script>
+        <script src="./node_modules/moment/min/moment.min.js"></script>
+        <script src="./node_modules/angular/angular.min.js"></script>
+        <script src="./node_modules/angular-route/angular-route.min.js"></script>
+    </head>
+    <body>
+        <navigation></navigation>
+        <div class="container" ng-view></div>
 
-    <script src="app.js"></script>
-    <script src="config.routes.js"></script>
-    <script src="./navigation/navigation.js"></script>
-    <script src="./directives/validateDate.js"></script>
-    <script src="./home/home.js"></script>
-    <script src="./customers/customers.js"></script>
-    <script src="./customers/customers-table.js"></script>
-    <script src="./customerDetail/customerDetail.js"></script>
-    <script src="./customerDetail/discount.js"></script>
-    <script src="./orders/orders.js"></script>
-    <script src="./orderDetail/orderDetail.js"></script>
-    <script src="./products/products.js"></script>
-    <script src="./productDetail/productDetail.js"></script>
-    <script src="./shared/addressFactory.js"></script>
-    <script src="./customers/customerService.js"></script>
-    <script src="./products/productService.js"></script>
-    <script src="./shared/authenticationService.js"></script>
-    <script src="./orders/orderService.js"></script>
-  </body>
+        <!-- <script src="app.js"></script> -->
+        <script src="./dist/main.bundle.js"></script>
+        <script src="config.routes.js"></script>
+        <script src="./navigation/navigation.js"></script>
+        <script src="./directives/validateDate.js"></script>
+        <!-- <script src="./home/home.js"></script> -->
+        <script src="./customers/customers.js"></script>
+        <script src="./customers/customers-table.js"></script>
+        <script src="./customerDetail/customerDetail.js"></script>
+        <script src="./customerDetail/discount.js"></script>
+        <script src="./orders/orders.js"></script>
+        <script src="./orderDetail/orderDetail.js"></script>
+        <script src="./products/products.js"></script>
+        <script src="./productDetail/productDetail.js"></script>
+        <script src="./shared/addressFactory.js"></script>
+        <script src="./customers/customerService.js"></script>
+        <script src="./products/productService.js"></script>
+        <script src="./shared/authenticationService.js"></script>
+        <script src="./orders/orderService.js"></script>
+    </body>
 </html>
