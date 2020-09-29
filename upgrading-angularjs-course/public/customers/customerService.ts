@@ -1,16 +1,14 @@
-function service($http: any) {
-    const vm = this;
+class CustomerService {
+    constructor(private $http: any) {}
 
-    vm.getCustomers = () => customers;
+    getCustomers = () => customers;
 
-    vm.getCustomer = (id: number) => customers.filter((c) => c.id === id)[0];
+    getCustomer = (id: number) => customers.filter((c) => c.id === id)[0];
 
-    vm.postCustomer = (customer: any) => $http.post('/api/customers', customer).then((data: any) => data);
-
-    return vm;
+    postCustomer = (customer: any) => this.$http.post('/api/customers', customer).then((data: any) => data);
 }
 
-service.$inject = ['$http'];
+CustomerService.$inject = ['$http'];
 
 const customers = [
     {
@@ -56,4 +54,4 @@ const customers = [
     },
 ];
 
-export { service as CustomersService };
+export { CustomerService };
