@@ -2,6 +2,13 @@
     'use strict';
 
     angular.module('app').config([
+        '$locationProvider',
+        function ($locationProvider) {
+            $locationProvider.hashPrefix('');
+        },
+    ]);
+
+    angular.module('app').config([
         '$routeProvider',
         function ($routeProvider) {
             $routeProvider
