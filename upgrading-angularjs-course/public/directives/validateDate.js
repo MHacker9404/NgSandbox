@@ -1,9 +1,7 @@
 //We don't need or use this validateDate directive,
 //it's just here to illustrate attribute directives.
-(function () {
-    'use strict';
-
-    angular.module('app').directive('validateDate', function () {
+angular.module('app')
+    .directive('validateDate', function () {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -17,14 +15,17 @@
                 function fromUser(text) {
                     text = text || '';
 
-                    text = text.replace(/(\/00\d{2})$/, function (year) {
-                        var twoDigit = year.substr(3, 4);
-                        if (twoDigit.match(new RegExp('^[012]{1}', ''))) {
-                            return '/20' + twoDigit;
-                        } else {
-                            return '/19' + twoDigit;
+                    text = text.replace(
+                        /(\/00\d{2})$/,
+                        function (year) {
+                            var twoDigit = year.substr(3, 4);
+                            if (twoDigit.match(new RegExp('^[012]{1}', ''))) {
+                                return ("/20" + twoDigit);
+                            } else {
+                                return ("/19" + twoDigit);
+                            }
                         }
-                    });
+                    );
 
                     changeViewValue(text);
 
@@ -41,7 +42,6 @@
                 element.bind('blur', function () {
                     ngModel.$commitViewValue();
                 });
-            },
+            }
         };
-    });
-})();
+});

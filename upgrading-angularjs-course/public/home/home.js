@@ -1,10 +1,16 @@
-(function () {
+(function(){
     'use strict';
 
-    controller.$inject = ['$scope'];
-    function controller($scope) {
-        $scope.title = 'Awesome, Inc. Internal Ordering System';
+    var homeComponent = {
+        templateUrl: './home/home.html',
+        bindings: {},
+        controller: homeComponentController
+    };
+
+    function homeComponentController(){
+        var vm = this;
+        vm.title = 'Awesome, Inc. Internal Ordering System';
     }
 
-    angular.module('app').controller('homeController', controller);
+    angular.module('app').component('home', homeComponent);
 })();

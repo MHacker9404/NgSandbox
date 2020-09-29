@@ -1,17 +1,21 @@
-(function () {
+(function(){
     'use strict';
 
-    controller.$inject = ['$scope', 'productService'];
+    var productsComponent = {
+        templateUrl: './products/products.html',
+        bindings: {},
+        controller: productsComponentController
+    };
 
-    function controller($scope, productService) {
-        $scope.title = 'Products';
+    productsComponentController.$inject = ['productService', ];
+    function productsComponentController(productService){
+        var vm = this;
+        vm.title = 'Products';
 
-        activate();
-
-        function activate() {
-            $scope.products = productService.getProducts();
-        }
+        vm.$onInit = function(){
+            vm.products = productService.getProducts();
+        };
     }
 
-    angular.module('app').controller('productsController', controller);
+    angular.module('app').component('products', productsComponent);
 })();

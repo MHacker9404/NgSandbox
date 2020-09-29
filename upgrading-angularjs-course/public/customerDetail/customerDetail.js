@@ -1,33 +1,32 @@
-(function () {
+(function(){
     'use strict';
 
-    controller.$inject = ['addressFactory', 'orderService'];
-    function controller(addressFactory, orderService) {
-        const vm = this;
+    var customerDetailComponent = {
+        templateUrl: './customerDetail/customerDetail.html',
+        bindings: {
+            customer: '<'
+        },
+        controller: customerDetailComponentController
+    };
 
+    customerDetailComponentController.$inject = ['addressFactory', 'orderService'];
+    function customerDetailComponentController (addressFactory, orderService) {
+        var vm = this;
         vm.title = 'Customer Detail';
         vm.customer = this.customer;
-
-        vm.$onInit = function () {
+        
+        vm.$onInit = function() {
             vm.address = addressFactory.getFullAddress(vm.customer);
             vm.orders = orderService.getOrdersByCustomer(vm.customer.id);
             vm.orders.forEach(function (order) {
-                order.orderDate = moment(order.orderDate).format('MM/DD/YYYY');
+                order.orderDate = moment(order.orderDate).format("MM/DD/YYYY");
             });
-        };
+        }
 
-        vm.updateDiscount = function (discount) {
+        vm.updateDiscount = function(discount){
             vm.customer.discount = discount;
         };
     }
 
-    const component = {
-        templateUrl: './customerDetail/customerDetail.html',
-        bindings: {
-            customer: '<',
-        },
-        controller: controller,
-    };
-
-    angular.module('app').component('customerDetail', component);
+    angular.module('app').component('customerDetail', customerDetailComponent);
 })();

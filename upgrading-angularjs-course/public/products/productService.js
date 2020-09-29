@@ -1,9 +1,9 @@
 (function () {
     'use strict';
+    
+    productService.$inject = ['$http'];
 
-    service.$inject = ['$http'];
-
-    function service($http) {
+    function productService($http) {
         function getProducts() {
             return products();
         }
@@ -15,19 +15,21 @@
         }
 
         function postProduct(product) {
-            return $http.post('/api/products', product).then(function (data) {
-                return data;
-            });
+            return $http.post('/api/products', product)
+                .then(function (data) {
+                    return data;
+                });
         }
 
         return {
             getProducts: getProducts,
             getProduct: getProduct,
-            postProduct: postProduct,
-        };
-    }
+            postProduct: postProduct
+        }
+    };
 
-    angular.module('app').service('productService', service);
+    angular.module('app')
+        .service('productService', productService);
 })();
 
 //Sample data
@@ -37,25 +39,25 @@ function products() {
             id: 1,
             name: 'Amazing Widget',
             color: 'Red',
-            price: 2.5,
+            price: 2.5
         },
         {
             id: 2,
             name: 'Incredible Widget',
             color: 'Blue',
-            price: 2.5,
+            price: 2.5
         },
         {
             id: 3,
             name: 'Fantastic Widget',
             color: 'Yellow',
-            price: 2.5,
+            price: 2.5
         },
         {
             id: 4,
             name: 'Collectible Widget Tote Bag',
             color: 'Sand',
-            price: 10,
-        },
+            price: 10
+        }
     ];
 }

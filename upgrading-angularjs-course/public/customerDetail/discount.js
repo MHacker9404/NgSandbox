@@ -1,51 +1,48 @@
 (function () {
     'use strict';
 
-    function controller(addressFactory, orderService) {
-        const vm = this;
-        // vm.customerDiscount = this.customerDiscount;
-        // vm.update = this.update;
+    var discountComponent = {
+        templateUrl: './customerDetail/discount.html',
+        bindings: {
+            customerDiscount: '<',
+            update: '&'
+        },
+        controller: discountComponentController
+    };
 
-        vm.$onInit = function () {
-            vm.editDiscount = false;
-        };
+    function discountComponentController() {
+        var vm = this;
+
+        vm.editDiscount = false;
 
         vm.editDiscountType = function () {
             vm.editDiscount = true;
-        };
+        }
 
         vm.updateDiscountType = function () {
-            vm.update({ discount: vm.selectedDiscount });
+            vm.update({discount: vm.selectedDiscount});
             vm.editDiscount = false;
-        };
+        }
 
         vm.discounts = [
             {
                 discountId: 1,
                 discountPercent: 10,
-                discountName: 'Employee',
+                discountName: "Employee"
             },
             {
                 discountId: 2,
                 discountPercent: 5,
-                discountName: 'Friends & Family',
+                discountName: "Friends & Family"
             },
             {
                 discountId: 3,
                 discountPercent: 20,
-                discountName: 'Famous Drummer',
-            },
+                discountName: "Famous Drummer"
+            }
         ];
     }
 
-    const component = {
-        templateUrl: './customerDetail/discount.html',
-        bindings: {
-            customerDiscount: '<',
-            update: '&',
-        },
-        controller: controller,
-    };
-
-    angular.module('app').component('discount', component);
+    angular.module('app')
+        .component('discount', discountComponent);
 })();

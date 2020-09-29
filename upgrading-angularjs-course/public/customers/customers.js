@@ -3,7 +3,7 @@
 
     controller.$inject = ['customerService'];
     function controller(customerService) {
-        const vm = this;
+        var vm = this;
         vm.title = 'Customers';
 
         vm.$onInit = function () {

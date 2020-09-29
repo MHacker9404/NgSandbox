@@ -1,16 +1,15 @@
 (function () {
     'use strict';
 
+    controller.$inject = [];
     function controller() {
-        const vm = this;
+        var vm = this;
 
-        vm.$onInit = function () {
-            vm.companyName = 'Awesome, Inc';
-        };
+        vm.companyName = 'Awesome, Inc.';
     }
 
     const component = {
-        templateUrl: './navigation/navigation.html',
+        templateUrl: '../navigation/navigation.html',
         bindings: {},
         controller: controller,
     };

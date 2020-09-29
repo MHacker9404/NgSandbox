@@ -1,19 +1,17 @@
-(function () {
+(function(){
     'use strict';
 
-    function controller() {
-        const vm = this;
-
-        vm.$onInit = function () {};
-    }
-
-    const component = {
+    var customersTableComponent = {
         templateUrl: './customers/customers-table.html',
         bindings: {
-            customers: '<',
+            customers: '<'
         },
-        controller: controller,
+        controller: customersTableComponentController
     };
 
-    angular.module('app').component('customersTable', component);
+    function customersTableComponentController(){
+        var vm = this;
+    }
+
+    angular.module('app').component('customersTable', customersTableComponent);
 })();

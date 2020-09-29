@@ -3,6 +3,11 @@
     "version": "1.0.0",
     "main": "app.js",
     "license": "MIT",
+    "scripts": {
+        "build": "webpack --config=config/webpack.dev.js",
+        "dev": "node src/server/main.js",
+        "start": "webpack-dev-server --config=config/webpack.dev.js"
+    },
     "dependencies": {
         "angular": "^1.8.0",
         "angular-route": "^1.8.0",
@@ -10,5 +15,10 @@
         "jquery": "^2.0",
         "lodash": "^4.0.0",
         "moment": "^2.0.0"
+    },
+    "devDependencies": {
+        "webpack": "^4.44.2",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
     }
 }

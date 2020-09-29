@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    'use strict'
 
     orderService.$inject = ['$http'];
 
@@ -21,20 +21,22 @@
         }
 
         function postOrder(order) {
-            return $http.post('/api/orders', order).then(function (data) {
-                return data;
-            });
+            return $http.post('/api/orders', order)
+                .then(function (data) {
+                    return data;
+                });
         }
 
         return {
             getOrders: getOrders,
             getOrder: getOrder,
             getOrdersByCustomer: getOrdersByCustomer,
-            postOrder: postOrder,
-        };
-    }
+            postOrder: postOrder
+        }
+    };
 
-    angular.module('app').service('orderService', orderService);
+    angular.module('app')
+        .service('orderService', orderService);
 })();
 
 //Sample data
@@ -44,19 +46,19 @@ function orders() {
             id: 1,
             orderDate: '2017-06-25T00:30:43.16-07:00',
             customerId: 2,
-            totalCost: 15.0,
-            totalSale: 15.0,
+            totalCost: 15.00,
+            totalSale: 15.00,
             totalItems: 3,
             items: [
                 {
                     quantity: 2,
-                    productId: 1,
+                    productId: 1
                 },
                 {
                     quantity: 1,
-                    productId: 4,
-                },
-            ],
+                    productId: 4
+                }
+            ]
         },
         {
             id: 2,
@@ -68,13 +70,13 @@ function orders() {
             items: [
                 {
                     quantity: 2,
-                    productId: 2,
+                    productId: 2
                 },
                 {
                     quantity: 2,
-                    productId: 3,
-                },
-            ],
+                    productId: 3
+                }
+            ]
         },
         {
             id: 3,
@@ -86,9 +88,9 @@ function orders() {
             items: [
                 {
                     quantity: 2,
-                    productId: 1,
-                },
-            ],
+                    productId: 1
+                }
+            ]
         },
         {
             id: 4,
@@ -100,9 +102,9 @@ function orders() {
             items: [
                 {
                     quantity: 10,
-                    productId: 2,
-                },
-            ],
-        },
+                    productId: 2
+                }
+            ]
+        }
     ];
 }

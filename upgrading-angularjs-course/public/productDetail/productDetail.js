@@ -1,12 +1,19 @@
-(function () {
+(function(){
     'use strict';
 
-    controller.$inject = ['$scope', 'product'];
+    var productDetailComponent = {
+        templateUrl: './productDetail/productDetail.html',
+        bindings: {
+            product: '<'
+        },
+        controller: productDetailComponentController
+    };
 
-    function controller($scope, product) {
-        $scope.title = 'Product Detail';
-        $scope.product = product;
+    function productDetailComponentController(){
+        var vm = this;
+        vm.title = 'Product Detail';
+        vm.product = this.product;
     }
 
-    angular.module('app').controller('productDetailController', controller);
+    angular.module('app').component('productDetail', productDetailComponent);
 })();

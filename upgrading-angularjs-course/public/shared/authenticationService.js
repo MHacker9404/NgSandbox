@@ -3,16 +3,16 @@
 (function () {
     'use strict';
 
-    service.$inject = [];
-    function service() {
-        const vm = this;
-
-        vm.authenticate = function () {
+    function authenticationService() {
+        function authenticate() {
             return true;
-        };
+        }
 
-        return vm;
-    }
+        return {
+            authenticate: authenticate
+        }
+    };
 
-    angular.module('app').service('authenticationService', service);
+    angular.module('app')
+        .service('authenticationService', authenticationService);
 })();
