@@ -1,21 +1,15 @@
 // (function () {
 // 'use strict';
 
-interface This {
-    templateUrl: string;
-    bindings: {};
-    controller: () => void;
-    $onInit: () => void;
-    title: string;
-    customers: any[];
-}
-
-function controller(this: This, customerService: any) {
+function controller(customerService: any) {
     const vm = this;
     vm.title = 'Customers';
 
-    vm.$onInit = () => (vm.customers = customerService.getCustomers());
+    vm.$onInit = () => {
+        customerService.getCustomers().then((data) => (vm.customers = data));
+    };
 }
+
 controller.$inject = ['customerService'];
 
 const component = {

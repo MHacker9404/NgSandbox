@@ -1,21 +1,23 @@
 import _find from 'lodash/find';
 
-function controller(orderService: any, customerService: any) {
+function controller(orderService: any, customerService: any, $q: any) {
     var vm = this;
     vm.title = 'Orders';
 
     vm.$onInit = () => {
-        vm.customers = customerService.getCustomers();
-        vm.orders = orderService.getOrders();
-        vm.orders.forEach(function (order) {
-            const customer = _find(vm.customers, (customer: any) => order.customerId === customer.id);
-
-            order.customerName = customer.fullName;
+        let promises = [orderService.getOrders(), customerService.getCustomers()];
+        return $q.all(promises).then((data: any) => {
+            vm.orders = data[0];
+            vm.customers = data[1];
+            vm.orders.forEach((order: any) => {
+                const customer = _find(vm.customers, (customer) => order.customerId === customer.id);
+                order.customerName = customer.fullName;
+            });
         });
     };
 }
 
-controller.$inject = ['orderService', 'customerService'];
+controller.$inject = ['orderService', 'customerService', '$q'];
 
 const component = {
     templateUrl: './orders/orders.html',

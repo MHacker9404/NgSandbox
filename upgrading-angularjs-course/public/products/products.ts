@@ -2,7 +2,7 @@ function controller(productService) {
     var vm = this;
     vm.title = 'Products';
 
-    vm.$onInit = () => (vm.products = productService.getProducts());
+    vm.$onInit = () => productService.getProducts().then((data) => (vm.products = data));
 }
 
 controller.$inject = ['productService'];
