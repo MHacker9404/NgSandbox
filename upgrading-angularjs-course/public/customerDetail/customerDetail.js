@@ -7,7 +7,6 @@
 
         vm.title = 'Customer Detail';
         vm.customer = this.customer;
-        vm.discountTemplate = '../customerDetail/discount.html';
 
         vm.$onInit = function () {
             vm.address = addressFactory.getFullAddress(vm.customer);

@@ -13,7 +13,8 @@
     </div>
     <div class="col-md-4 end">{{$ctrl.customer.getsDiscount ? 'Yes' : 'No'}}</div>
 </div>
-<div data-ng-if="$ctrl.customer.getsDiscount" data-ng-include="discountTemplate"></div>
+<!-- <div data-ng-if="$ctrl.customer.getsDiscount" data-ng-include="discountTemplate"></div> -->
+<discount data-ng-if="$ctrl.customer.getsDiscount" customer="$ctrl.customer"></discount>
 <div class="row" data-ng-if="$ctrl.orders.length > 0">
     <div class="col-md-12">
         <h3>Orders</h3>
