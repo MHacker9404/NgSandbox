@@ -13,12 +13,13 @@
         "angular-route": "^1.8.0",
         "bootstrap": "^3.0.0",
         "jquery": "^2.0",
-        "lodash": "^4.0.0",
+        "lodash": "^4.17.20",
         "moment": "^2.0.0"
     },
     "devDependencies": {
         "@peterek/extract-loader": "^6.0.0",
         "@types/angular": "^1.7.3",
+        "@types/lodash": "^4.14.161",
         "@types/node": "^14.11.2",
         "css-loader": "^4.3.0",
         "file-loader": "^6.1.0",
