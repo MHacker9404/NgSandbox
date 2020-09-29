@@ -1,6 +1,11 @@
 import * as angular from 'angular';
 import 'angular-route';
 
+import 'jquery';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/app.css';
+
 import hashPrefixConfig from './config.hash-prefx';
 import routeProviderConfig from './config.routes';
 
