@@ -1,13 +1,16 @@
 (function () {
     'use strict';
 
-    angular.module('app').factory('addressFactory', function () {
-        var service = {};
+    factory.$inject = [];
+    function factory() {
+        const vm = this;
 
-        service.getFullAddress = function (customer) {
+        vm.getFullAddress = function (customer) {
             return customer.address1 + ', ' + customer.city + ', ' + customer.state + ' ' + customer.zip;
         };
 
-        return service;
-    });
+        return vm;
+    }
+
+    angular.module('app').factory('addressFactory', factory);
 })();
