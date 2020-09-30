@@ -4,7 +4,7 @@ import 'angular-route';
 import 'jquery';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/app.css';
+import './styles/app.scss';
 
 import hashPrefixConfig from './config.hash-prefx';
 import routeProviderConfig from './config.routes';

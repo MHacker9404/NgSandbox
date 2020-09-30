@@ -51,9 +51,17 @@ out-tsc/
 /connect.lock
 /coverage
 /libpeerconnection.log
+testem.log
+
+# https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 npm-debug.log
 yarn-error.log
-testem.log
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
