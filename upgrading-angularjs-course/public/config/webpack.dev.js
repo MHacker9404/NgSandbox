@@ -37,7 +37,7 @@ module.exports = {
         ],
     },
     devServer: {
-        contentBase: './',
+        contentBase: './src',
         port: 9000,
         proxy: {
             '/api': {

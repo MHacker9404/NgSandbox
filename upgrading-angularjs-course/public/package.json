@@ -6,7 +6,8 @@
     "scripts": {
         "build": "rimraf ../dist && webpack --config=config/webpack.config.js --env.env=dev",
         "build:prod": "rimraf ../dist && webpack --config=config/webpack.config.js --env.env=prod",
-        "start": "webpack-dev-server --config=config/webpack.config.js --env.env=dev --watch"
+        "start": "webpack-dev-server --config=config/webpack.config.js --env.env=dev --watch",
+        "test": "karma start"
     },
     "dependencies": {
         "angular": "^1.8.0",
@@ -14,20 +15,31 @@
         "bootstrap": "^3.0.0",
         "jquery": "^2.0",
         "lodash": "^4.17.20",
-        "moment": "^2.0.0"
+        "moment": "^2.29.0",
+        "popper.js": "^1.16.1"
     },
     "devDependencies": {
         "@peterek/extract-loader": "^6.0.0",
         "@types/angular": "^1.7.3",
+        "@types/jasmine": "^3.5.14",
+        "@types/karma": "^5.0.0",
         "@types/lodash": "^4.14.161",
         "@types/node": "^14.11.2",
         "@types/webpack": "^4.41.22",
+        "angular-mocks": "^1.8.0",
         "autoprefixer": "^10.0.1",
         "css-loader": "^4.3.0",
         "file-loader": "^6.1.0",
         "html-loader": "^1.3.1",
         "html-webpack-plugin": "^4.5.0",
+        "jasmine-core": "^3.6.0",
+        "karma": "^5.2.3",
+        "karma-jasmine": "^4.0.1",
+        "karma-phantomjs-launcher": "^1.0.4",
+        "karma-spec-reporter": "^0.0.32",
+        "karma-webpack": "^4.0.2",
         "mini-css-extract-plugin": "^0.11.2",
+        "phantomjs-prebuilt": "^2.1.16",
         "postcss": "^8.1.1",
         "postcss-loader": "^4.0.2",
         "raw-loader": "^4.0.1",

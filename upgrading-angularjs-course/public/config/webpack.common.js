@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     // entry: './app.ts',
     entry: {
-        app: './app.ts',
+        app: './src/app.ts',
     },
     optimization: {
         splitChunks: {
@@ -88,7 +88,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './index.html',
+            template: './src/index.html',
         }),
     ],
 };
