@@ -7,19 +7,22 @@ var express = require('express'),
     path = require('path');
 
 var rootPath = path.normalize(__dirname + '/../');
+console.info(rootPath);
 
-module.exports = function(app) {
-  app.use(logger('dev'));
-  app.use(cookieParser());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(session({
-    secret: 'single focus wolves', 
-    resave:false,
-    saveUninitialized: true
-  }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  app.use(express.static(rootPath + '/dist'));
-}
+module.exports = function (app) {
+    app.use(logger('dev'));
+    app.use(cookieParser());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(
+        session({
+            secret: 'single focus wolves',
+            resave: false,
+            saveUninitialized: true,
+        })
+    );
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use(express.static(rootPath + '/dist'));
+};
