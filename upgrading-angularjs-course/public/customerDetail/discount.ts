@@ -31,8 +31,11 @@ function controller() {
 
 controller.$inject = [];
 
+const template = require('./discount.html');
+
 const component = {
-    templateUrl: './customerDetail/discount.html',
+    // templateUrl: './customerDetail/discount.html',
+    template: template,
     bindings: {
         customerDiscount: '<',
         update: '&',

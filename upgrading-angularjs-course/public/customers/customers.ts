@@ -12,8 +12,11 @@ function controller(customerService: any) {
 
 controller.$inject = ['customerService'];
 
+const template = require('./customers.html');
+
 const component = {
-    templateUrl: './customers/customers.html',
+    // templateUrl: './customers/customers.html',
+    template: template,
     bindings: {},
     controller: controller,
 };

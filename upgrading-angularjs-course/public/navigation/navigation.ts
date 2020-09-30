@@ -6,8 +6,11 @@ function controller() {
 
 controller.$inject = [];
 
+const template = require('./navigation.html');
+
 const component = {
-    templateUrl: '../navigation/navigation.html',
+    // templateUrl: '../navigation/navigation.html',
+    template: template,
     bindings: {},
     controller: controller,
 };

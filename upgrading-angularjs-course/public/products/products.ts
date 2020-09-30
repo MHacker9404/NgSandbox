@@ -1,3 +1,5 @@
+const template = require('./products.html');
+
 function controller(productService) {
     var vm = this;
     vm.title = 'Products';
@@ -8,7 +10,8 @@ function controller(productService) {
 controller.$inject = ['productService'];
 
 const component = {
-    templateUrl: './products/products.html',
+    // templateUrl: './products/products.html',
+    template: template,
     bindings: {},
     controller: controller,
 };

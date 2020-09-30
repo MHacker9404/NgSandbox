@@ -1,3 +1,5 @@
+const template = require('./home.html');
+
 function controller(this: any) {
     // function controller() {
     const vm = this;
@@ -5,7 +7,7 @@ function controller(this: any) {
 }
 
 const component = {
-    templateUrl: './home/home.html',
+    template: template,
     bindings: {},
     controller: controller,
 };

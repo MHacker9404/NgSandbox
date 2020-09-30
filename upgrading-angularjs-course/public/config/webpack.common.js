@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './app.ts',
@@ -7,7 +8,6 @@ module.exports = {
         path: path.resolve(__dirname, '../../dist'),
         publicPath: '/',
     },
-    mode: 'development',
     module: {
         rules: [
             {
@@ -18,16 +18,15 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'dist/',
-                        },
-                    },
-                    {
-                        loader: '@peterek/extract-loader',
-                    },
+                    // {
+                    //     loader: 'file-loader',
+                    //     options: {
+                    //         name: '[name].[ext]',
+                    //     },
+                    // },
+                    // {
+                    //     loader: '@peterek/extract-loader',
+                    // },
                     {
                         loader: 'html-loader',
                     },
@@ -86,4 +85,9 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.json'],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './index.html',
+        }),
+    ],
 };

@@ -4,8 +4,11 @@ function controller() {
 
 controller.$inject = [];
 
+const template = require('./customers-table.html');
+
 const component = {
-    templateUrl: './customers/customers-table.html',
+    // templateUrl: './customers/customers-table.html',
+    template: template,
     bindings: {
         customers: '<',
     },

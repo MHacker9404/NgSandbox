@@ -1,3 +1,5 @@
+const template = require('./orders.html');
+
 import _find from 'lodash/find';
 
 function controller(orderService: any, customerService: any, $q: any) {
@@ -20,7 +22,8 @@ function controller(orderService: any, customerService: any, $q: any) {
 controller.$inject = ['orderService', 'customerService', '$q'];
 
 const component = {
-    templateUrl: './orders/orders.html',
+    // templateUrl: './orders/orders.html',
+    template: template,
     bindings: {},
     controller: controller,
 };

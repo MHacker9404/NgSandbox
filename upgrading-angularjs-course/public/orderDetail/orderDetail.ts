@@ -21,8 +21,11 @@ function controller(productService: any, customerService: any, $q: any) {
 
 controller.$inject = ['productService', 'customerService', '$q'];
 
+const template = require('./orderDetail.html');
+
 const component = {
-    templateUrl: './orderDetail/orderDetail.html',
+    // templateUrl: './orderDetail/orderDetail.html',
+    template: template,
     bindings: {
         order: '<',
     },
