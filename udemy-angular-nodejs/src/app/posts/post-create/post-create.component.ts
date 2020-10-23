@@ -16,12 +16,7 @@ export class PostCreateComponent implements OnInit {
         if (form.invalid) {
             return;
         }
-
-        const post: Post = {
-            title: form.value.title,
-            content: form.value.content,
-        };
-        this._postSvc.addPost(post);
+        this._postSvc.addPost(form.value.title, form.value.content);
 
         form.resetForm();
     }
