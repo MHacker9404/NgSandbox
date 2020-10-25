@@ -10,29 +10,23 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit, OnDestroy {
-    public posts: Post[] = [];
-    // private _postsListener: Subscription;
-    // private _unsubscribe: Subject<any> = new Subject();
-
     public posts$: Observable<Post[]>;
+    public loading: Boolean = false;
 
     constructor(private _postSvc: PostsService) {}
 
     ngOnInit(): void {
-        // this._postSvc
-        //     .getPostsListener()
-        //     .pipe(takeUntil(this._unsubscribe))
-        //     .subscribe((posts: Post[]) => (this.posts = posts));
         this.posts$ = this._postSvc.getPostsListener();
+        this.loading = true;
         this._postSvc.getPosts();
+        this.loading = false;
     }
 
     onDelete(id: string): void {
+        this.loading = true;
         this._postSvc.deletePost(id);
+        this.loading = false;
     }
 
-    ngOnDestroy(): void {
-        // this._unsubscribe.next();
-        // this._unsubscribe.complete();
-    }
+    ngOnDestroy(): void {}
 }

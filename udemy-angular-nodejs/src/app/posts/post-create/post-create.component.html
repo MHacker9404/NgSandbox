@@ -1,13 +1,26 @@
 <mat-card>
-    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <form (submit)="onAddPost(postForm)" #postForm="ngForm" *ngIf="!loading">
         <mat-form-field>
             <!-- <input matInput type="text" [(ngModel)]="enteredTitle" /> -->
-            <input matInput type="text" name="title" id="title" ngModel required placeholder="Post Title" />
+            <input matInput type="text" name="title" id="title" [ngModel]="post?.title" required placeholder="Post Title" />
         </mat-form-field>
+        <div>
+            <button mat-stroke-button type="button" (click)="filePicker.click()">Pick Image</button>
+            <input type="file" name="file" id="file" #filePicker />
+        </div>
         <mat-form-field>
             <!-- <textarea name="new-post" id="new-post" rows="6" [value]="newPost" #postInput></textarea> -->
             <!-- <textarea matInput name="new-post" id="new-post" rows="6" [(ngModel)]="enteredContent"></textarea> -->
-            <textarea matInput name="content" id="content" rows="6" ngModel required placeholder="Post Content"></textarea>
+            <textarea
+                matInput
+                name="content"
+                id="content"
+                rows="6"
+                [ngModel]="post?.content"
+                required
+                placeholder="Post Content"
+            ></textarea>
         </mat-form-field>
         <!-- <button (click)="onAddPost(postInput)">Save Post</button> -->
         <!-- <button mat-raised-button color="accent" (click)="onAddPost()">Save Post</button> -->
