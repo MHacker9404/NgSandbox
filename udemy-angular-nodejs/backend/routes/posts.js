@@ -11,12 +11,32 @@ const MIME_TYPE_MAP = {
 };
 
 router.get(``, (req, res, next) => {
-    Post.find().then((docs) => {
-        // console.info(docs);
-        res.status(200).json({
-            posts: docs.map((doc) => ({ _id: doc._id, title: doc.title, content: doc.content, imagePath: doc.imagePath })),
+    const query = req.query;
+    const postQuery = Post.find(); //  delayed execution
+    const pageSize = +query.pageSize;
+    const page = +query.page;
+    let fetchedPosts;
+
+    if (pageSize && page) {
+        postQuery.skip(pageSize * (page - 1)).limit(pageSize);
+    }
+    postQuery
+        .then((docs) => {
+            fetchedPosts = docs;
+            return Post.count({});
+        })
+        .then((count) => {
+            console.info(fetchedPosts);
+            res.status(200).json({
+                count: count,
+                posts: fetchedPosts.map((doc) => ({
+                    _id: doc._id,
+                    title: doc.title,
+                    content: doc.content,
+                    imagePath: doc.imagePath,
+                })),
+            });
         });
-    });
 });
 
 const storage = multer.diskStorage({

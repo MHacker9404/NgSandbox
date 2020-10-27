@@ -2,44 +2,47 @@ import { Injectable } from '@angular/core';
 import { Post } from './post.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, subscribeOn, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PostsService {
-    private _posts: Post[] = [];
-    private _postSubject = new BehaviorSubject<Post[]>([]);
+    private _data: { count: number; posts: Post[] } = { count: 0, posts: [] };
+    private _postSubject = new BehaviorSubject<{ count: number; posts: Post[] }>({ count: 0, posts: [] });
 
     constructor(private _httpClient: HttpClient, private _router: Router) {}
 
-    public getPosts(): void {
+    public getPosts(pageSize: number, page: number): void {
+        const queryParams = `?pageSize=${pageSize}&page=${page}`;
+
         this._httpClient
-            .get<{ message: string; posts: any[] }>('http://localhost:5000/api/posts')
+            .get<{ message: string; count: number; posts: any[] }>(`http://localhost:5000/api/posts${queryParams}`)
             .pipe(
-                map((body) =>
-                    body.posts.map((post) => ({
+                tap((body) => console.info(body)),
+                map((body) => ({
+                    count: body.count,
+                    posts: body.posts.map((post) => ({
+                        id: post._id,
                         title: post.title,
                         content: post.content,
-                        id: post._id,
                         imagePath: post.imagePath,
-                    }))
-                )
+                    })),
+                }))
             )
-            .subscribe((posts: Post[]) => {
-                this._posts = posts;
-                // console.info(this._posts);
-                this._postSubject.next(this._posts.slice());
+            .subscribe((data: any) => {
+                this._data = data;
+                this._postSubject.next({ ...this._data });
             });
     }
 
-    public getPostsListener(): Observable<Post[]> {
+    public getPostsListener(): Observable<{ count: number; posts: Post[] }> {
         return this._postSubject.asObservable();
     }
 
     public getPost(id: string): Post {
-        const post = this._posts.find((post) => post.id === id);
+        const post = this._data.posts.find((post) => post.id === id);
         return { ...post };
     }
 
@@ -49,14 +52,13 @@ export class PostsService {
         postData.append('content', content);
         postData.append('image', image, title);
 
-        this._httpClient
-            .post<{ message: string; post: Post }>(`http://localhost:5000/api/posts`, postData)
-            .subscribe((body) => {
-                const post = { id: body.post.id, title: title, content: content, imagePath: body.post.imagePath };
-                this._posts.push(post);
-                this._postSubject.next(this._posts.slice());
-                this._router.navigate([`/`]);
-            });
+        this._httpClient.post<{ message: string; post: Post }>(`http://localhost:5000/api/posts`, postData).subscribe(() => {
+            // const post = { id: body.post.id, title: title, content: content, imagePath: body.post.imagePath };
+            // this._data._posts.push(post);
+            // this._data.count += 1;
+            // this._postSubject.next({ ...this._data });
+            this._router.navigate([`/`]);
+        });
     }
 
     public updatedPost(id: string, title: string, content: string, image: File | string): void {
@@ -79,25 +81,20 @@ export class PostsService {
                 `http://localhost:5000/api/posts/${postData.id}`,
                 postData
             )
-            .subscribe((body: any) => {
-                const post = this._posts.find((post) => post.id === id);
-                post.title = body.post.title;
-                post.content = body.post.content;
-                post.imagePath = body.post.imagePath;
+            .subscribe(() => {
+                // const post = this._data.posts.find((post) => post.id === id);
+                // post.title = body.post.title;
+                // post.content = body.post.content;
+                // post.imagePath = body.post.imagePath;
 
-                this._postSubject.next(this._posts.slice());
+                // this._postSubject.next({ ...this._data });
 
                 this._router.navigate([`/`]);
             });
     }
 
-    public deletePost(id: string): void {
-        this._httpClient.delete<{ message: string }>(`http://localhost:5000/api/posts/${id}`).subscribe((response) => {
-            // console.info(response);
-
-            const posts = this._posts.filter((post) => post.id !== id);
-            this._posts = [...posts];
-            this._postSubject.next(this._posts.slice());
-        });
+    public deletePost(id: string): Observable<any> {
+        ``;
+        return this._httpClient.delete<{ message: string }>(`http://localhost:5000/api/posts/${id}`);
     }
 }
