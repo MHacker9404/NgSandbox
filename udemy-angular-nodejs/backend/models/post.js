@@ -8,5 +8,9 @@ const postSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    imagePath: {
+        type: String,
+        required: true,
+    },
 });
 module.exports = mongoose.model(`Post`, postSchema);
