@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require(`multer`);
+const checkJWT = require('../middleware/check-jwt');
 
 const router = express.Router();
 const Post = require(`../models/post`);
@@ -26,7 +27,7 @@ router.get(``, (req, res, next) => {
             return Post.count({});
         })
         .then((count) => {
-            console.info(fetchedPosts);
+            // console.info(fetchedPosts);
             res.status(200).json({
                 count: count,
                 posts: fetchedPosts.map((doc) => ({
@@ -53,7 +54,7 @@ const storage = multer.diskStorage({
         callback(null, `${name}-${Date.now()}.${ext}`);
     },
 });
-router.post(``, multer({ storage: storage }).single('image'), (req, res, next) => {
+router.post(``, checkJWT, multer({ storage: storage }).single('image'), (req, res, next) => {
     const url = `${req.protocol}://${req.get('host')}`;
     const post = new Post({
         title: req.body.title,
@@ -75,8 +76,8 @@ router.post(``, multer({ storage: storage }).single('image'), (req, res, next) =
     });
 });
 
-router.patch(`/:id`, multer({ storage: storage }).single('image'), (req, res, next) => {
-    console.info(req.file);
+router.patch(`/:id`, checkJWT, multer({ storage: storage }).single('image'), (req, res, next) => {
+    // console.info(req.file);
 
     const post = new Post({
         //     _id: req.params.id,
@@ -85,7 +86,7 @@ router.patch(`/:id`, multer({ storage: storage }).single('image'), (req, res, ne
         //     imagePath: req.body.im
     });
 
-    console.info(post);
+    // console.info(post);
 
     Post.updateOne({ _id: req.params.id }, post).then((result) => {
         res.status(200).json({ message: 'updated', post: { _id: post._id, title: post.title, content: post.content } });
@@ -93,7 +94,7 @@ router.patch(`/:id`, multer({ storage: storage }).single('image'), (req, res, ne
     });
 });
 
-router.delete(`/:id`, (req, res, next) => {
+router.delete(`/:id`, checkJWT, (req, res, next) => {
     // console.info(req.params.id);
 
     Post.deleteOne({ _id: req.params.id }).then((result) => {
