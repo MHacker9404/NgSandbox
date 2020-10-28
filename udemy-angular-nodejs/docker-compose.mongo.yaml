@@ -12,3 +12,19 @@ services:
       - d:/mongo-data:/data/db
     ports:
       - '27017-27019:27017-27019'
+    networks:
+      - udemy-ng-nodejs
+
+  server-ui:
+    image: ${DOCKER_REGISTRY-}server-ui
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - '4200:4200'
+    networks:
+      - udemy-ng-nodejs
+
+networks:
+  udemy-ng-nodejs:
+    name: udemy-ng-nodejs
