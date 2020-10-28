@@ -24,14 +24,13 @@ router.post('/login', (req, res, next) => {
             if (!user) {
                 return res.status(401).json({ message: 'Authentication failed' });
             }
-            fUser = { ...user };
+            fUser = { email: user.email, _id: user._id };
             return bcrypt.compare(req.body.password, user.password);
         })
         .then((result) => {
             if (!result) {
                 return res.status(401).json({ message: 'Authentication failed' });
             }
-            // console.info(fUser);
             const token = jwt.sign({ email: fUser.email, userId: fUser._id }, 'secret-this-should-be-longer', {
                 expiresIn: '1h',
             });

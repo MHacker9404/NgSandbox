@@ -35,6 +35,7 @@ router.get(``, (req, res, next) => {
                     title: doc.title,
                     content: doc.content,
                     imagePath: doc.imagePath,
+                    creator: doc.creator,
                 })),
             });
         });
@@ -60,6 +61,7 @@ router.post(``, checkJWT, multer({ storage: storage }).single('image'), (req, re
         title: req.body.title,
         content: req.body.content,
         imagePath: `${url}/images/${req.file.filename}`,
+        creator: req['userData']['userId'],
     });
 
     post.save().then((result) => {
@@ -77,8 +79,6 @@ router.post(``, checkJWT, multer({ storage: storage }).single('image'), (req, re
 });
 
 router.patch(`/:id`, checkJWT, multer({ storage: storage }).single('image'), (req, res, next) => {
-    // console.info(req.file);
-
     const post = new Post({
         //     _id: req.params.id,
         //     title: req.body.title,
@@ -86,9 +86,7 @@ router.patch(`/:id`, checkJWT, multer({ storage: storage }).single('image'), (re
         //     imagePath: req.body.im
     });
 
-    // console.info(post);
-
-    Post.updateOne({ _id: req.params.id }, post).then((result) => {
+    Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then((result) => {
         res.status(200).json({ message: 'updated', post: { _id: post._id, title: post.title, content: post.content } });
         res.end();
     });
