@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AuthData } from './auth-data.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthService {
 
     public createUser(email: string, password: string) {
         const user: AuthData = { email: email, password: password };
-        this._httpClient.post<any>(`http://localhost:5000/api/auth/signup`, user).subscribe((result) => {
+        this._httpClient.post<any>(`${environment.apiDomain}/api/auth/signup`, user).subscribe((result) => {
             console.info(result);
             this._router.navigate([`/login`]);
         });
@@ -32,7 +33,7 @@ export class AuthService {
     public loginUser(email: string, password: string) {
         const user: AuthData = { email: email, password: password };
         this._httpClient
-            .post<{ token: string; expiresIn: number }>(`http://localhost:5000/api/auth/login`, user)
+            .post<{ token: string; expiresIn: number }>(`${environment.apiDomain}/api/auth/login`, user)
             .subscribe((result) => {
                 console.info(result);
                 this._token = result.token;

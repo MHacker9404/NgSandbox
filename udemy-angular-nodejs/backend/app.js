@@ -10,7 +10,7 @@ const app = express();
 
 const mongoOptions = {
     user: 'root-user',
-    pass: 'P@ssw0rd1',
+    pass: process.env.MONGO_PASSWORD,
 };
 mongoose.connect(`mongodb://localhost/udemy-ng-node?authSource=admin`, mongoOptions).then(() => {
     console.info(`connected to mongo`);

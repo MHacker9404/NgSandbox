@@ -1,15 +1,10 @@
 const express = require('express');
-const multer = require(`multer`);
+const router = express.Router();
 const checkJWT = require('../middleware/check-jwt');
 
-const router = express.Router();
-const Post = require(`../models/post`);
+const useFileStorage = require('../middleware/file');
 
-const MIME_TYPE_MAP = {
-    'image/png': 'png',
-    'image/jpeg': 'jpg',
-    'image/jpg': 'jpg',
-};
+const Post = require(`../models/post`);
 
 router.get(``, (req, res, next) => {
     const query = req.query;
@@ -41,21 +36,7 @@ router.get(``, (req, res, next) => {
         });
 });
 
-const storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-        const isValid = MIME_TYPE_MAP[file.mimetype];
-        const error = isValid ? null : new Error(`Invalid MIME type`);
-
-        //  relative to server.js
-        callback(error, './backend/images');
-    },
-    filename: (req, file, callback) => {
-        const name = file.originalname.toLowerCase().split(' ').join('-');
-        const ext = MIME_TYPE_MAP[file.mimetype];
-        callback(null, `${name}-${Date.now()}.${ext}`);
-    },
-});
-router.post(``, checkJWT, multer({ storage: storage }).single('image'), (req, res, next) => {
+router.post(``, checkJWT, useFileStorage, (req, res, next) => {
     const url = `${req.protocol}://${req.get('host')}`;
     const post = new Post({
         title: req.body.title,
@@ -78,7 +59,7 @@ router.post(``, checkJWT, multer({ storage: storage }).single('image'), (req, re
     });
 });
 
-router.patch(`/:id`, checkJWT, multer({ storage: storage }).single('image'), (req, res, next) => {
+router.patch(`/:id`, checkJWT, useFileStorage, (req, res, next) => {
     const post = new Post({
         //     _id: req.params.id,
         //     title: req.body.title,

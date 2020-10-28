@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Post } from './post.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, subscribeOn, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +19,7 @@ export class PostsService {
         const queryParams = `?pageSize=${pageSize}&page=${page}`;
 
         this._httpClient
-            .get<{ message: string; count: number; posts: any[] }>(`http://localhost:5000/api/posts${queryParams}`)
+            .get<{ message: string; count: number; posts: any[] }>(`${environment.apiDomain}/api/posts${queryParams}`)
             .pipe(
                 tap((body) => console.info(body)),
                 map((body) => ({
@@ -53,13 +54,15 @@ export class PostsService {
         postData.append('content', content);
         postData.append('image', image, title);
 
-        this._httpClient.post<{ message: string; post: Post }>(`http://localhost:5000/api/posts`, postData).subscribe(() => {
-            // const post = { id: body.post.id, title: title, content: content, imagePath: body.post.imagePath };
-            // this._data._posts.push(post);
-            // this._data.count += 1;
-            // this._postSubject.next({ ...this._data });
-            this._router.navigate([`/`]);
-        });
+        this._httpClient
+            .post<{ message: string; post: Post }>(`${environment.apiDomain}/api/posts`, postData)
+            .subscribe(() => {
+                // const post = { id: body.post.id, title: title, content: content, imagePath: body.post.imagePath };
+                // this._data._posts.push(post);
+                // this._data.count += 1;
+                // this._postSubject.next({ ...this._data });
+                this._router.navigate([`/`]);
+            });
     }
 
     public updatedPost(id: string, title: string, content: string, image: File | string): void {
@@ -79,7 +82,7 @@ export class PostsService {
         }
         this._httpClient
             .patch<{ message: string; post: { _id: string; title: string; content: string } }>(
-                `http://localhost:5000/api/posts/${postData.id}`,
+                `${environment.apiDomain}/api/posts/${postData.id}`,
                 postData
             )
             .subscribe(() => {
@@ -96,6 +99,6 @@ export class PostsService {
 
     public deletePost(id: string): Observable<any> {
         ``;
-        return this._httpClient.delete<{ message: string }>(`http://localhost:5000/api/posts/${id}`);
+        return this._httpClient.delete<{ message: string }>(`${environment.apiDomain}/api/posts/${id}`);
     }
 }
