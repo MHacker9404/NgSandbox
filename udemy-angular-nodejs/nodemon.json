@@ -1,6 +1,7 @@
 {
     "env": {
         "MONGO_PASSWORD": "P@ssw0rd1",
+        "MONGO_HOST": "localhost",
         "JWT_KEY": "secret-this-should-be-longer"
     }
 }

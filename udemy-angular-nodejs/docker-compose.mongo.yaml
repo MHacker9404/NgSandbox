@@ -1,5 +1,22 @@
 version: '3'
 services:
+  server-ui:
+    image: ${DOCKER_REGISTRY-}server-ui
+    container_name: 'server-ui'
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    environment:
+      - MONGO_HOST=mongo
+      - MONGO_PASSWORD=P@ssw0rd1
+      - JWT_KEY="secret-this-should-be-longer"
+    ports:
+      - '5000:5000'
+    networks:
+      - udemy-ng-node
+    depends_on:
+      - mongo
+
   mongo:
     image: 'mongo'
     container_name: 'mongo'
@@ -13,18 +30,8 @@ services:
     ports:
       - '27017-27019:27017-27019'
     networks:
-      - udemy-ng-nodejs
-
-  server-ui:
-    image: ${DOCKER_REGISTRY-}server-ui
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    ports:
-      - '4200:4200'
-    networks:
-      - udemy-ng-nodejs
+      - udemy-ng-node
 
 networks:
-  udemy-ng-nodejs:
-    name: udemy-ng-nodejs
+  udemy-ng-node:
+    name: udemy-ng-node
