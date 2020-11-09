@@ -1,0 +1,37 @@
+version: '3'
+services:
+  server-ui:
+    image: ${DOCKER_REGISTRY-}server-ui
+    container_name: 'server-ui'
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    environment:
+      - MONGO_HOST=mongo
+      - MONGO_PASSWORD=P@ssw0rd1
+      - JWT_KEY="secret-this-should-be-longer"
+    ports:
+      - '5000:5000'
+    networks:
+      - udemy-ng-node
+    depends_on:
+      - mongo
+
+  mongo:
+    image: 'mongo'
+    container_name: 'mongo'
+    environment:
+      - MONGO_INITDB_DATABASE=udemy-ng-node
+      - MONGO_INITDB_ROOT_USERNAME=root-user
+      - MONGO_INITDB_ROOT_PASSWORD=P@ssw0rd1
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - d:/mongo-data:/data/db
+    ports:
+      - '27017-27019:27017-27019'
+    networks:
+      - udemy-ng-node
+
+networks:
+  udemy-ng-node:
+    name: udemy-ng-node
