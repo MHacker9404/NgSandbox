@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { interval, Observable, Subscriber, timer } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { concat, of } from 'rxjs';
+import { httpObservable } from 'src/shared/utils';
 
 @Component({
     selector: 'about',
@@ -10,26 +11,16 @@ export class AboutComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        const http$: Observable<any> = new Observable((subscriber: Subscriber<any>) => {
-            fetch('http://localhost:3000/api/courses')
-                .then((response) => {
-                    console.info(response);
-                    return response.json();
-                })
-                .then((json) => {
-                    console.info(json);
-                    subscriber.next(json);
-                    subscriber.complete();
-                })
-                .catch((error) => {
-                    subscriber.error(error);
-                });
-        });
-        const sub = http$.subscribe(
-            (courses) => console.info(courses),
-            (error) => console.error(error),
-            () => console.info('completed')
+        const source1$ = of(1, 2, 3);
+        const source2$ = of(4, 5, 6);
+
+        // const concat$ = source1$.pipe(concatMap(() => source2$));
+        // const sub = concat$.subscribe((value) => console.info(value));
+        const sub = concat(source1$, source2$).subscribe(
+            (value) => console.info(value),
+            (err) => {},
+            () => console.info('complete')
         );
-        setTimeout(() => sub.unsubscribe(), 2000);
+        setTimeout(() => sub.unsubscribe(), 5000);
     }
 }

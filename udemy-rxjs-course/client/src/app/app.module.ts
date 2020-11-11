@@ -26,9 +26,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, AboutComponent],
+    declarations: [AppComponent, HomeComponent, AboutComponent, CoursesCardListComponent, CourseDialogComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
