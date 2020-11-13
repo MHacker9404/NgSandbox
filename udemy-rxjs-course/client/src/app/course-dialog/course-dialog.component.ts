@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Course } from '../model/course';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { concatMap, distinctUntilChanged, exhaustMap, filter, mergeMap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/internal-compatibility';
 
@@ -50,17 +50,34 @@ export class CourseDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
-        this._sub = this.form.valueChanges.pipe(filter(() => this.form.valid)).subscribe((changes) => {
-            fetch(`http://localhost:3000/api/courses/${this.course.id}`, {
-                method: 'PUT',
-                body: JSON.stringify(changes),
-                headers: {
-                    'content-type': 'application/json',
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => console.info(data));
-        });
+        // this._sub = this.form.valueChanges.pipe(filter(() => this.form.valid)).subscribe((changes) => {
+        this._sub = this.form.valueChanges
+            .pipe(
+                filter(() => this.form.valid),
+                concatMap((changes: any) => this._saveCourses(changes))
+            )
+            // .subscribe((changes) => {
+            //     const saveCourses$ = this._saveCourses(changes);
+            //     this._sub = saveCourses$.subscribe();
+            // });
+            .subscribe();
+    }
+
+    private _saveCourses(changes): Observable<Response> {
+        return fromPromise(
+            fetch(
+                `http://localhost:3000/api/courses/${this.course.id}`,
+                {
+                    method: 'PUT',
+                    body: JSON.stringify(changes),
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                }
+                // .then((response) => response.json())
+                // .then((data) => console.info(data));
+            )
+        );
     }
 
     ngAfterViewInit() {}

@@ -18,6 +18,11 @@ export class AppController {
     @Param('id') id: number,
     @Body() changes: any,
   ): Promise<any> {
+    await this._sleep(2000);
     return { id, changes };
+  }
+
+  private async _sleep(ms: number): Promise<any> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
