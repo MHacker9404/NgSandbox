@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     advancedCourses$: Observable<Course[]>;
 
     constructor() {
-        const http$ = httpObservable('http://localhost:3000/api/courses');
+        const http$ = httpObservable('http://localhost:5000/api/courses');
         const courses$: Observable<Course[]> = http$.pipe(
             tap(() => console.debug('http request executed')),
             map((obj: any) => Object.values(obj) as Course[]),

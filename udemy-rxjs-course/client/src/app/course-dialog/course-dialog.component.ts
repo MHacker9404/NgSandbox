@@ -54,7 +54,10 @@ export class CourseDialogComponent implements OnInit, AfterViewInit, OnDestroy {
         this._sub = this.form.valueChanges
             .pipe(
                 filter(() => this.form.valid),
+                //  ops completed in sequence
                 concatMap((changes: any) => this._saveCourses(changes))
+                //  ops completed in parallel
+                // mergeMap((changes: any) => this._saveCourses(changes))
             )
             // .subscribe((changes) => {
             //     const saveCourses$ = this._saveCourses(changes);
@@ -66,7 +69,7 @@ export class CourseDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     private _saveCourses(changes): Observable<Response> {
         return fromPromise(
             fetch(
-                `http://localhost:3000/api/courses/${this.course.id}`,
+                `http://localhost:5000/api/courses/${this.course.id}`,
                 {
                     method: 'PUT',
                     body: JSON.stringify(changes),
