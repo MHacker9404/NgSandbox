@@ -10,6 +10,7 @@ import {
     ViewChildren,
     ChangeDetectorRef,
     ElementRef,
+    Renderer2,
 } from '@angular/core';
 import { AuthRememberComponent } from './auth-remember/auth-remember.component';
 import { AuthMessageComponent } from './auth-message/auth-message.component';
@@ -53,7 +54,7 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
     @ViewChildren(AuthMessageComponent) message: QueryList<AuthMessageComponent> | undefined;
     @ViewChild('email') email: ElementRef | undefined;
 
-    constructor(private _cd: ChangeDetectorRef) {}
+    constructor(private _cd: ChangeDetectorRef, private _renderer: Renderer2) {}
 
     showMessage: boolean = false;
 
@@ -72,10 +73,12 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        console.debug(this.email?.nativeElement);
-        this.email?.nativeElement.setAttribute('placeholder', 'Enter your email address');
-        this.email?.nativeElement.classList.add('email');
-        this.email?.nativeElement.focus();
+        // console.debug(this.email?.nativeElement);
+        // this.email?.nativeElement.setAttribute('placeholder', 'Enter your email address');
+        // this.email?.nativeElement.classList.add('email');
+        // this.email?.nativeElement.focus();
+        // this._renderer.setAttribute(this.email, 'placeholder', 'Enter your email address');
+        // this._renderer.addClass(this.email, 'email');
 
         if (this.message) {
             // setTimeout(() => {
