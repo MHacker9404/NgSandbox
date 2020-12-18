@@ -14,5 +14,9 @@
         <app-auth-remember (checked)="onChecked($event)"></app-auth-remember>
     </auth-form>
     -->
-    <div #entry></div>
+    <!-- <div #entry></div> -->
+    <ng-container [ngTemplateOutlet]="tmpl" [ngTemplateOutletContext]="ctx"> </ng-container>
+    <!-- name is the $implicit value, because it is not bound to a specific property -->
+    <ng-template #tmpl let-name let-location="location">{{ name }} - {{ location }}</ng-template>
+    <!-- <ng-template #tmpl>Phil Boyd - Columbus GA</ng-template> -->
 </div>

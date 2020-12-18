@@ -4,6 +4,7 @@ import {
     Component,
     ComponentFactoryResolver,
     ComponentRef,
+    TemplateRef,
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
@@ -20,6 +21,7 @@ export class AppComponent implements AfterViewInit {
     @ViewChild('entry', { read: ViewContainerRef }) entry!: ViewContainerRef;
     component!: ComponentRef<AuthFormComponent>;
     // @ViewChild('entry') entry!: ViewContainerRef;
+    @ViewChild('tmpl') tmpl!: TemplateRef<any>;
 
     constructor(private _resolver: ComponentFactoryResolver, private _cd: ChangeDetectorRef) {}
 
@@ -27,14 +29,21 @@ export class AppComponent implements AfterViewInit {
         alert(`Login: ${JSON.stringify(user)}`);
     }
 
-    ngAfterViewInit() {
-        const factory = this._resolver.resolveComponentFactory(AuthFormComponent);
-        this.entry.createComponent<AuthFormComponent>(factory);
-        this.component = this.entry.createComponent<AuthFormComponent>(factory, 0);
-        console.debug(this.component.instance);
+    ctx = {
+        $implicit: 'Phil Boyd',
+        location: 'Columbus GA',
+    };
 
-        this.component.instance.title = 'changed';
-        this.component.instance.submitted.subscribe(this.loginUser);
+    ngAfterViewInit() {
+        // const factory = this._resolver.resolveComponentFactory(AuthFormComponent);
+        // this.entry.createComponent<AuthFormComponent>(factory);
+        // this.component = this.entry.createComponent<AuthFormComponent>(factory, 0);
+        // console.debug(this.component.instance);
+
+        // this.component.instance.title = 'changed';
+        // this.component.instance.submitted.subscribe(this.loginUser);
+
+        // this.entry.createEmbeddedView(this.tmpl, { $implicit: 'Phil Boyd', location: 'Columbus, GA' });
 
         this._cd.detectChanges();
     }
