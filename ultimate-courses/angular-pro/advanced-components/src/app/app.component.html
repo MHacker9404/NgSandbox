@@ -1,22 +1,58 @@
-<button (click)="destroyComponent()">Destroy</button>
-<button (click)="moveComponent()">Move</button>
-<div>
-    <!--
+<!-- 
+    <div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <button (click)="destroyComponent()">Destroy</button>
+                <button (click)="moveComponent()">Move</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
     <auth-form (submitted)="createUser($event)">
         <h3>Create account</h3>
         <button type="submit">Join Us</button>
     </auth-form>
-    -->
-    <!--
     <auth-form (submitted)="loginUser($event)">
         <app-auth-remember (checked)="onChecked($event)"></app-auth-remember>
         <app-auth-remember (checked)="onChecked($event)"></app-auth-remember>
         <app-auth-remember (checked)="onChecked($event)"></app-auth-remember>
     </auth-form>
-    -->
-    <!-- <div #entry></div> -->
-    <ng-container [ngTemplateOutlet]="tmpl" [ngTemplateOutletContext]="ctx"> </ng-container>
-    <!-- name is the $implicit value, because it is not bound to a specific property -->
-    <ng-template #tmpl let-name let-location="location">{{ name }} - {{ location }}</ng-template>
-    <!-- <ng-template #tmpl>Phil Boyd - Columbus GA</ng-template> -->
+                <ng-container [ngTemplateOutlet]="tmpl" [ngTemplateOutletContext]="ctx"> </ng-container>
+                <ng-template #tmpl let-name let-location="location">{{ name }} - {{ location }}</ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+<!--
+    <div class="row">
+    <div class="col">
+        <label>
+            Credit Card Number
+            <input name="credit-card" type="text" placeholder="Enter your 16-digit card number" prb-credit-card />
+        </label>
+    </div>
+    <div class="col">
+        <label tooltip="3 digits, back of your card" #myTooltip="tooltip">
+            Enter your security code
+            <span (mouseover)="myTooltip.show()" (mouseout)="myTooltip.hide()">(?)</span>
+            <input type="text" name="cvv" id="cvv" />
+        </label>
+    </div>
+</div>
+ -->
+<div class="row">
+    <div class="col">
+        <ul>
+            <li *myFor="let item of items; let i = index">{{ i }} Member: {{ item.name | json }}</li>
+        </ul>
+    </div>
+    <div class="col">
+        <ul>
+            <ng-template myFor [myForOf]="items" let-item let-i="index">
+                <li>{{ i }} Member: {{ item.name | json }}</li>
+            </ng-template>
+        </ul>
+    </div>
 </div>
